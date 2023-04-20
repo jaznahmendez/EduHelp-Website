@@ -27,3 +27,5 @@ mongoose.connect(mongoUrl).then(() => {
 }).catch(err =>{
     console.log('No se pudo conectar a la base de datos', err)
 })
+
+module.exports = routes;
