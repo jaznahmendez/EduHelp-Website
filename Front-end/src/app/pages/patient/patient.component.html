@@ -1,1 +1,7 @@
-<p>patient works!</p>
+<div *ngFor="let item of pArray" (click)="getPatientById(item)" [routerLink]="[item._id]"  class="row">
+    <div class="column">
+      <div class="card">
+        <h3>{{item.name}}</h3>
+        <p>{{item._id}}</p>
+      </div>
+    </div>

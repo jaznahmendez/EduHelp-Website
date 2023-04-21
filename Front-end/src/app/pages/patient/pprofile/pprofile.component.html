@@ -1,0 +1,22 @@
+<div class="column">
+    <div class="card">
+      <h3>Nombre: {{patient.name}}</h3>
+      <p>Email: {{patient.email}}</p>
+      <p>Id: {{patient._id}}</p>
+</div>
+
+<h2>TUTOR</h2>
+<div class="column">
+    <div class="card">
+      <h3>Nombre: {{tutor.name}}</h3>
+      <p>Email: {{tutor.email}}</p>
+      <p>Id: {{tutor._id}}</p>
+</div>
+
+<h2>PROFESIONALES</h2>
+<div *ngFor="let item of cp" class="column">
+    <div class="card">
+      <h3>Nombre: {{item.name}}</h3>
+      <p>Email: {{item.email}}</p>
+      <p>Id: {{item._id}}</p>
+</div>

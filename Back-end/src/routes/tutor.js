@@ -2,6 +2,8 @@ const express = require('express');
 const router = express.Router();
 const controller = require('../controllers/tutor');
 
+router.put('/:id', express.json(), controller.updateTutor);
+
 /**
  * @swagger
  * /tutor/professional:
@@ -80,7 +82,7 @@ router.get('/patient/:id', controller.findPatient);
  *      200:
  *        description: nuevo profesional creado
  */
-router.post('/patient', controller.crearPaciente);
+router.post('/patient', express.json(), controller.crearPaciente);
 
 /**
  * @swagger
@@ -125,7 +127,7 @@ router.get('/:id', controller.findTutor);
  *      200:
  *        description: nuevo profesional creado
  */
-router.post('/', controller.crearTutor);
+router.post('/', express.json(), controller.crearTutor);
 
 /**
  * @swagger

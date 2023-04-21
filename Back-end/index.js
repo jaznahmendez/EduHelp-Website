@@ -6,6 +6,8 @@ const swaggerJsDoc = require('swagger-jsdoc')
 const swaggerUI = require('swagger-ui-express')
 const swaggerConf = require('./swagger.config')
 
+const cors = require('cors');
+
 require('dotenv').config();
 
 const app = express();
@@ -16,6 +18,10 @@ const port = process.env.PORT || 3000;
 
 const swaggerDocs = swaggerJsDoc(swaggerConf);
 app.use('/swagger', swaggerUI.serve, swaggerUI.setup(swaggerDocs));
+
+app.use(cors({
+    methods: ["GET", "POST", "DELETE", "UPDATE", "PUT", "PATCH"]
+}));
 
 app.use('/', routes);
 
