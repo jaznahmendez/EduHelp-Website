@@ -1,1 +1,240 @@
-<p>home works!</p>
+
+<img src="../../../assets/bg2.png" style="width: 100%;">
+
+<div class="container">
+    <div class="child">
+        <mat-card class="example-card">
+            <mat-card-header>
+                <mat-card-title><h1>Who we are</h1></mat-card-title>
+            </mat-card-header>
+            <mat-card-content>
+                <mat-accordion>
+                    <mat-expansion-panel (opened)="panelOpenState = true"
+                                         (closed)="panelOpenState = false">
+                      <mat-expansion-panel-header>
+                        <mat-panel-title>
+                          About Us
+                        </mat-panel-title>
+                      </mat-expansion-panel-header>
+                      <p>We are a website dedicated to reunite troubled teenagers with the socioeducative professionals they need</p>
+                    </mat-expansion-panel>
+
+                    <mat-expansion-panel (opened)="panelOpenState = true"
+                                         (closed)="panelOpenState = false">
+                      <mat-expansion-panel-header>
+                        <mat-panel-title>
+                          How it works
+                        </mat-panel-title>
+                      </mat-expansion-panel-header>
+                      <p>For...</p>
+                      <mat-accordion>
+                        <mat-expansion-panel (opened)="panelOpenState = true"
+                                            (closed)="panelOpenState = false">
+                        <mat-expansion-panel-header>
+                            <mat-panel-title>
+                            Professionals
+                            </mat-panel-title>
+                        </mat-expansion-panel-header>
+                        <p>With EduHelp we allow you to connect with teens who might need your help.<br>
+                            <ol type="1">
+                                <li>Create an account</li>
+                                <li>Upload proof of degree</li>
+                                <li>Wait for a response from our team</li>
+                            </ol>  
+                            Once your account has been approved, start connecting with teenagers in need of help.
+                            </mat-expansion-panel>
+                            <mat-expansion-panel (opened)="panelOpenState = true"
+                            (closed)="panelOpenState = false">
+                            <mat-expansion-panel-header>
+                                <mat-panel-title>
+                                Tutors
+                                </mat-panel-title>
+                            </mat-expansion-panel-header>
+                            <p>In EduHelp we know parenting is not an easy task, here you will be able to connect with the professionals that suit the best for your family.<br>
+                                <ol type="1">
+                                    <li>Create an account</li>
+                                    <li>Create accounts for your teens</li>
+                                    <li>Start connecting with professionals</li>
+                                </ol>  
+                            </mat-expansion-panel>
+                            <mat-expansion-panel (opened)="panelOpenState = true"
+                            (closed)="panelOpenState = false">
+                            <mat-expansion-panel-header>
+                                <mat-panel-title>
+                                Teenagers
+                                </mat-panel-title>
+                            </mat-expansion-panel-header>
+                            <p>We want to help you in everything we can, from mental health issues to socioeducative needs.<br>
+                                <ol type="1">
+                                    <li>Only a tutor can create you an account</li>
+                                    <li>Start chatting and making appointments wiht the professional your tutor has choose for you</li>
+                                </ol>  
+                            </mat-expansion-panel>
+                        </mat-accordion>
+                    </mat-expansion-panel>
+                  </mat-accordion>
+            </mat-card-content>
+        </mat-card>
+    </div>
+
+
+    <div class="child">
+        <mat-card class="example-card">
+            <mat-tab-group mat-stretch-tabs="false" mat-align-tabs="start">
+                <mat-tab label="Sign Up">
+                  <section class="btn-group-t">
+                    <span>Create an account for a  </span>
+                    <mat-form-field appearance="fill">
+                      <mat-select [(value)]="fontStyleControl">
+                        <mat-option value="tutor">Tutor</mat-option>
+                        <mat-option value="professional">Professional</mat-option>
+                      </mat-select>
+                    </mat-form-field>
+                  </section>
+                    <section *ngIf="fontStyleControl == tutorString">
+                      <mat-stepper orientation="vertical" [linear]="isLinear" #stepper>
+                        <mat-step [stepControl]="firstFormGroup">
+                          <form [formGroup]="firstFormGroup">
+                            <ng-template matStepLabel>Personal Information</ng-template>
+                            <mat-form-field appearance="fill">
+                              <mat-label>Full Name</mat-label>
+                              <input matInput placeholder="First name, Last name" formControlName="name" required>
+                            </mat-form-field><br>
+                            <mat-form-field appearance="fill">
+                              <mat-label>Phone-Number</mat-label>
+                              <input matInput placeholder="Ex. 2124567890" formControlName="telefono" required>
+                            </mat-form-field>
+                            <div>
+                              <button class="nxt-btn" [disabled]="this.firstFormGroup.status == 'INVALID'" mat-raised-button matStepperNext color="accent">Next</button>
+                            </div>
+                          </form>
+                        </mat-step>
+                        <mat-step [stepControl]="secondFormGroup">
+                          <form [formGroup]="secondFormGroup">
+                            <ng-template matStepLabel>Account Information</ng-template>
+                            <mat-form-field appearance="fill">
+                              <mat-label>Email</mat-label>
+                              <input matInput formControlName="email" placeholder="Enter a valid email address" required>
+                            </mat-form-field><br>
+                            <mat-form-field appearance="fill">
+                              <mat-label>Password</mat-label>
+                              <input matInput [type]="hide ? 'password' : 'text'" formControlName="password">
+                              <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
+                                <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+                              </button>
+                            </mat-form-field>
+                            <div>
+                              <div >
+                                <button mat-raised-button matStepperPrevious color="warn">Back</button>
+                                <button class="nxt-btn" [disabled]="this.secondFormGroup.status == 'INVALID'" mat-raised-button matStepperNext color="accent">Next</button>
+                              </div>
+                            </div>
+                          </form>
+                        </mat-step>
+                        <mat-step>
+                          <ng-template matStepLabel>Almost there...</ng-template>
+                          <div>
+                            <button mat-raised-button matStepperPrevious color="warn">Back</button>
+                            <button mat-raised-button color="accent" class="nxt-btn" [disabled]="this.secondFormGroup.status == 'INVALID' || this.firstFormGroup.status == 'INVALID'" (click)="crearUsuario()">Create Account</button>
+                          </div>
+                        </mat-step>
+                      </mat-stepper>
+                      
+                    </section>
+                    <section *ngIf="fontStyleControl == profString; else no_data">
+                      <mat-stepper orientation="vertical" [linear]="isLinear" #stepper>
+                        <mat-step [stepControl]="thirdFormGroup">
+                          <form [formGroup]="thirdFormGroup">
+                            <ng-template matStepLabel>Personal Information</ng-template>
+                            <mat-form-field appearance="fill">
+                              <mat-label>Full Name</mat-label>
+                              <input matInput placeholder="First name, Last name" formControlName="name" required>
+                            </mat-form-field><br>
+                            <mat-form-field appearance="fill">
+                              <mat-label>Phone-Number</mat-label>
+                              <input matInput placeholder="Ex. 2124567890" formControlName="telefono" required>
+                            </mat-form-field> <br>
+                            <mat-form-field appearance="fill">
+                              <mat-label>Select your profession</mat-label>
+                              <select matNativeControl required formControlName="profession">
+                                <option value="Psychologist">Psychologist</option>
+                                <option value="Pedagogue">Pedagogue</option>
+                                <option value="Speech therapist">Speech therapist</option>
+                                <option value="Psychiatrist">Psychiatrist</option>
+                                <option value="Profession">Other</option>
+                              </select>
+                            </mat-form-field>
+                            <br>
+                            <mat-form-field appearance="fill" *ngIf="">
+                              <mat-label>Specify your profession</mat-label>
+                              <input matInput placeholder="Ex. 2124567890" formControlName="profession" required>
+                            </mat-form-field> <br>
+
+                            <div>
+                              <button class="nxt-btn" [disabled]="this.firstFormGroup.status == 'INVALID'" mat-raised-button matStepperNext color="accent">Next</button>
+                            </div>
+                          </form>
+                        </mat-step>
+                        <mat-step [stepControl]="secondFormGroup">
+                          <form [formGroup]="secondFormGroup">
+                            <ng-template matStepLabel>Account Information</ng-template>
+                            <mat-form-field appearance="fill">
+                              <mat-label>Email</mat-label>
+                              <input matInput formControlName="email" placeholder="Enter a valid email address" required>
+                            </mat-form-field><br>
+                            <mat-form-field appearance="fill">
+                              <mat-label>Password</mat-label>
+                              <input matInput [type]="hide ? 'password' : 'text'" formControlName="password">
+                              <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
+                                <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+                              </button>
+                            </mat-form-field>
+                            <div>
+                              <div >
+                                <button mat-raised-button matStepperPrevious color="warn">Back</button>
+                                <button class="nxt-btn" [disabled]="this.secondFormGroup.status == 'INVALID'" mat-raised-button matStepperNext color="accent">Next</button>
+                              </div>
+                            </div>
+                          </form>
+                        </mat-step>
+                        <mat-step>
+                          <ng-template matStepLabel>Almost there...</ng-template>
+                          <div>
+                            <button mat-raised-button matStepperPrevious color="warn">Back</button>
+                            <button mat-raised-button color="accent" class="nxt-btn" [disabled]="this.secondFormGroup.status == 'INVALID' || this.firstFormGroup.status == 'INVALID'" (click)="crearUsuario()">Create Account</button>
+                          </div>
+                        </mat-step>
+                      </mat-stepper>
+                    </section>
+                    <ng-template #no_data></ng-template>
+                  
+                </mat-tab>
+                <mat-tab label="Login">
+                    <mat-stepper orientation="vertical">
+                        <mat-step>
+                          <ng-template matStepLabel>Step 1</ng-template>
+                          <ng-template matStepContent>
+                            <p>This content was rendered lazily</p>
+                            <button mat-button matStepperNext>Next</button>
+                          </ng-template>
+                        </mat-step>
+                        <mat-step>
+                          <ng-template matStepLabel>Step 2</ng-template>
+                          <ng-template matStepContent>
+                            <p>This content was also rendered lazily</p>
+                            <button mat-button matStepperPrevious>Back</button>
+                            <button mat-button matStepperNext>Next</button>
+                          </ng-template>
+                        </mat-step>
+                        <mat-step>
+                          <ng-template matStepLabel>Step 3</ng-template>
+                          <p>This content was rendered eagerly</p>
+                          <button mat-button matStepperPrevious>Back</button>
+                        </mat-step>
+                      </mat-stepper>
+                </mat-tab>
+            </mat-tab-group>
+
+        </mat-card>
+    </div>
+</div>
