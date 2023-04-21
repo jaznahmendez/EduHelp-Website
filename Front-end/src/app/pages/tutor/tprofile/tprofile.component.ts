@@ -3,6 +3,7 @@ import { RegisterService } from 'src/app/shared/services/register.service'
 import { Tutor } from 'src/app/shared/interfaces/tutor'
 import { Patient } from 'src/app/shared/interfaces/patient'
 import { TutorService } from 'src/app/shared/services/tutor.service'
+import { PatientService } from 'src/app/shared/services/patient.service'
 
 @Component({
   selector: 'app-tprofile',
@@ -22,26 +23,36 @@ export class TProfileComponent implements OnInit {
     tutorDescription: ''
   }
 
-  constructor(private registerService: RegisterService, private tutorService: TutorService) {}
+  constructor(private registerService: RegisterService, private tutorService: TutorService, private patientService: PatientService) {}
+
+  hijos: any = []
+  hijosArray: any = []
 
   ngOnInit(): void {
+    this.tutorService.setTutorProfile('641e47725ad83e88452cd701'); // id sacado con token, de mientras es el de Karla
+
     this.tutorService.getTutor().subscribe((response: any) => {
       this.tutor = response
+
+      for(let i = 0; i < this.tutor.hijos.length; i++)
+      {
+        this.hijos.push(this.tutor.hijos[i])
+      }
+      
+      for(let i = 0; i < this.hijos.length; i++)
+      {
+        this.patientService.id = this.hijos[i];
+        this.patientService.getPatient().subscribe((response: any) => {
+          console.log(response)
+          this.hijosArray.push(response);
+        });
+      }
+
     });
+
   }
 
-  createPatient(name: String, email: String, password: String, tutorId: String, age: Number, gender: String, tutorDescription: String){
-    let patient: any = {
-      name: name,
-      email: email,
-      password: password,
-      tutorId: tutorId,
-      age: age,
-      gender: gender,
-      pastProfessionals: '',
-      currentProfessionals: '',
-      tutorDescription: tutorDescription
-    }
+  createPatient(patient: any){
     this.registerService.createPatient(patient);
   }
 

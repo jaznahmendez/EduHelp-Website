@@ -7,3 +7,11 @@
       <p>Ubicación:{{professional.location}}</p>
       <p>Link: {{professional.link}}</p>
 </div>
+<h2>PACIENTES</h2>
+<div *ngFor="let item of patientsProf" (click)="getPatientById(item)" [routerLink]="['/patient/' + item._id]"  class="row">
+  <div class="column">
+    <div class="card">
+      <h3>{{item.name}}</h3>
+      <p>{{item._id}}</p>
+    </div>
+  </div>

@@ -51,6 +51,5 @@ export class PatientComponent {
         }
       }
     });
-
   }
 }

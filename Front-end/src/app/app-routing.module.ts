@@ -11,6 +11,11 @@ import { PprofileComponent } from './pages/patient/pprofile/pprofile.component';
 
 import { TutorComponent } from './pages/tutor/tutor.component';
 import { DetalleTutorComponent } from './pages/detalle-tutor/detalle-tutor.component';
+import { TProfileComponent } from './pages/tutor/tprofile/tprofile.component';
+
+import { AdminComponent } from './pages/admin/admin.component';
+import { DetalleAdminComponent } from './pages/detalle-admin/detalle-admin.component';
+import { AProfileComponent } from './pages/admin/aprofile/aprofile.component';
 
 const routes: Routes = [
   {path: 'professional', component: ProfessionalComponent},
@@ -23,6 +28,11 @@ const routes: Routes = [
 
   {path: 'tutor', component: TutorComponent},
   {path: 'tutor/:id', component: DetalleTutorComponent},
+  {path: 'tutor/profile/:id', component: TProfileComponent},
+
+  {path: 'admin', component: AdminComponent},
+  {path: 'admin/:id', component: DetalleAdminComponent},
+  {path: 'admin/profile/:id', component: AProfileComponent},
 ];
 
 @NgModule({

@@ -32,6 +32,17 @@ export class TutorService {
     return this.httpClient.get(url)
   }
 
+  setTutorProfile(id: string)
+  {
+    this.id = id;
+    let url = this.apiUrl + 'admin/tutor/' + id
+    this.httpClient.get(url).subscribe((response: any) => {
+      //console.log(url)
+      //console.log(response)
+      this.tutorSeleccionado = response
+    });
+  }
+
   getTutor() {
     //console.log('id: ', this.id)
     let url = this.apiUrl + 'admin/tutor/' + this.id

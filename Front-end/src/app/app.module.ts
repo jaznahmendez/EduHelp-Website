@@ -24,6 +24,8 @@ import { PprofileComponent } from './pages/patient/pprofile/pprofile.component';
 import { DetallesPatientComponent } from './pages/detalles-patient/detalles-patient.component';
 import { DetalleTutorComponent } from './pages/detalle-tutor/detalle-tutor.component';
 import { TProfileComponent } from './pages/tutor/tprofile/tprofile.component';
+import { DetalleAdminComponent } from './pages/detalle-admin/detalle-admin.component';
+import { AProfileComponent } from './pages/admin/aprofile/aprofile.component';
 
 @NgModule({
   declarations: [
@@ -40,7 +42,9 @@ import { TProfileComponent } from './pages/tutor/tprofile/tprofile.component';
     PprofileComponent,
     DetallesPatientComponent,
     DetalleTutorComponent,
-    TProfileComponent
+    TProfileComponent,
+    DetalleAdminComponent,
+    AProfileComponent
   ],
   imports: [
     BrowserModule,

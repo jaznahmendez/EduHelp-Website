@@ -1,1 +1,8 @@
-<p>admin works!</p>
+<h2>Admins</h2>
+<div *ngFor="let item of pArray" (click)="getAdminById(item)" [routerLink]="[item._id]"  class="row">
+    <div class="column">
+      <div class="card">
+        <h3>{{item.name}}</h3>
+        <p>{{item._id}}</p>
+      </div>
+</div>

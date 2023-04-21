@@ -6,7 +6,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http'
   providedIn: 'root'
 })
 export class PatientService {
-  patientSeleccionado: Patient = {
+  patientSeleccionado: any = {
     name: '',
     email: '',
     password: '',
@@ -26,10 +26,22 @@ export class PatientService {
     this.patientSeleccionado = item;
   }
 
+  setPatientProfile(id: string)
+  {
+    this.id = id;
+    let url = this.apiUrl + 'admin/patient/' + id
+    this.httpClient.get(url).subscribe((response: any) => {
+      //console.log(url)
+      //console.log(response)
+      this.patientSeleccionado = response
+    });
+    console.log(this.patientSeleccionado)
+  }
+
   getPatient() {
     //console.log('id: ', this.id)
     let url = this.apiUrl + 'admin/patient/' + this.id
-    console.log(url)
+    //console.log(url)
     return this.httpClient.get(url)
   }
 

@@ -26,6 +26,17 @@ export class ProfessionalService {
     this.professionalSeleccionado = item;
   }
 
+  setProfessionalProfile(id: string)
+  {
+    this.id = id;
+    let url = this.apiUrl + 'professional/' + id
+    this.httpClient.get(url).subscribe((response: any) => {
+      //console.log(url)
+      //console.log(response)
+      this.professionalSeleccionado = response
+    });
+  }
+
   getProfessional() {
     //console.log('id: ', this.id)
     return this.httpClient.get(this.apiUrl + 'professional/' + this.id);
