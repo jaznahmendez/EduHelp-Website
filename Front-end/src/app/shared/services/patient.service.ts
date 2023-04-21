@@ -18,7 +18,7 @@ export class PatientService {
   constructor(private httpClient: HttpClient) { }
 
   getPatients() {
-    return this.httpClient.get(this.apiUrl + 'patient')
+    return this.httpClient.get(this.apiUrl + 'admin/patient')
   }
 
   setPatient(item: any) {
@@ -28,7 +28,7 @@ export class PatientService {
 
   getPatient() {
     //console.log('id: ', this.id)
-    return this.httpClient.get(this.apiUrl + 'patient/' + this.id);
+    return this.httpClient.get(this.apiUrl + 'admin/patient/' + this.id)
   }
 
   updatePatient(patient: object, id: string)
@@ -37,11 +37,11 @@ export class PatientService {
     let options = {
       headers: headers
     }
-    return this.httpClient.put(this.apiUrl + 'patient/' + id, patient, options)
+    return this.httpClient.put(this.apiUrl + 'admin/patient/:id' + id, patient, options)
   }
 
   deletePatient(id: string)
   {
-    return this.httpClient.delete(this.apiUrl + 'patient/' + id)
+    return this.httpClient.delete(this.apiUrl + 'admin/patient/' + id)
   }
 }

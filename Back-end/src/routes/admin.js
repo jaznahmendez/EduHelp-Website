@@ -120,7 +120,6 @@ router.delete('/:id', controller.deleteAdministrador);
  */
 router.put('/professional/:id', express.json(), controller.activateProfessional);
 
-
 // PATIENT
 /**
  * @swagger
@@ -159,7 +158,7 @@ router.put('patient/:id', express.json(), controllerPatient.updatePaciente)
  *      200:
  *        description: La lista de los profesionales registrados
  */
-router.get('professional/', controllerProfessional.getProfessional);
+router.get('/professional', controllerProfessional.getProfessional);
 
 /**
  * @swagger
@@ -208,7 +207,6 @@ router.post('professional/', controllerProfessional.createProfessional);
  *        description: objeto del profesional actualizado
  */
 router.put('professional/:id', controllerProfessional.updateProfessional);
-
 
 /**
  * @swagger

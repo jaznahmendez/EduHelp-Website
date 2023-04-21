@@ -20,6 +20,8 @@ import { HomeComponent } from './pages/home/home.component';
 import {MatButtonModule} from '@angular/material/button';
 import { DetalleProfessionalComponent } from './pages/detalle-professional/detalle-professional.component';
 import { ProfileComponent } from './pages/professional/profile/profile.component';
+import { PprofileComponent } from './pages/patient/pprofile/pprofile.component';
+import { DetallesPatientComponent } from './pages/detalles-patient/detalles-patient.component';
 
 @NgModule({
   declarations: [
@@ -32,7 +34,9 @@ import { ProfileComponent } from './pages/professional/profile/profile.component
     NavComponent,
     HomeComponent,
     DetalleProfessionalComponent,
-    ProfileComponent
+    ProfileComponent,
+    PprofileComponent,
+    DetallesPatientComponent
   ],
   imports: [
     BrowserModule,
