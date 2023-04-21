@@ -1,0 +1,52 @@
+.example-card{
+    border: 1px;
+    border-color: rgb(126, 122, 122);
+    border-style: solid;
+    border-radius: 5px;
+    margin-left: 20px;
+}
+
+img{
+    position: absolute;
+}
+
+.container{
+    position: relative;
+    left: 35%;
+    transform: translate(-50%, -50%);
+    padding-top: 100px;
+}
+
+.child{
+    float: left;
+    width: 50%;
+}
+
+.left-btn{
+    margin-right: 100px;
+    margin-left: 50px;
+}
+
+.right-btn{
+    margin-left: 100px;
+    margin-right: 50px;
+}
+
+button{
+    font-size: large;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    width: 150px;
+}
+
+span{
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}  
+
+.btn-group-t{
+    margin-left: 10px;
+}
+
+.nxt-btn{
+    margin-left: 10px;
+    width: 250px;
+}
