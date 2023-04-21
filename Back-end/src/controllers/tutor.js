@@ -32,6 +32,20 @@ class controladorTutor{
             });
     }
 
+    static updateTutor(req, res){
+        let obj = {
+            name: req.body.name,
+            email: req.body.password,
+            password: req.body.password,
+            telefono: req.body.telefono
+        }
+        tutor.findByIdAndUpdate(req.param.id, obj).then(tutor => {
+                res.status(200).send(tutor);
+            }).catch(err => {
+                console.error("Failed to update the document");
+                res.send(err);
+            });
+    }
 
     static borrarTutor(req, res){
         let id = req.params.id;
@@ -113,7 +127,18 @@ class controladorTutor{
         let id = req.params.id;
         patient.findByIdAndDelete(id)
             .then(patient => {
-                console.log('Paciente Eliminado');
+
+                let tutorId = patient.tutorId;
+                tutor.findById(tutorId)
+                    .then(tutor => {
+                        tutor.hijos = tutor.hijos.filter(e => e !== id)
+                        res.send(tutor);
+                    })
+                    .catch(err => {
+                        console.log('error');
+                        res.send('No se encuentran tutores con ese ID ' + err);
+                    });
+
                 res.send(patient);
             })
             .catch(err => {

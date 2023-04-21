@@ -27,6 +27,5 @@ export class DetallesPatientComponent implements OnInit {
     this.patientService.getPatient().subscribe((response: any) => {
       this.patient = response
     });
-   
   }
 }

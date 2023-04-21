@@ -56,7 +56,7 @@ const adminController = {
                 res.status(200).send(adminById)    
             })
             .catch(adminById =>{
-                res.status(400).send('algo salió mal en mostrar la cuenta de administrador' + req.params.id)    
+                res.status(400).send('algo salió mal en mostrar la cuenta de administrador ' + req.params.id)    
             })
     },
     deleteAdministrador: (req, res) => { // YA
@@ -90,34 +90,21 @@ const adminController = {
                 res.status(400).send('algo salió mal en el listado de cuentas de tutor');
             })
     },
-    getPatients(req, res){
+    getPatients: (req, res) => {
         patient.find()
             .then(response => {
                 res.send({patient: response})
             })
             .catch(error => {
-                res.status(400).send('algo salió mal en el listado de cuentas de pacientes');
+                res.status(400).send('algo salió mal en el listado de cuentas de paciente');
             })
     },
-    getPatient(req, res){
-        let patient = {
-            name: req.body.name,
-            tutorId: req.body.tutorId,
-            email: req.body.email,
-            password: req.body.password,
-            age: req.body.age,
-            gender: req.body.gender,
-            pastProfessionals: req.body.pastProfessionals,
-            currentProfessionals: req.body.currentProfessionals,
-            tutorDescription: req.body.tutorDescription,
-            token: req.body.token
-        }
-
-        patient.findByIdAndUpdate(req.params.id, patient)
-            .then(patientToUpdate =>{
-                res.status(200).send(patientToUpdate)    
+    getPatient: (req, res) => {
+        patient.findById(req.params.id)
+            .then(patientId =>{
+                res.status(200).send(patientId)    
             })
-            .catch(patientToUpdate =>{
+            .catch(patientId =>{
                 res.status(400).send('algo salió mal en actualizar la cuenta de paciente con id ', req.params.id)    
             })
     }

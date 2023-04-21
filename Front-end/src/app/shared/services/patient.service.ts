@@ -28,7 +28,9 @@ export class PatientService {
 
   getPatient() {
     //console.log('id: ', this.id)
-    return this.httpClient.get(this.apiUrl + 'admin/patient/' + this.id)
+    let url = this.apiUrl + 'admin/patient/' + this.id
+    console.log(url)
+    return this.httpClient.get(url)
   }
 
   updatePatient(patient: object, id: string)

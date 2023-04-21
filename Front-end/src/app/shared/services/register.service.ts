@@ -26,4 +26,13 @@ export class RegisterService {
     return this.httpClient.post(this.apiUrl + 'admin/patient', patient, options);
   }
 
+  createTutor(tutor: object)
+  {
+    let headers = new HttpHeaders({'Content-Type': 'application/json'})
+    let options = {
+      headers: headers
+    }
+    return this.httpClient.post(this.apiUrl + 'admin/tutor', tutor, options);
+  }
+
 }

@@ -6,6 +6,39 @@ const controllerPatient = require('../controllers/patient');
 const controllerProfessional = require('../controllers/professional');
 const controllerTutor = require('../controllers/tutor');
 
+// GETS
+
+router.get('/patient', controller.getPatients);
+
+router.get('/patient/:id', controller.getPatient);
+
+/**
+ * @swagger
+ * /admin/professional:
+ *  get:
+ *    description: obtener lista de profesionales
+ *    responses:
+ *      200:
+ *        description: La lista de los profesionales registrados
+ */
+router.get('/professional', controllerProfessional.getProfessional);
+
+/**
+ * @swagger
+ * /admin/professional/{id}: 
+ *  get:
+ *    description: listar una cuenta de profesional por el id
+ *    parameters:
+ *      - in: path
+ *        name: id
+ *        schema: 
+ *          type: string
+ *    responses:
+ *      200:
+ *        description: listar una cuenta de profesional mediante el id
+ */
+router.get('/professional/:id', controllerProfessional.getProfessionalId);
+
 /**
  * @swagger
  * /admin/tutor:
@@ -19,6 +52,23 @@ router.get('/tutor', controller.getTutores);
 
 /**
  * @swagger
+ * /admin/tutor/{id}:
+ *  get:
+ *    description: obtener tutor especifico
+ *    parameters:
+ *      - in: path
+ *        name: id
+ *        description: id del tutor a buscar
+ *        schema:
+ *          type: string
+ *    responses:
+ *      200:
+ *        description: tutor con ese id
+ */
+router.get('/tutor/:id', controllerTutor.findTutor);
+
+/**
+ * @swagger
  * /admin:
  *  get:
  *    description: obtener lista de admins
@@ -27,50 +77,6 @@ router.get('/tutor', controller.getTutores);
  *        description: La lista de los admins registrados
  */
 router.get('/', controller.getAdministrador);
-
-/**
- * @swagger
- * /admin: 
- *  post:
- *    description: crear nuevo Administrador
- *    parameters:
- *      - in: body
- *        name: nombre
- *        email: correo
- *        password: contraseña
- *        telefono: celular
- *        token: token de tipo de usuario
- *        required: true
- *        schema: 
- *          type: object
- *    responses:
- *      200:
- *        description: nuevo Administrador creado
- */
-router.post('/', controller.createAdministrador);
-
-/**
- * @swagger
- * /admin/{id}: 
- *  put:
- *    description: actualizar los parámetros de un Administrador
- *    parameters:
- *      - in: body
- *        name: nombre
- *        email: correo
- *        password: contraseña
- *        telefono: celular
- *        token: token de tipo de usuario
- *      - in: path
- *        name: id
- *        schema: 
- *          type: string
- *    responses:
- *      200:
- *        description: objeto de la Administrador actualizada
- */
-router.put('/:id', express.json(), controller.updateAdministrador);
-
 
 /**
  * @swagger
@@ -90,76 +96,16 @@ router.get('/:id', controller.getAdministradorId);
 
 /**
  * @swagger
- * /admin/{id}: 
- *  delete:
- *    description: eliminar una cuenta de Administrador
- *    parameters:
- *      - in: path
- *        name: id
- *        schema: 
- *          type: string
- *    responses:
- *      200:
- *        description: eliminar una cuenta de Administrador mediante el id
- */
-router.delete('/:id', controller.deleteAdministrador);
-
-/**
- * @swagger
- * /admin/professional/{id}: 
- *  delete:
- *    description: activar la cuenta de un profesional
- *    parameters:
- *      - in: path
- *        name: id
- *        schema: 
- *          type: string
- *    responses:
- *      200:
- *        description: activar la cuenta de un profesional mediante el id
- */
-router.put('/professional/:id', express.json(), controller.activateProfessional);
-
-// PATIENT
-/**
- * @swagger
- * /admin/patient/{id}: 
- *  put:
- *    description: actualizar los parámetros de un paciente
- *    parameters:
- *      - in: body
- *        name: nombre
- *        tutorId: nombre del padre o madre
- *        email: correo
- *        password: contraseña
- *        age: edad del paciente
- *        gender: género del paciente
- *        issue: problema por el que necesita ayuda
- *        tutorDescription: más información que el tutor desee proveer del paciente
- *        token: token de tipo de usuario
- *        required: true
- *      - in: path
- *        name: id
- *        schema: 
- *          type: string
- *    responses:
- *      200:
- *        description: objeto de paciente actualizado
- */
-router.put('patient/:id', express.json(), controllerPatient.updatePaciente)
-
-// PROFESSIONAL
-/**
- * @swagger
- * /admin/professional:
+ * /admin/tutor/patient:
  *  get:
- *    description: obtener lista de profesionales
+ *    description: obtener lista de pacientes registrados
  *    responses:
  *      200:
- *        description: La lista de los profesionales registrados
+ *        description: La lista de los pacientes registrados
  */
-router.get('/professional', controllerProfessional.getProfessional);
+router.get('/tutor/patient/:id', controllerTutor.getPatients);
 
+// POST
 /**
  * @swagger
  * /admin/profesisonal: 
@@ -182,122 +128,30 @@ router.get('/professional', controllerProfessional.getProfessional);
  *      200:
  *        description: nuevo profesional creado
  */
-router.post('professional/', controllerProfessional.createProfessional);
+router.post('/professional', express.json(), controllerProfessional.createProfessional);
 
 /**
  * @swagger
- * /admin/professional/{id}: 
- *  put:
- *    description: actualizar los parámetros de un profesional
+ * /admin: 
+ *  post:
+ *    description: crear nuevo Administrador
  *    parameters:
  *      - in: body
  *        name: nombre
  *        email: correo
  *        password: contraseña
  *        telefono: celular
- *        location: ubicación de consultorio o si lo quiere en línea
- *        link: link al google calendar
+ *        token: token de tipo de usuario
  *        required: true
- *      - in: path
- *        name: id
  *        schema: 
- *          type: string
+ *          type: object
  *    responses:
  *      200:
- *        description: objeto del profesional actualizado
+ *        description: nuevo Administrador creado
  */
-router.put('professional/:id', controllerProfessional.updateProfessional);
+router.post('/', express.json(), controller.createAdministrador);
 
-/**
- * @swagger
- * /admin/professional/{id}: 
- *  get:
- *    description: listar una cuenta de profesional por el id
- *    parameters:
- *      - in: path
- *        name: id
- *        schema: 
- *          type: string
- *    responses:
- *      200:
- *        description: listar una cuenta de profesional mediante el id
- */
-router.get('professional/:id', controllerProfessional.getProfessionalId);
-
-/**
- * @swagger
- * /admin/professional/{id}: 
- *  delete:
- *    description: eliminar una cuenta de profesionl
- *    parameters:
- *      - in: path
- *        name: id
- *        schema: 
- *          type: string
- *    responses:
- *      200:
- *        description: eliminar una cuenta de profesional mediante el id
- */
-router.delete('professional/:id', controllerProfessional.deleteProfessional);
-
-// TUTOR
-
-/**
- * @swagger
- * /admin/tutor/professional:
- *  get:
- *    description: obtener lista de profesionales activos
- *    responses:
- *      200:
- *        description: La lista de los profesionales registrados activos
- */
-router.get('tutor/professional', controllerTutor.getProfessional);
-
-
-/**
- * @swagger
- * /admin/tutor/patient:
- *  get:
- *    description: obtener lista de pacientes registrados
- *    responses:
- *      200:
- *        description: La lista de los pacientes registrados
- */
-router.get('/tutor/patient', controllerTutor.getPatients);
-
-/**
- * @swagger
- * /admin/tutor/patient:
- *  get:
- *    description: obtener lista de pacientes registrados
- *    responses:
- *      200:
- *        description: La lista de los pacientes registrados
- */
-router.get('/patient/:id', controller.getPatient);
-
-router.get('/patient', controller.getPatients);
-
-router.delete('/patient/:id', controllerTutor.borrarPaciente);
-
-router.post('/patient', controllerTutor.crearPaciente);
-
-/**
- * @swagger
- * /admin/tutor/{id}:
- *  get:
- *    description: obtener tutor especifico
- *    parameters:
- *      - in: path
- *        name: id
- *        description: id del tutor a buscar
- *        schema:
- *          type: string
- *    responses:
- *      200:
- *        description: tutor con ese id
- */
-router.get('tutor/:id', controllerTutor.findTutor);
+router.post('/patient', express.json(), controllerTutor.crearPaciente);
 
 /**
  * @swagger
@@ -325,7 +179,7 @@ router.get('tutor/:id', controllerTutor.findTutor);
  *      200:
  *        description: nuevo profesional creado
  */
-router.post('tutor/', controllerTutor.crearTutor);
+router.post('/tutor', express.json(), controllerTutor.crearTutor);
 
 /**
  * @swagger
@@ -362,7 +216,133 @@ router.post('tutor/', controllerTutor.crearTutor);
  *      200:
  *        description: nuevo profesional creado
  */
-router.post('tutor/patient', controllerTutor.crearPaciente);
+router.post('/tutor/patient', express.json(), controllerTutor.crearPaciente);
+
+// PUT
+/**
+ * @swagger
+ * /admin/{id}: 
+ *  put:
+ *    description: actualizar los parámetros de un Administrador
+ *    parameters:
+ *      - in: body
+ *        name: nombre
+ *        email: correo
+ *        password: contraseña
+ *        telefono: celular
+ *        token: token de tipo de usuario
+ *      - in: path
+ *        name: id
+ *        schema: 
+ *          type: string
+ *    responses:
+ *      200:
+ *        description: objeto de la Administrador actualizada
+ */
+router.put('/:id', express.json(), controller.updateAdministrador);
+
+/**
+ * @swagger
+ * /admin/professional/{id}: 
+ *  delete:
+ *    description: activar la cuenta de un profesional
+ *    parameters:
+ *      - in: path
+ *        name: id
+ *        schema: 
+ *          type: string
+ *    responses:
+ *      200:
+ *        description: activar la cuenta de un profesional mediante el id
+ */
+router.put('/professional/:id', express.json(), controller.activateProfessional);
+
+/**
+ * @swagger
+ * /admin/patient/{id}: 
+ *  put:
+ *    description: actualizar los parámetros de un paciente
+ *    parameters:
+ *      - in: body
+ *        name: nombre
+ *        tutorId: nombre del padre o madre
+ *        email: correo
+ *        password: contraseña
+ *        age: edad del paciente
+ *        gender: género del paciente
+ *        issue: problema por el que necesita ayuda
+ *        tutorDescription: más información que el tutor desee proveer del paciente
+ *        token: token de tipo de usuario
+ *        required: true
+ *      - in: path
+ *        name: id
+ *        schema: 
+ *          type: string
+ *    responses:
+ *      200:
+ *        description: objeto de paciente actualizado
+ */
+router.put('/patient/:id', express.json(), controllerPatient.updatePaciente)
+
+/**
+ * @swagger
+ * /admin/professional/{id}: 
+ *  put:
+ *    description: actualizar los parámetros de un profesional
+ *    parameters:
+ *      - in: body
+ *        name: nombre
+ *        email: correo
+ *        password: contraseña
+ *        telefono: celular
+ *        location: ubicación de consultorio o si lo quiere en línea
+ *        link: link al google calendar
+ *        required: true
+ *      - in: path
+ *        name: id
+ *        schema: 
+ *          type: string
+ *    responses:
+ *      200:
+ *        description: objeto del profesional actualizado
+ */
+router.put('/professional/:id', express.json(), controllerProfessional.updateProfessional);
+
+//DELETE
+
+/**
+ * @swagger
+ * /admin/{id}: 
+ *  delete:
+ *    description: eliminar una cuenta de Administrador
+ *    parameters:
+ *      - in: path
+ *        name: id
+ *        schema: 
+ *          type: string
+ *    responses:
+ *      200:
+ *        description: eliminar una cuenta de Administrador mediante el id
+ */
+router.delete('/:id', controller.deleteAdministrador);
+
+/**
+ * @swagger
+ * /admin/professional/{id}: 
+ *  delete:
+ *    description: eliminar una cuenta de profesionl
+ *    parameters:
+ *      - in: path
+ *        name: id
+ *        schema: 
+ *          type: string
+ *    responses:
+ *      200:
+ *        description: eliminar una cuenta de profesional mediante el id
+ */
+router.delete('/professional/:id', controllerProfessional.deleteProfessional);
+
+router.delete('/patient/:id', controllerTutor.borrarPaciente);
 
 /**
  * @swagger
@@ -378,6 +358,6 @@ router.post('tutor/patient', controllerTutor.crearPaciente);
  *      200:
  *        description: eliminar una cuenta de profesional mediante el id
  */
-router.delete('tutor/:id', controllerTutor.borrarTutor);
+router.delete('/tutor/:id', controllerTutor.borrarTutor);
 
 module.exports = router;

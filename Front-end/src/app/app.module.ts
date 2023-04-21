@@ -22,6 +22,8 @@ import { DetalleProfessionalComponent } from './pages/detalle-professional/detal
 import { ProfileComponent } from './pages/professional/profile/profile.component';
 import { PprofileComponent } from './pages/patient/pprofile/pprofile.component';
 import { DetallesPatientComponent } from './pages/detalles-patient/detalles-patient.component';
+import { DetalleTutorComponent } from './pages/detalle-tutor/detalle-tutor.component';
+import { TProfileComponent } from './pages/tutor/tprofile/tprofile.component';
 
 @NgModule({
   declarations: [
@@ -36,7 +38,9 @@ import { DetallesPatientComponent } from './pages/detalles-patient/detalles-pati
     DetalleProfessionalComponent,
     ProfileComponent,
     PprofileComponent,
-    DetallesPatientComponent
+    DetallesPatientComponent,
+    DetalleTutorComponent,
+    TProfileComponent
   ],
   imports: [
     BrowserModule,

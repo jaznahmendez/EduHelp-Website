@@ -6,12 +6,23 @@ import { ProfileComponent } from './pages/professional//profile/profile.componen
 import { DetalleProfessionalComponent } from './pages/detalle-professional/detalle-professional.component';
 
 import { PatientComponent } from './pages/patient/patient.component';
+import { DetallesPatientComponent } from './pages/detalles-patient/detalles-patient.component';
+import { PprofileComponent } from './pages/patient/pprofile/pprofile.component';
+
+import { TutorComponent } from './pages/tutor/tutor.component';
+import { DetalleTutorComponent } from './pages/detalle-tutor/detalle-tutor.component';
 
 const routes: Routes = [
   {path: 'professional', component: ProfessionalComponent},
   {path: 'professional/:id', component: DetalleProfessionalComponent},
   {path: 'professional/profile/:id', component: ProfileComponent},
+
   {path: 'patient', component: PatientComponent},
+  {path: 'patient/:id', component: DetallesPatientComponent},
+  {path: 'patient/profile/:id', component: PprofileComponent},
+
+  {path: 'tutor', component: TutorComponent},
+  {path: 'tutor/:id', component: DetalleTutorComponent},
 ];
 
 @NgModule({

@@ -1,0 +1,14 @@
+<div class="column">
+    <div class="card">
+      <h3>Nombre: {{tutor.name}}</h3>
+      <p>Email: {{tutor.email}}</p>
+      <p>Id: {{tutor._id}}</p>
+</div>
+<h2>HIJOS</h2>
+<div *ngFor="let item of hijos" class="row">
+  <div class="column">
+    <div class="card">
+      <h3>{{item.name}}</h3>
+      <p>{{item.tutorId}}</p>
+    </div>
+  </div>
