@@ -2,6 +2,7 @@ const modelo = require('../models/admin')
 const tutor = require('./tutor');
 const modelTutor = require('../models/tutor');
 const professional = require('../models/professional');
+const patient = require('../models/patient')
 
 const adminController = {
     createAdministrador: (req, res) => {
@@ -87,6 +88,37 @@ const adminController = {
             })
             .catch(error => {
                 res.status(400).send('algo salió mal en el listado de cuentas de tutor');
+            })
+    },
+    getPatients(req, res){
+        patient.find()
+            .then(response => {
+                res.send({patient: response})
+            })
+            .catch(error => {
+                res.status(400).send('algo salió mal en el listado de cuentas de pacientes');
+            })
+    },
+    getPatient(req, res){
+        let patient = {
+            name: req.body.name,
+            tutorId: req.body.tutorId,
+            email: req.body.email,
+            password: req.body.password,
+            age: req.body.age,
+            gender: req.body.gender,
+            pastProfessionals: req.body.pastProfessionals,
+            currentProfessionals: req.body.currentProfessionals,
+            tutorDescription: req.body.tutorDescription,
+            token: req.body.token
+        }
+
+        patient.findByIdAndUpdate(req.params.id, patient)
+            .then(patientToUpdate =>{
+                res.status(200).send(patientToUpdate)    
+            })
+            .catch(patientToUpdate =>{
+                res.status(400).send('algo salió mal en actualizar la cuenta de paciente con id ', req.params.id)    
             })
     }
 }

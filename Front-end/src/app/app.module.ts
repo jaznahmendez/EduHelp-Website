@@ -5,6 +5,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
+import { HttpClientModule } from '@angular/common/http'
 
 import {MatCommonModule} from '@angular/material/core';
 import { AdminComponent } from './pages/admin/admin.component';
@@ -17,6 +18,8 @@ import { HomeComponent } from './pages/home/home.component';
 
 
 import {MatButtonModule} from '@angular/material/button';
+import { DetalleProfessionalComponent } from './pages/detalle-professional/detalle-professional.component';
+import { ProfileComponent } from './pages/professional/profile/profile.component';
 
 @NgModule({
   declarations: [
@@ -27,11 +30,14 @@ import {MatButtonModule} from '@angular/material/button';
     TutorComponent,
     FooterComponent,
     NavComponent,
-    HomeComponent
+    HomeComponent,
+    DetalleProfessionalComponent,
+    ProfileComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
+    HttpClientModule,
     BrowserAnimationsModule,
     MatCommonModule,
     MatButtonModule

@@ -1,8 +1,6 @@
 const patient = require('../models/patient');
 // nombre, correo, género
 
-
-
 class controladorPatient{
     static updatePaciente(req, res){
         let obj = {

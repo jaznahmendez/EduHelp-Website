@@ -269,6 +269,23 @@ router.get('/tutor/patient', controllerTutor.getPatients);
 
 /**
  * @swagger
+ * /admin/tutor/patient:
+ *  get:
+ *    description: obtener lista de pacientes registrados
+ *    responses:
+ *      200:
+ *        description: La lista de los pacientes registrados
+ */
+router.get('/patient/:id', controller.getPatient);
+
+router.get('/patient', controller.getPatients);
+
+router.delete('/patient/:id', controllerTutor.borrarPaciente);
+
+router.post('/patient', controllerTutor.crearPaciente);
+
+/**
+ * @swagger
  * /admin/tutor/{id}:
  *  get:
  *    description: obtener tutor especifico
