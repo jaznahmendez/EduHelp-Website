@@ -23,7 +23,7 @@ export class HomeComponent {
   
 
   constructor(FormBuilder: FormBuilder){
-
+    console.log('hi')
     this.firstFormGroup = FormBuilder.group({
       name: ['', Validators.required],
       telefono: ['', [Validators.required, Validators.minLength(3)]]

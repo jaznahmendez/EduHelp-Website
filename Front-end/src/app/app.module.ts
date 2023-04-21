@@ -5,7 +5,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
-import { HttpClientModule } from '@angular/common/http'
+import { HttpClientModule } from '@angular/common/http';
 
 import {MatCommonModule} from '@angular/material/core';
 import { AdminComponent } from './pages/admin/admin.component';
@@ -65,7 +65,6 @@ import { AProfileComponent } from './pages/admin/aprofile/aprofile.component';
   imports: [
     BrowserModule,
     AppRoutingModule,
-    HttpClientModule,
     BrowserAnimationsModule,
     MatCommonModule,
     MatButtonModule,
@@ -84,14 +83,6 @@ import { AProfileComponent } from './pages/admin/aprofile/aprofile.component';
     MatInputModule,
     MatButtonToggleModule,
     MatTooltipModule,
-    DetalleProfessionalComponent,
-    ProfileComponent,
-    PprofileComponent,
-    DetallesPatientComponent,
-    DetalleTutorComponent,
-    TProfileComponent,
-    DetalleAdminComponent,
-    AProfileComponent,
     HttpClientModule
   ],
   providers: [],
