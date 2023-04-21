@@ -17,7 +17,11 @@ import { AdminComponent } from './pages/admin/admin.component';
 import { DetalleAdminComponent } from './pages/detalle-admin/detalle-admin.component';
 import { AProfileComponent } from './pages/admin/aprofile/aprofile.component';
 
+import { HomeComponent } from './pages/home/home.component';
+
 const routes: Routes = [
+  {path: '', component: HomeComponent},
+
   {path: 'professional', component: ProfessionalComponent},
   {path: 'professional/:id', component: DetalleProfessionalComponent},
   {path: 'professional/profile/:id', component: ProfileComponent},
