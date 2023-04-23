@@ -13,7 +13,7 @@ import { NewPatientComponent } from './new-patient/new-patient.component';
   templateUrl: './tprofile.component.html',
   styleUrls: ['./tprofile.component.scss']
 })
-export class TProfileComponent implements OnInit,  OnChanges {
+export class TProfileComponent implements OnInit {
 
   imageLink : any =  [];
 
@@ -43,31 +43,6 @@ export class TProfileComponent implements OnInit,  OnChanges {
 
   ngOnInit(): void {
     this.tutorService.setTutorProfile('641e47725ad83e88452cd701'); // id sacado con token, de mientras es el de Carlos
-
-    this.tutorService.getTutor().subscribe((response: any) => {
-      this.tutor = response
-
-      for(let i = 0; i < this.tutor.hijos.length; i++)
-      {
-        this.hijos.push(this.tutor.hijos[i])
-      }
-      
-      for(let i = 0; i < this.hijos.length; i++)
-      {
-        this.patientService.id = this.hijos[i];
-        this.patientService.getPatient().subscribe((response: any) => {
-          console.log(response)
-          if(response != null)this.hijosArray.push(response);
-          this.imageLink.push("url('https://randomuser.me/api/portraits/women/" + i + ".jpg')");
-        });
-      }
-
-    });
-
-  }
-
-  ngOnChanges(changes: SimpleChanges): void {
-    //this.tutorService.setTutorProfile('641e47725ad83e88452cd701'); // id sacado con token, de mientras es el de Carlos
 
     this.tutorService.getTutor().subscribe((response: any) => {
       this.tutor = response

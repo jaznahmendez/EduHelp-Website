@@ -6,7 +6,8 @@ class controladorPatient{
         let obj = {
             name: req.body.name,
             email: req.body.email,
-            gender: req.body.gender
+            gender: req.body.gender,
+            age: req.body.age
         }
         let id = req.params.id;
         patient.findByIdAndUpdate(id, req.body, {new:true})
