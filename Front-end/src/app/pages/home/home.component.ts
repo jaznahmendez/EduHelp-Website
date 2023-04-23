@@ -61,7 +61,7 @@ export class HomeComponent {
     if(this.fontStyleControl == "tutor"){
       this.user = {
         name: this.firstFormGroup.value.name,
-        email: this.firstFormGroup.value.email,
+        email: this.secondFormGroup.value.email,
         password: this.secondFormGroup.value.password,
         telefono: this.firstFormGroup.value.telefono    
       }
@@ -70,7 +70,7 @@ export class HomeComponent {
       this.user = {
         name: this.thirdFormGroup.value.name,
         profession: this.thirdFormGroup.value.profession,
-        email: this.firstFormGroup.value.email,
+        email: this.secondFormGroup.value.email,
         password: this.secondFormGroup.value.password,
         telefono: this.thirdFormGroup.value.telefono    
       }
