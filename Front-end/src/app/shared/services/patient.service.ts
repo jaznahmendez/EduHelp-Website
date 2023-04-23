@@ -51,7 +51,7 @@ export class PatientService {
     let options = {
       headers: headers
     }
-    return this.httpClient.put(this.apiUrl + 'admin/patient/:id' + id, patient, options).subscribe()
+    return this.httpClient.put(this.apiUrl + 'admin/patient/' + id, patient, options).subscribe()
   }
 
   deletePatient(id: string)

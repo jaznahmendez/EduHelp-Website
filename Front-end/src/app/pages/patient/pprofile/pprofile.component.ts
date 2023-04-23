@@ -104,9 +104,10 @@ export class PprofileComponent implements OnInit {
       console.log('The dialog was closed');
       console.log(result);
       if(result){
-        console.log(result);
-        console.log(this.patient._id);
+        console.log('res: ',result);
+        console.log('id: ',this.patient._id);
         this.patientService.updatePatient(result, this.patient._id);
+        this.patient = result;
       }
     });
   }
