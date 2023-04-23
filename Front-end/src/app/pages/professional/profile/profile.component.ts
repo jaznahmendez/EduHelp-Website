@@ -31,24 +31,21 @@ export class ProfileComponent implements OnInit {
     });
   }
 
-  updateProfessional(id: string) {
-    let obj = {
-      name: '',
-      profession: '',
-      email: '',
-      password: '',
-      telefono: '',
-      token: '',
-      location: '',
-      link: '',
-      active: false,
-      patients: ['']
-    }
+  updateProfessional(id: string, obj: any) {
     this.professionalService.updateProfessional(obj, id);
   }
 
   deleteProfessional(id: string) {
     this.professionalService.deleteProfessional(id);
+  }
+
+  changeProfessionalPassword(id: string, password: string){
+    this.professionalService.id = id;
+    this.professionalService.getProfessional().subscribe((response: any) => {
+        response.password = password;
+        this.professionalService.updateProfessional(response, id);
+      
+    });
   }
   
 }

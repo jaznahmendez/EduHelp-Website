@@ -23,13 +23,17 @@ export class AProfileComponent implements OnInit {
     });
   }
 
-  updateAdmin(id: string) {
-    let obj = {
-      name: '',
-      password: '',
-      telefono: ''
-    }
+  updateAdmin(id: string, obj: any) {
     this.adminService.updateAdmin(obj, id);
+  }
+
+  changeAdminPassword(id: string, password: string){
+    this.adminService.id = id;
+    this.adminService.getAdmin().subscribe((response: any) => {
+        response.password = password;
+        this.adminService.updateAdmin(response, id);
+      
+    });
   }
 
   deleteAdmin(id: string) {

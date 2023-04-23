@@ -64,6 +64,15 @@ export class TProfileComponent implements OnInit {
 
   }
 
+  changeTutorPassword(id: string, password: string){
+    this.tutorService.id = id;
+    this.tutorService.getTutor().subscribe((response: any) => {
+        response.password = password;
+        this.tutorService.updateTutor(response, id);
+      
+    });
+  }
+
   createPatient(patient: any){
     this.registerService.createPatient(patient);
   }

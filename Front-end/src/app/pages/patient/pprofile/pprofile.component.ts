@@ -48,23 +48,21 @@ export class PprofileComponent implements OnInit {
     
   }
 
-  updatePatient(id: string) {
-    let obj = {
-      name: '',
-      email: '',
-      password: '',
-      tutorId: '',
-      age: 0,
-      gender: '',
-      pastProfessionals: '',
-      currentProfessionals: '',
-      tutorDescription: ''
-    }
+  updatePatient(id: string, obj: any) {
     this.patientService.updatePatient(obj, id);
   }
 
   deletePatient(id: string) {
     this.patientService.deletePatient(id);
+  }
+
+  changePatientPassword(id: string, password: string){
+    this.patientService.id = id;
+    this.patientService.getPatient().subscribe((response: any) => {
+        response.password = password;
+        this.patientService.updatePatient(response, id);
+      
+    });
   }
 
 }
