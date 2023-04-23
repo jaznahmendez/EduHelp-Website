@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Admin } from 'src/app/shared/interfaces/admin'
 import { AdminService } from 'src/app/shared/services/admin.service'
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-aprofile',
@@ -8,16 +9,16 @@ import { AdminService } from 'src/app/shared/services/admin.service'
   styleUrls: ['./aprofile.component.scss']
 })
 export class AProfileComponent implements OnInit {
-  admin: any = {
-    name: '',
-    password: '',
-    telefono: ''
-  }
+  admin: any = {}
+  id: string = ''
 
-  constructor(private adminService: AdminService) {}
+  constructor(private route: ActivatedRoute, private adminService: AdminService) {}
 
   ngOnInit(): void {
-    this.adminService.setAdminProfile('641e3e292f6ba3544a2be4af')
+    this.route.params.subscribe(params => {
+      this.id = params['id'];
+    });
+    this.adminService.setAdminProfile(this.id)
     this.adminService.getAdmin().subscribe((response: any) => {
       this.admin = response
     });

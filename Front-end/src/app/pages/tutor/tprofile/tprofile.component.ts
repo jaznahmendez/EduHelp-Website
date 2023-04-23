@@ -7,6 +7,7 @@ import { PatientService } from 'src/app/shared/services/patient.service'
 import {MatDialog, MAT_DIALOG_DATA, MatDialogRef} from '@angular/material/dialog';
 import { EditDialogComponent } from './edit-dialog/edit-dialog.component';
 import { NewPatientComponent } from './new-patient/new-patient.component';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-tprofile',
@@ -23,9 +24,11 @@ export class TProfileComponent implements OnInit {
     password: ''
   }
 
+  routeId: string = ''
+
   newPatient: any = {
     name: '',
-    tutorId: '641e47725ad83e88452cd701',
+    tutorId: this.routeId,
     email: '',
     password: '',
     age: 0,
@@ -33,7 +36,7 @@ export class TProfileComponent implements OnInit {
     tutorDescription: ''
   }
 
-  constructor(private registerService: RegisterService, private tutorService: TutorService, private patientService: PatientService, public dialog: MatDialog) { }
+  constructor(private route: ActivatedRoute, private registerService: RegisterService, private tutorService: TutorService, private patientService: PatientService, public dialog: MatDialog) { }
 
   hijos: any = []
   hijosArray: any = []
@@ -42,7 +45,11 @@ export class TProfileComponent implements OnInit {
   
 
   ngOnInit(): void {
-    this.tutorService.setTutorProfile('641e47725ad83e88452cd701'); // id sacado con token, de mientras es el de Carlos
+    this.route.params.subscribe(params => {
+      this.routeId = params['id'];
+    });
+
+    this.tutorService.setTutorProfile(this.routeId); // id sacado con token, de mientras es el de Carlos
 
     this.tutorService.getTutor().subscribe((response: any) => {
       this.tutor = response
@@ -106,7 +113,7 @@ export class TProfileComponent implements OnInit {
         this.tutor.email = result.email;
         this.tutor.telefono = result.telefono;
         console.log(this.tutor)
-        this.tutorService.updateTutor(result, '641e47725ad83e88452cd701');
+        this.tutorService.updateTutor(result, this.routeId);
       }
     });
   }
