@@ -40,7 +40,7 @@ export class TProfileComponent implements OnInit {
   
 
   ngOnInit(): void {
-    this.tutorService.setTutorProfile('641e47725ad83e88452cd701'); // id sacado con token, de mientras es el de Karla
+    this.tutorService.setTutorProfile('641e47725ad83e88452cd701'); // id sacado con token, de mientras es el de Carlos
 
     this.tutorService.getTutor().subscribe((response: any) => {
       this.tutor = response
@@ -55,7 +55,7 @@ export class TProfileComponent implements OnInit {
         this.patientService.id = this.hijos[i];
         this.patientService.getPatient().subscribe((response: any) => {
           console.log(response)
-          this.hijosArray.push(response);
+          if(response != null)this.hijosArray.push(response);
           this.imageLink.push("url('https://randomuser.me/api/portraits/women/" + i + ".jpg')");
         });
       }
@@ -68,16 +68,17 @@ export class TProfileComponent implements OnInit {
     this.registerService.createPatient(patient);
   }
 
-  updateTutor(id: string) {
-    let obj = {
-      name: '',
-      email: ''
-    }
+  updateTutor(obj: object,id: string) {
     this.tutorService.updateTutor(obj, id);
   }
 
   deleteTutor(id: string) {
     this.tutorService.deleteTutor(id);
+  }
+
+  deletePatient(id: string) {
+    console.log('hi')
+    this.patientService.deletePatient(id);
   }
 
   openEditDialog(): void {
@@ -92,7 +93,8 @@ export class TProfileComponent implements OnInit {
         this.newPatient.name = result.name;
         this.newPatient.email = result.email;
         this.tutor.telefono = result.telefono;
-        this.tutorService.updateTutor(this.tutor, '641e47725ad83e88452cd701');
+        console.log(this.tutor)
+        this.tutorService.updateTutor(result, '641e47725ad83e88452cd701');
       }
     });
   }

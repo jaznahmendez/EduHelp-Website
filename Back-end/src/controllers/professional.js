@@ -34,7 +34,7 @@ const professionalController = {
             link: req.body.link
         }
 
-        modelo.findByIdAndUpdate(req.params.id, prof)
+        modelo.findByIdAndUpdate(req.params.id, req.body)
             .then(profToUpdate =>{
                 res.status(200).send(profToUpdate)    
             })

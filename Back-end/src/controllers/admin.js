@@ -31,7 +31,7 @@ const adminController = {
             token: req.body.token
         }
 
-        modelo.findByIdAndUpdate(req.params.id, admin)
+        modelo.findByIdAndUpdate(req.params.id, req.body)
             .then(adminToUpdate =>{
                 res.status(200).send(adminToUpdate)    
             })

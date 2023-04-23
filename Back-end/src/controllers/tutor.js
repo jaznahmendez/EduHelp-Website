@@ -17,12 +17,14 @@ class controladorTutor{
     }
 
     static crearTutor(req, res){
+        console.log('entra a tutor')
         let obj = {
             name: req.body.name,
             email: req.body.password,
             password: req.body.password,
             telefono: req.body.telefono
         }
+        console.log(obj)
         tutor(obj).save().then(tutor => {
                 console.log("Document inserted successfully");
                 res.status(200).send(tutor);
@@ -33,14 +35,17 @@ class controladorTutor{
     }
 
     static updateTutor(req, res){
-        console.log("ñam ña,");
-        let obj = {
+        
+        /*let obj = {
             name: req.body.name,
             email: req.body.password,
             password: req.body.password,
             telefono: req.body.telefono
-        }
-        tutor.findByIdAndUpdate(req.param.id, obj).then(tutor => {
+        }*/
+        //console.log("ñam ña,", req.body);
+        console.log(req.params.id)
+        tutor.findByIdAndUpdate(req.params.id, req.body).then(tutor => {
+                console.log(tutor)
                 res.status(200).send(tutor);
             }).catch(err => {
                 console.error("Failed to update the document");
@@ -126,20 +131,10 @@ class controladorTutor{
 
     static borrarPaciente(req, res){
         let id = req.params.id;
+        console.log(id)
         patient.findByIdAndDelete(id)
             .then(patient => {
-
                 let tutorId = patient.tutorId;
-                tutor.findById(tutorId)
-                    .then(tutor => {
-                        tutor.hijos = tutor.hijos.filter(e => e !== id)
-                        res.send(tutor);
-                    })
-                    .catch(err => {
-                        console.log('error');
-                        res.send('No se encuentran tutores con ese ID ' + err);
-                    });
-
                 res.send(patient);
             })
             .catch(err => {

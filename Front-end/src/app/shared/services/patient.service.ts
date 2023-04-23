@@ -51,11 +51,12 @@ export class PatientService {
     let options = {
       headers: headers
     }
-    return this.httpClient.put(this.apiUrl + 'admin/patient/:id' + id, patient, options)
+    return this.httpClient.put(this.apiUrl + 'admin/patient/:id' + id, patient, options).subscribe()
   }
 
   deletePatient(id: string)
   {
-    return this.httpClient.delete(this.apiUrl + 'admin/patient/' + id)
+    console.log(id)
+    return this.httpClient.delete(this.apiUrl + 'admin/patient/' + id).subscribe()
   }
 }

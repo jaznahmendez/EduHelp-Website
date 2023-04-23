@@ -48,7 +48,7 @@ export class ProfessionalService {
     let options = {
       headers: headers
     }
-    return this.httpClient.put(this.apiUrl + 'professional/' + id, prof, options)
+    return this.httpClient.put(this.apiUrl + 'professional/' + id, prof, options).subscribe()
   }
 
   deleteProfessional(id: string)

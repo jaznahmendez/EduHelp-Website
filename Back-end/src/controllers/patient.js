@@ -9,7 +9,7 @@ class controladorPatient{
             gender: req.body.gender
         }
         let id = req.params.id;
-        patient.findByIdAndUpdate(id, obj, {new:true})
+        patient.findByIdAndUpdate(id, req.body, {new:true})
             .then(patient => {
                 console.log('Paciente Actualizado');
                 res.status(200).send(patient);

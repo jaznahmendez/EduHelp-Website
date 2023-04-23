@@ -38,7 +38,11 @@
       <mat-card-actions align="end">
         <button mat-fab extended>
           <mat-icon>app_registration</mat-icon>
-          <span>Details</span>
+          <span (click)="deletePatient(item._id)">Delete</span>
+        </button>
+        <button mat-fab extended>
+          <mat-icon>app_registration</mat-icon>
+          <span [routerLink]="['/patient/profile/' + item._id]">Details</span>
         </button>
       </mat-card-actions>
     </mat-card>

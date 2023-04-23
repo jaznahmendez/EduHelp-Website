@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
 import { FormGroup, FormBuilder, Validators, FormControl } from '@angular/forms';
+import { RegisterService } from 'src/app/shared/services/register.service'
+
 
 @Component({
   selector: 'app-home',
@@ -22,7 +24,7 @@ export class HomeComponent {
   hide = true;
   
 
-  constructor(FormBuilder: FormBuilder){
+  constructor(FormBuilder: FormBuilder, private registerService: RegisterService){
     console.log('hi')
     this.firstFormGroup = FormBuilder.group({
       name: ['', Validators.required],
@@ -63,6 +65,7 @@ export class HomeComponent {
         password: this.secondFormGroup.value.password,
         telefono: this.firstFormGroup.value.telefono    
       }
+      this.registerService.createTutor(this.user)
     }else{
       this.user = {
         name: this.thirdFormGroup.value.name,
@@ -71,8 +74,10 @@ export class HomeComponent {
         password: this.secondFormGroup.value.password,
         telefono: this.thirdFormGroup.value.telefono    
       }
+      this.registerService.createProfessional(this.user)
     }
-    
+    //console.log(this.user)
+    //console.log(typeof(this.user))
   }
 
   login(){
