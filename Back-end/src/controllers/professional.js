@@ -3,7 +3,7 @@ const { response } = require('express');
 
 const professionalController = {
     createProfessional: (req, res) => {
-        let prof = {
+        /*let prof = {
             name: req.body.name,
             profession: req.body.profession,
             email: req.body.email,
@@ -12,9 +12,9 @@ const professionalController = {
             token: req.body.token,
             location: req.body.location,
             link: req.body.link
-        }
+        }*/
         //console.log(prof)
-        modelo(prof).save()
+        modelo(req.body).save()
             .then(prof =>{
                 res.status(200).send(prof)    
             })

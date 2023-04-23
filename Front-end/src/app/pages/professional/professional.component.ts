@@ -72,7 +72,7 @@ export class ProfessionalComponent implements OnChanges {
   getProfessionals() {
     this.professionalService.getProfessionals().subscribe((response: any) => {
       this.p = response.professional;
-      
+      console.log(response)
       for (const key in this.p) {
         if (this.p.hasOwnProperty(key)) {
           this.pArray.push(this.p[key]);
