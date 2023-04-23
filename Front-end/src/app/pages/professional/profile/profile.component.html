@@ -22,3 +22,30 @@
     </mat-card-actions>
   </mat-card>
 </div>
+
+<div class="middle-div">
+  <h2><span class="middle-title">My Current Patients</span></h2>
+</div>
+
+<div class="container-patient">
+  <div  class="error-msg" *ngIf="this.patientsProf == ''">Uuh Oh! it seems you do not have any current patients registered</div>
+  <div *ngFor="let item of patientsProf; let i = index;">
+    <mat-card class="patient-card">
+      <mat-card-header>
+        <div mat-card-avatar class="patient-image" [style.background-image] = "imageLinkCp[i]"></div>
+        <mat-card-title><h1>{{item.name}}</h1></mat-card-title>
+        <mat-card-subtitle><h2>{{item.profession}}</h2></mat-card-subtitle>
+        <mat-card-subtitle><h2>{{item.email}}</h2></mat-card-subtitle>
+        <mat-card-subtitle><h2>{{item.telefono}}</h2></mat-card-subtitle>
+      </mat-card-header>
+      <mat-card-content>
+      </mat-card-content>
+      <mat-card-actions align="end">
+        <button mat-fab extended>
+          <mat-icon>persona</mat-icon>
+          <span [routerLink]="['/professional/' + item._id]">See Profile</span>
+        </button>
+      </mat-card-actions>
+    </mat-card>
+  </div>
+</div>
