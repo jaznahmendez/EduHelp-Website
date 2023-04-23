@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnChanges, SimpleChanges, EventEmitter, Output } from '@angular/core';
 import { RegisterService } from 'src/app/shared/services/register.service'
 import { Tutor } from 'src/app/shared/interfaces/tutor'
 import { Patient } from 'src/app/shared/interfaces/patient'
@@ -13,7 +13,7 @@ import { NewPatientComponent } from './new-patient/new-patient.component';
   templateUrl: './tprofile.component.html',
   styleUrls: ['./tprofile.component.scss']
 })
-export class TProfileComponent implements OnInit {
+export class TProfileComponent implements OnInit,  OnChanges {
 
   imageLink : any =  [];
 
@@ -37,10 +37,37 @@ export class TProfileComponent implements OnInit {
 
   hijos: any = []
   hijosArray: any = []
+
+  @Output() onSelected: EventEmitter<any> = new EventEmitter();
   
 
   ngOnInit(): void {
     this.tutorService.setTutorProfile('641e47725ad83e88452cd701'); // id sacado con token, de mientras es el de Carlos
+
+    this.tutorService.getTutor().subscribe((response: any) => {
+      this.tutor = response
+
+      for(let i = 0; i < this.tutor.hijos.length; i++)
+      {
+        this.hijos.push(this.tutor.hijos[i])
+      }
+      
+      for(let i = 0; i < this.hijos.length; i++)
+      {
+        this.patientService.id = this.hijos[i];
+        this.patientService.getPatient().subscribe((response: any) => {
+          console.log(response)
+          if(response != null)this.hijosArray.push(response);
+          this.imageLink.push("url('https://randomuser.me/api/portraits/women/" + i + ".jpg')");
+        });
+      }
+
+    });
+
+  }
+
+  ngOnChanges(changes: SimpleChanges): void {
+    //this.tutorService.setTutorProfile('641e47725ad83e88452cd701'); // id sacado con token, de mientras es el de Carlos
 
     this.tutorService.getTutor().subscribe((response: any) => {
       this.tutor = response
@@ -88,6 +115,7 @@ export class TProfileComponent implements OnInit {
   deletePatient(id: string) {
     console.log('hi')
     this.patientService.deletePatient(id);
+    window.location.reload()
   }
 
   openEditDialog(): void {
@@ -118,6 +146,7 @@ export class TProfileComponent implements OnInit {
       console.log(result);
       if(result){
         this.newPatient = {...result}
+        window.location.reload()
       }
     });
   }

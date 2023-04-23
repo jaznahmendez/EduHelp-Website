@@ -25,7 +25,7 @@ export class ProfileComponent implements OnInit {
   constructor(private professionalService: ProfessionalService) {}
 
   ngOnInit(): void {
-    this.professionalService.setProfessionalProfile('6441c0507fc61ff5ae1e112e')
+    this.professionalService.setProfessionalProfile('641e3aa760a550973418d30e')
     this.professionalService.getProfessional().subscribe((response: any) => {
       this.professional = response
     });

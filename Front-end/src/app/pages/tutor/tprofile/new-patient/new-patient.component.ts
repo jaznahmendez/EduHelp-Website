@@ -47,6 +47,7 @@ export class NewPatientComponent {
     }
     console.log(newPatient);
     this.registerService.createPatient(newPatient);
+    window.location.reload()
   }
 
   onNoClick(): void {
