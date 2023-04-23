@@ -65,6 +65,7 @@ export class HomeComponent {
         password: this.secondFormGroup.value.password,
         telefono: this.firstFormGroup.value.telefono    
       }
+      //console.log(this.user)
       this.registerService.createTutor(this.user)
     }else{
       this.user = {

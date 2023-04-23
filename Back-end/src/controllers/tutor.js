@@ -20,7 +20,7 @@ class controladorTutor{
         console.log('entra a tutor')
         let obj = {
             name: req.body.name,
-            email: req.body.password,
+            email: req.body.email,
             password: req.body.password,
             telefono: req.body.telefono
         }
