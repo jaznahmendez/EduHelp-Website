@@ -99,8 +99,8 @@ export class TProfileComponent implements OnInit {
       console.log('The dialog was closed');
       console.log(result);
       if(result){
-        this.newPatient.name = result.name;
-        this.newPatient.email = result.email;
+        this.tutor.name = result.name;
+        this.tutor.email = result.email;
         this.tutor.telefono = result.telefono;
         console.log(this.tutor)
         this.tutorService.updateTutor(result, '641e47725ad83e88452cd701');
