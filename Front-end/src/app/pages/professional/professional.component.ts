@@ -19,24 +19,41 @@ export class ProfessionalComponent implements OnChanges {
   }
   id = '';
   itemsFiltrados: any[] = []
+  itemsFiltrados2: any[] = []
   buscar: string = '';
+  prof: string = "all";
 
   ngOnChanges(changes: SimpleChanges): void {
     this.itemsFiltrados = this.pArray;
+    this.itemsFiltrados2 = this.itemsFiltrados
   }
 
   constructor(private professionalService: ProfessionalService) {
     this.getProfessionals();
     this.itemsFiltrados = this.pArray;
+    this.itemsFiltrados2 = this.itemsFiltrados
   }
   filtrar() {
     //console.log('items: ', this.itemsFiltrados)
     const buscar = this.buscar.toLowerCase();
-    console.log("hiciste click ", buscar)
+    //console.log("hiciste click ", buscar)
     this.itemsFiltrados = this.pArray.filter((item) => {
      // console.log(item.name)
       return item.name?.toLowerCase().includes(buscar);
     });
+    //console.log(this.itemsFiltrados)
+    this.filtrarProfession();
+  }
+
+  filtrarProfession() {
+    console.log(this.itemsFiltrados)
+    
+    this.itemsFiltrados2 = this.itemsFiltrados.filter((item) => {
+      console.log(item.profession)
+      if(this.prof == "all") return item
+      if(item.profession == this.prof) return item
+     });
+
   }
 
   getProfessionalById(item: any) {

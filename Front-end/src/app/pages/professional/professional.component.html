@@ -5,7 +5,38 @@
   <input class="searchBar" name="buscar" type="text" placeholder="Search..." [(ngModel)]="buscar">
 </form>
 <br><br>
-  <div class="card"   *ngFor="let item of itemsFiltrados" (click)="getProfessionalById(item)" [routerLink]="[item._id]">
+<!--
+<form (submit)="filtrarProfession()" class="profession">
+  <label for="all">
+    <input type="radio" id="all" name="prof" value="All" checked="checked" [(value)]="prof">All
+  </label>
+  <label for="psychologist">
+    <input type="radio" id="psychologist" name="prof" value="Psychologist" [(value)]="prof">Psychologist
+  </label>
+  <label for="pedagogue">
+    <input type="radio" id="pedagogue" name="prof" value="Pedagogue" [(value)]="prof">Pedagogue
+  </label>
+  <label for="speech-therapist">
+    <input type="radio" id="speech-therapist" name="prof" value="Speech therapist" [(value)]="prof">Speech therapist
+  </label>
+  <label for="psychiatrist">
+    <input type="radio" id="psychiatrist" name="prof" value="Psychiatrist" [(value)]="prof">Psychiatrist
+  </label>
+</form>-->
+
+<mat-form-field appearance="fill" class="mat">
+  <mat-select [(value)]="prof">
+    <mat-option (click)="filtrarProfession()"  value="all">All</mat-option>
+    <mat-option (click)="filtrarProfession()"  value="Psychologist">Psychologist</mat-option>
+    <mat-option (click)="filtrarProfession()"  value="Pedagogue">Pedagogue</mat-option>
+    <mat-option (click)="filtrarProfession()"  value="Speech therapist">Speech therapist</mat-option>
+    <mat-option (click)="filtrarProfession()"  value="Psychiatrist">Psychiatrist</mat-option>
+  </mat-select>
+</mat-form-field>
+
+<br>
+
+  <div class="card"   *ngFor="let item of itemsFiltrados2" (click)="getProfessionalById(item)" [routerLink]="[item._id]">
   <div class="cardContainer">
     <h4><b>Name: {{item.name}}</b></h4>
     <p>Profession: {{item.profession}}</p>
