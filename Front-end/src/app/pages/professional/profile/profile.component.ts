@@ -9,16 +9,6 @@ import { ProfessionalService } from 'src/app/shared/services/professional.servic
 })
 export class ProfileComponent implements OnInit {
   professional: any = {
-    name: '',
-    profession: '',
-    email: '',
-    password: '',
-    telefono: '',
-    token: '',
-    location: '',
-    link: '',
-    active: false,
-    patients: ['']
   }
   idProf: String = ''
 
