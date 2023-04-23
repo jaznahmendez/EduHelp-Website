@@ -38,7 +38,6 @@ export class DetalleProfessionalComponent implements OnInit {
       this.patientService.getPatients().subscribe((response: any) => {
         this.patients= response.patient;
         
-        
         for(let i = 0; i < this.patients.length; i++)
         {
           for(let j = 0; j < this.patients[i].currentProffesionals.length; j++)

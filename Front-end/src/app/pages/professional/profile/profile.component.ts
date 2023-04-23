@@ -35,12 +35,11 @@ export class ProfileComponent implements OnInit {
     this.patientService.getPatients().subscribe((response: any) => {
       this.patients= response.patient;
       
-      
       for(let i = 0; i < this.patients.length; i++)
       {
         for(let j = 0; j < this.patients[i].currentProffesionals.length; j++)
         {
-          if(this.patients[i].currentProffesionals[j] == this.professional._id)
+          if(this.patients[i].currentProffesionals[j] == this.idProf)
           {
             this.patientsProf.push(this.patients[i])
             this.imageLinkCp.push("url('https://randomuser.me/api/portraits/women/" + i + ".jpg')");
