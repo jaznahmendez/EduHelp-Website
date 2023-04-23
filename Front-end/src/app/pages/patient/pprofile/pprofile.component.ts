@@ -5,6 +5,7 @@ import { TutorService } from 'src/app/shared/services/tutor.service'
 import { ProfessionalService } from 'src/app/shared/services/professional.service'
 import {MatDialog, MAT_DIALOG_DATA, MatDialogRef} from '@angular/material/dialog';
 import { EditPatientDialogComponent } from './edit-patient-dialog/edit-patient-dialog.component';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-pprofile',
@@ -22,11 +23,15 @@ export class PprofileComponent implements OnInit {
   imageLinkCp : any =  [];
   imageLinkPp : any =  [];
 
-  constructor(private patientService: PatientService, private tutorService: TutorService, private professionalService: ProfessionalService, public dialog: MatDialog) {}
+  constructor(private route: ActivatedRoute, private patientService: PatientService, private tutorService: TutorService, private professionalService: ProfessionalService, public dialog: MatDialog) {}
 
   ngOnInit(): 
   void { 
-    this.patientService.setPatientProfile('641e68619a05a988c6bf61f1'); // id sacado con token, de mientras es el de Karla
+    this.route.params.subscribe(params => {
+      this.idPatient = params['id'];
+    });
+
+    this.patientService.setPatientProfile(this.idPatient); // id sacado con token, de mientras es el de Karla
 
     this.patientService.getPatient().subscribe((response: any) => {
       this.patient = response

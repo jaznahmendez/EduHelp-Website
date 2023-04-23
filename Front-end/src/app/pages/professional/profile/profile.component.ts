@@ -3,6 +3,7 @@ import { Patient } from 'src/app/shared/interfaces/patient';
 import { Professional } from 'src/app/shared/interfaces/professional'
 import { PatientService } from 'src/app/shared/services/patient.service';
 import { ProfessionalService } from 'src/app/shared/services/professional.service'
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-profile',
@@ -12,17 +13,21 @@ import { ProfessionalService } from 'src/app/shared/services/professional.servic
 export class ProfileComponent implements OnInit {
   professional: any = {
   }
-  idProf: String = ''
+  idProf: string = ''
 
   patients: any = []
   pArray: any = []
   patientsProf: any = []
   imageLinkCp : any =  [];
 
-  constructor(private professionalService: ProfessionalService, private patientService: PatientService) {}
+  constructor(private professionalService: ProfessionalService, private patientService: PatientService,  private route: ActivatedRoute) {}
 
   ngOnInit(): void {
-    this.professionalService.setProfessionalProfile('641e3aa760a550973418d30e')
+    this.route.params.subscribe(params => {
+      this.idProf = params['id'];
+      //console.log(id); // will output "123"
+    });
+    this.professionalService.setProfessionalProfile(this.idProf)
     this.professionalService.getProfessional().subscribe((response: any) => {
       this.professional = response
     });
