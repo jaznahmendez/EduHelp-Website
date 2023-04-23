@@ -5,12 +5,25 @@
     <input matInput [(ngModel)]="data.name">
   </mat-form-field>
   <mat-form-field appearance="fill">
-    <mat-label>Phone Number</mat-label>
-    <input matInput [(ngModel)]="data.gender">
-  </mat-form-field>
-  <mat-form-field appearance="fill">
     <mat-label>Email</mat-label>
     <input matInput [(ngModel)]="data.email">
+  </mat-form-field>
+  <br>
+  <mat-form-field appearance="fill">
+    <mat-label>Age</mat-label>
+    <input type="number" matInput [(ngModel)]="data.age">
+  </mat-form-field><br>
+  <mat-form-field appearance="fill">
+    <mat-label>Gender</mat-label>
+    <mat-select [(ngModel)]="data.gender">
+      <mat-option value="Female">Female</mat-option>
+      <mat-option value="Male">Male</mat-option>
+      <mat-option value="Other">Other</mat-option>
+    </mat-select>
+  </mat-form-field><br>
+  <mat-form-field appearance="fill" class="full-width">
+    <mat-label>About Me</mat-label>
+    <textarea matInput [(ngModel)]="data.tutorDescription"></textarea>
   </mat-form-field>
 </div>
 <div mat-dialog-actions>
