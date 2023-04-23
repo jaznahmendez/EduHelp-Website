@@ -6,9 +6,10 @@ header{
 footer{
     height: 50px;
     background-color: #ffbd59;
+    clear: both;
 }
 
 section {
-    height: 800px;
+    height: fit-content;
     box-sizing: border-box;
 }

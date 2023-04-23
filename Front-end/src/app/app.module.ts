@@ -32,6 +32,7 @@ import {MatRadioModule} from '@angular/material/radio';
 import { MatInputModule } from '@angular/material/input';
 import {MatButtonToggleModule} from '@angular/material/button-toggle';
 import {MatTooltipModule} from '@angular/material/tooltip';
+import {MatDialogModule} from '@angular/material/dialog';
 
 import { DetalleProfessionalComponent } from './pages/detalle-professional/detalle-professional.component';
 import { ProfileComponent } from './pages/professional/profile/profile.component';
@@ -41,6 +42,8 @@ import { DetalleTutorComponent } from './pages/detalle-tutor/detalle-tutor.compo
 import { TProfileComponent } from './pages/tutor/tprofile/tprofile.component';
 import { DetalleAdminComponent } from './pages/detalle-admin/detalle-admin.component';
 import { AProfileComponent } from './pages/admin/aprofile/aprofile.component';
+import { EditDialogComponent } from './pages/tutor/tprofile/edit-dialog/edit-dialog.component';
+import { NewPatientComponent } from './pages/tutor/tprofile/new-patient/new-patient.component';
 
 
 @NgModule({
@@ -60,7 +63,9 @@ import { AProfileComponent } from './pages/admin/aprofile/aprofile.component';
     DetalleTutorComponent,
     TProfileComponent,
     DetalleAdminComponent,
-    AProfileComponent
+    AProfileComponent,
+    EditDialogComponent,
+    NewPatientComponent
   ],
   imports: [
     BrowserModule,
@@ -84,15 +89,8 @@ import { AProfileComponent } from './pages/admin/aprofile/aprofile.component';
     MatInputModule,
     MatButtonToggleModule,
     MatTooltipModule,
-    DetalleProfessionalComponent,
-    ProfileComponent,
-    PprofileComponent,
-    DetallesPatientComponent,
-    DetalleTutorComponent,
-    TProfileComponent,
-    DetalleAdminComponent,
-    AProfileComponent,
-    HttpClientModule
+    HttpClientModule,
+    MatDialogModule
   ],
   providers: [],
   bootstrap: [AppComponent]
