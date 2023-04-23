@@ -22,6 +22,8 @@ export class HomeComponent {
 
   isLinear = false;
   hide = true;
+
+  routerL = ''
   
 
   constructor(FormBuilder: FormBuilder, private registerService: RegisterService){
@@ -67,6 +69,7 @@ export class HomeComponent {
       }
       //console.log(this.user)
       this.registerService.createTutor(this.user)
+      this.routerL = '/tutor/profile/641e47725ad83e88452cd701'
     }else{
       this.user = {
         name: this.thirdFormGroup.value.name,
@@ -76,6 +79,7 @@ export class HomeComponent {
         telefono: this.thirdFormGroup.value.telefono    
       }
       this.registerService.createProfessional(this.user)
+      this.routerL = '/professional/profile/641e3aa760a550973418d30e'
     }
     //console.log(this.user)
     //console.log(typeof(this.user))
@@ -83,11 +87,11 @@ export class HomeComponent {
 
   login(){
     if(this.LoginForm.value.user == "professional"){
-
+      this.routerL = '/professional/profile/641e3aa760a550973418d30e'
     }else if(this.LoginForm.value.user == "tutor"){
-      
+      this.routerL = '/tutor/profile/641e47725ad83e88452cd701'
     }else{
-      
+      this.routerL = '/patient/profile/641e68619a05a988c6bf61f1'
     }
     //redirigir a ruta hardcodeada
   }
