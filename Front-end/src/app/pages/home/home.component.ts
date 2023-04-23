@@ -16,7 +16,7 @@ export class HomeComponent {
   secondFormGroup: FormGroup;
 
   thirdFormGroup: FormGroup;
-  forthFormGroup: FormGroup;
+  LoginForm: FormGroup;
 
   isLinear = false;
   hide = true;
@@ -40,7 +40,8 @@ export class HomeComponent {
       telefono: ['', [Validators.required, Validators.minLength(3)]]
     });
 
-    this.forthFormGroup = FormBuilder.group({
+    this.LoginForm = FormBuilder.group({
+      user: ['', Validators.required],
       email: ['', [Validators.required, Validators.email]],
       password: ['', [Validators.required, Validators.minLength(3)]]
     });
@@ -51,10 +52,37 @@ export class HomeComponent {
 
   fontStyle?: string;
   
+  user = { };
   
 
   crearUsuario (){
-    console.log(this.firstFormGroup);
-    console.log(this.secondFormGroup);
+    if(this.fontStyleControl == "tutor"){
+      this.user = {
+        name: this.firstFormGroup.value.name,
+        email: this.firstFormGroup.value.email,
+        password: this.secondFormGroup.value.password,
+        telefono: this.firstFormGroup.value.telefono    
+      }
+    }else{
+      this.user = {
+        name: this.thirdFormGroup.value.name,
+        profession: this.thirdFormGroup.value.profession,
+        email: this.firstFormGroup.value.email,
+        password: this.secondFormGroup.value.password,
+        telefono: this.thirdFormGroup.value.telefono    
+      }
+    }
+    
+  }
+
+  login(){
+    if(this.LoginForm.value.user == "professional"){
+
+    }else if(this.LoginForm.value.user == "tutor"){
+      
+    }else{
+      
+    }
+    //redirigir a ruta hardcodeada
   }
 }

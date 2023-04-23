@@ -139,7 +139,6 @@
                           </div>
                         </mat-step>
                       </mat-stepper>
-                      
                     </section>
                     <section *ngIf="fontStyleControl == profString; else no_data">
                       <mat-stepper orientation="vertical" [linear]="isLinear" #stepper>
@@ -161,17 +160,16 @@
                                 <option value="Pedagogue">Pedagogue</option>
                                 <option value="Speech therapist">Speech therapist</option>
                                 <option value="Psychiatrist">Psychiatrist</option>
-                                <option value="Profession">Other</option>
+                                <option value=" ">Other</option>
                               </select>
                             </mat-form-field>
                             <br>
-                            <mat-form-field appearance="fill" *ngIf="">
+                            <mat-form-field appearance="fill" *ngIf="this.thirdFormGroup.value.profession != '' &&  (this.thirdFormGroup.value.profession == ' ' || (this.thirdFormGroup.value.profession != 'Psychologist' && this.thirdFormGroup.value.profession != 'Pedagogue'&& this.thirdFormGroup.value.profession != 'Speech therapist' && this.thirdFormGroup.value.profession != 'Psychiatrist'))">
                               <mat-label>Specify your profession</mat-label>
-                              <input matInput placeholder="Ex. 2124567890" formControlName="profession" required>
+                              <input matInput formControlName="profession" required>
                             </mat-form-field> <br>
-
                             <div>
-                              <button class="nxt-btn" [disabled]="this.firstFormGroup.status == 'INVALID'" mat-raised-button matStepperNext color="accent">Next</button>
+                              <button class="nxt-btn" [disabled]="this.thirdFormGroup.status == 'INVALID'" mat-raised-button matStepperNext color="accent">Next</button>
                             </div>
                           </form>
                         </mat-step>
@@ -201,7 +199,7 @@
                           <ng-template matStepLabel>Almost there...</ng-template>
                           <div>
                             <button mat-raised-button matStepperPrevious color="warn">Back</button>
-                            <button mat-raised-button color="accent" class="nxt-btn" [disabled]="this.secondFormGroup.status == 'INVALID' || this.firstFormGroup.status == 'INVALID'" (click)="crearUsuario()">Create Account</button>
+                            <button mat-raised-button color="accent" class="nxt-btn" [disabled]="this.secondFormGroup.status == 'INVALID' || this.thirdFormGroup.status == 'INVALID'" (click)="crearUsuario()">Create Account</button>
                           </div>
                         </mat-step>
                       </mat-stepper>
@@ -210,28 +208,30 @@
                   
                 </mat-tab>
                 <mat-tab label="Login">
-                    <mat-stepper orientation="vertical">
-                        <mat-step>
-                          <ng-template matStepLabel>Step 1</ng-template>
-                          <ng-template matStepContent>
-                            <p>This content was rendered lazily</p>
-                            <button mat-button matStepperNext>Next</button>
-                          </ng-template>
-                        </mat-step>
-                        <mat-step>
-                          <ng-template matStepLabel>Step 2</ng-template>
-                          <ng-template matStepContent>
-                            <p>This content was also rendered lazily</p>
-                            <button mat-button matStepperPrevious>Back</button>
-                            <button mat-button matStepperNext>Next</button>
-                          </ng-template>
-                        </mat-step>
-                        <mat-step>
-                          <ng-template matStepLabel>Step 3</ng-template>
-                          <p>This content was rendered eagerly</p>
-                          <button mat-button matStepperPrevious>Back</button>
-                        </mat-step>
-                      </mat-stepper>
+                  <div class="loginContainer">
+                    <form [formGroup]="LoginForm">
+                      <div>
+                        <label>Login as a:</label><br>
+                        <mat-radio-group formControlName="user" required>
+                          <mat-radio-button value="professional">Professional</mat-radio-button><br>
+                          <mat-radio-button value="tutor">Tutor</mat-radio-button><br>
+                          <mat-radio-button value="patient">Patient</mat-radio-button><br>
+                        </mat-radio-group>
+                      </div>
+                      <mat-form-field appearance="fill">
+                        <mat-label>Email</mat-label>
+                        <input matInput formControlName="email" placeholder="Enter a valid email address" required>
+                      </mat-form-field><br>
+                      <mat-form-field appearance="fill">
+                        <mat-label>Password</mat-label>
+                        <input matInput [type]="hide ? 'password' : 'text'" formControlName="password">
+                        <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
+                          <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+                        </button>
+                      </mat-form-field>
+                    </form>
+                    <button mat-raised-button color="accent" class="nxt-btn" [disabled]="this.LoginForm.status == 'INVALID'" (click)="login()">Login</button>
+                  </div>
                 </mat-tab>
             </mat-tab-group>
 

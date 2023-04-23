@@ -4,6 +4,9 @@ import { Tutor } from 'src/app/shared/interfaces/tutor'
 import { Patient } from 'src/app/shared/interfaces/patient'
 import { TutorService } from 'src/app/shared/services/tutor.service'
 import { PatientService } from 'src/app/shared/services/patient.service'
+import {MatDialog, MAT_DIALOG_DATA, MatDialogRef} from '@angular/material/dialog';
+import { EditDialogComponent } from './edit-dialog/edit-dialog.component';
+import { NewPatientComponent } from './new-patient/new-patient.component';
 
 @Component({
   selector: 'app-tprofile',
@@ -11,22 +14,30 @@ import { PatientService } from 'src/app/shared/services/patient.service'
   styleUrls: ['./tprofile.component.scss']
 })
 export class TProfileComponent implements OnInit {
+
+  imageLink : any =  [];
+
   tutor: any = {
     name: '',
     email: '',
+    password: ''
+  }
+
+  newPatient: any = {
+    name: '',
+    tutorId: '641e47725ad83e88452cd701',
+    email: '',
     password: '',
-    tutorId: '',
     age: 0,
     gender: '',
-    pastProfessionals: '',
-    currentProfessionals: '',
     tutorDescription: ''
   }
 
-  constructor(private registerService: RegisterService, private tutorService: TutorService, private patientService: PatientService) {}
+  constructor(private registerService: RegisterService, private tutorService: TutorService, private patientService: PatientService, public dialog: MatDialog) { }
 
   hijos: any = []
   hijosArray: any = []
+  
 
   ngOnInit(): void {
     this.tutorService.setTutorProfile('641e47725ad83e88452cd701'); // id sacado con token, de mientras es el de Karla
@@ -45,6 +56,7 @@ export class TProfileComponent implements OnInit {
         this.patientService.getPatient().subscribe((response: any) => {
           console.log(response)
           this.hijosArray.push(response);
+          this.imageLink.push("url('https://randomuser.me/api/portraits/women/" + i + ".jpg')");
         });
       }
 
@@ -59,14 +71,7 @@ export class TProfileComponent implements OnInit {
   updateTutor(id: string) {
     let obj = {
       name: '',
-      email: '',
-      password: '',
-      tutorId: '',
-      age: 0,
-      gender: '',
-      pastProfessionals: '',
-      currentProfessionals: '',
-      tutorDescription: ''
+      email: ''
     }
     this.tutorService.updateTutor(obj, id);
   }
@@ -75,4 +80,34 @@ export class TProfileComponent implements OnInit {
     this.tutorService.deleteTutor(id);
   }
 
+  openEditDialog(): void {
+    const dialogRef = this.dialog.open(EditDialogComponent, {
+      data: { name: this.tutor.name, telefono: this.tutor.telefono, email: this.tutor.email }
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      console.log('The dialog was closed');
+      console.log(result);
+      if(result){
+        this.newPatient.name = result.name;
+        this.newPatient.email = result.email;
+        this.tutor.telefono = result.telefono;
+        this.tutorService.updateTutor(this.tutor, '641e47725ad83e88452cd701');
+      }
+    });
+  }
+
+  openNewDialog(): void {
+    const dialogRef = this.dialog.open(NewPatientComponent, {
+      data: {...this.newPatient}
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      console.log('The dialog was closed');
+      console.log(result);
+      if(result){
+        this.newPatient = {...result}
+      }
+    });
+  }
 }

@@ -33,6 +33,7 @@ class controladorTutor{
     }
 
     static updateTutor(req, res){
+        console.log("ñam ña,");
         let obj = {
             name: req.body.name,
             email: req.body.password,

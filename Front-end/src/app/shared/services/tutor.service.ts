@@ -56,7 +56,8 @@ export class TutorService {
     let options = {
       headers: headers
     }
-    return this.httpClient.put(this.apiUrl + 'tutor/:id' + id, tutor, options)
+    console.log("In update");
+    return this.httpClient.put(this.apiUrl + 'tutor/' + id, tutor, options)
   }
 
   deleteTutor(id: string)
