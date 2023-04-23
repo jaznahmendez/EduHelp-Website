@@ -45,6 +45,7 @@ import { AProfileComponent } from './pages/admin/aprofile/aprofile.component';
 import { EditDialogComponent } from './pages/tutor/tprofile/edit-dialog/edit-dialog.component';
 import { NewPatientComponent } from './pages/tutor/tprofile/new-patient/new-patient.component';
 import { EditPatientDialogComponent } from './pages/patient/pprofile/edit-patient-dialog/edit-patient-dialog.component';
+import { EditProfDialogComponent } from './pages/professional/profile/edit-prof-dialog/edit-prof-dialog.component';
 
 
 @NgModule({
@@ -67,7 +68,8 @@ import { EditPatientDialogComponent } from './pages/patient/pprofile/edit-patien
     AProfileComponent,
     EditDialogComponent,
     NewPatientComponent,
-    EditPatientDialogComponent
+    EditPatientDialogComponent,
+    EditProfDialogComponent
   ],
   imports: [
     BrowserModule,

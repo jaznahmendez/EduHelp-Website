@@ -1,6 +1,24 @@
-<div class="column">
-    <div class="card">
-      <h3>Nombre: {{professional.name}}</h3>
-      <p>Email: {{professional.email}}</p>
-      <p>Id: {{professional._id}}</p>
+<div class="profile-container">
+  <mat-card class="profile-card">
+    <mat-card-header>
+      <div mat-card-avatar class="header-image" style="background-image: url('https://randomuser.me/api/portraits/women/52.jpg');"></div>
+      <mat-card-title><h1>{{professional.name}}</h1></mat-card-title>
+      <mat-card-subtitle><h2>{{professional.email}}</h2></mat-card-subtitle>
+      <mat-card-subtitle><h2>{{professional.telefono}}</h2></mat-card-subtitle>
+      <mat-card-subtitle><h2>{{professional.profession}}</h2></mat-card-subtitle>
+    </mat-card-header>
+    <mat-card-actions align="end">
+      <button mat-fab extended>
+        <mat-icon>edit</mat-icon>
+        <span>Edit</span>
+      </button>
+    </mat-card-actions> 
+  </mat-card>
+  <mat-card class="app-card">
+    <div class="tutor-title">My Next Appointments</div>
+    <mat-card-content>
+    </mat-card-content>
+    <mat-card-actions align="end">
+    </mat-card-actions>
+  </mat-card>
 </div>
