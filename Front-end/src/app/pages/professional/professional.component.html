@@ -1,28 +1,12 @@
 <br><br>
+<h1>Professionals</h1>
+<br>
 <form (submit)="filtrar()">
   <button class="searchBtn" (click)="filtrar()"><img src="../../../assets/logo.png"></button>
   <hr>
   <input class="searchBar" name="buscar" type="text" placeholder="Search..." [(ngModel)]="buscar">
 </form>
 <br><br>
-<!--
-<form (submit)="filtrarProfession()" class="profession">
-  <label for="all">
-    <input type="radio" id="all" name="prof" value="All" checked="checked" [(value)]="prof">All
-  </label>
-  <label for="psychologist">
-    <input type="radio" id="psychologist" name="prof" value="Psychologist" [(value)]="prof">Psychologist
-  </label>
-  <label for="pedagogue">
-    <input type="radio" id="pedagogue" name="prof" value="Pedagogue" [(value)]="prof">Pedagogue
-  </label>
-  <label for="speech-therapist">
-    <input type="radio" id="speech-therapist" name="prof" value="Speech therapist" [(value)]="prof">Speech therapist
-  </label>
-  <label for="psychiatrist">
-    <input type="radio" id="psychiatrist" name="prof" value="Psychiatrist" [(value)]="prof">Psychiatrist
-  </label>
-</form>-->
 
 <mat-form-field appearance="fill" class="mat">
   <mat-select [(value)]="prof">

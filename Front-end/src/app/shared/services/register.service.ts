@@ -8,6 +8,15 @@ export class RegisterService {
   apiUrl: string = 'http://localhost:3000/'
   constructor(private httpClient: HttpClient) { }
 
+  createAdmin(admin: object)
+  {
+    let headers = new HttpHeaders({'Content-Type': 'application/json'})
+    let options = {
+      headers: headers
+    }
+    this.httpClient.post<any>(this.apiUrl + 'admin', admin, options).subscribe();
+  }
+
   createProfessional(professional: object)
   {
     let headers = new HttpHeaders({'Content-Type': 'application/json'})
