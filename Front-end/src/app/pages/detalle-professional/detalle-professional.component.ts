@@ -3,6 +3,7 @@ import { Professional } from 'src/app/shared/interfaces/professional'
 import { ProfessionalService } from 'src/app/shared/services/professional.service'
 import { Patient } from 'src/app/shared/interfaces/patient'
 import { PatientService } from 'src/app/shared/services/patient.service'
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-detalle-professional',
@@ -25,13 +26,19 @@ export class DetalleProfessionalComponent implements OnInit {
   patients: any = []
   pArray: any = []
   patientsProf: any = []
+  id: string = ''
 
   @Output() onSelectedPatient: EventEmitter<any> = new EventEmitter();
 
-  constructor(private professionalService: ProfessionalService, private patientService: PatientService) {}
+  constructor(private route: ActivatedRoute, private professionalService: ProfessionalService, private patientService: PatientService) {}
 
   ngOnInit(): void {
     //console.log('holaaaa')
+    this.route.params.subscribe(params => {
+      this.id = params['id'];
+    });
+    this.professionalService.id = this.id
+
     this.professionalService.getProfessional().subscribe((response: any) => {
       this.professional = response
 

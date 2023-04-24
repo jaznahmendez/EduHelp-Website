@@ -1,27 +1,52 @@
-* {
-    box-sizing: border-box;
-  }
-  
-  body {
-    font-family: Arial, Helvetica, sans-serif;
-  }
+.profile-card{
+  width: 60%;
+  margin-top: 20px;
+  border-radius: 25px;
+  border: 2px solid #795c3e;
+  float: left;
+  box-sizing: margin-box;
+  margin-left:3%;
+}
 
-  .column {
-    float: left;
-    width: 23%;
-    padding: 10px;
-    margin: 10px;
-  }
+h1 {
+  text-align: center;
+  font-weight: bolder;
+  color: rgb(109, 43, 17)
+}
 
-  .row:after {
-    content: "";
-    display: table;
-    clear: both;
-  }
+.app-card{
+  width: 30%;
+  margin-top: 20px;
+  border-radius: 25px;
+  border: 2px solid #795c3e;
+  float: left;
+  box-sizing: margin-box;
+  margin-left: 3%;
+  text-align: center;
+}
+.header-image {
+  width: 200px;
+  height: 200px;
+  background-size: cover;
+}
 
-  .card {
-    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
-    padding: 20px;
-    text-align: center;
-    background-color: rgb(240, 203, 150);
-  }
+.profile-card h1{
+  font-size: 60px;
+  margin-left: 20px;
+}
+
+.profile-card h2{
+  font-size: 20px;
+  margin-left: 30px;
+  color: grey;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.tutor-title{
+  padding-left: 20px;
+  font-size: xx-large;
+}
+
+.middle-div{
+  clear: both;
+}
