@@ -6,15 +6,8 @@ const patient = require('../models/patient')
 
 const adminController = {
     createAdministrador: (req, res) => {
-        let admin = {
-            name: req.body.name,
-            email: req.body.email,
-            password: req.body.password,
-            telefono: req.body.telefono,
-            token: req.body.token
-        }
         //console.log(admin)
-        modelo(admin).save()
+        modelo(req.body).save()
             .then(admin =>{
                 res.status(200).send(admin)    
             })
