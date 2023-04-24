@@ -23,17 +23,7 @@ const professionalController = {
             })
     },
     updateProfessional: (req, res) => {
-        let prof = {
-            name: req.body.name,
-            profession: req.body.profession,
-            email: req.body.email,
-            password: req.body.password,
-            telefono: req.body.telefono,
-            token: req.body.token,
-            location: req.body.location,
-            link: req.body.link
-        }
-
+        //console.log('good')
         modelo.findByIdAndUpdate(req.params.id, req.body)
             .then(profToUpdate =>{
                 res.status(200).send(profToUpdate)    
