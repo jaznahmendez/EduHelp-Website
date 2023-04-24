@@ -1,17 +1,17 @@
-<div class="column">
-    <div class="card">
-      <h3>Nombre: {{professional.name}}</h3>
-      <p>Profesión: {{professional.profession}}</p>
-      <p>Email: {{professional.email}}</p>
-      <p>Telefono: {{professional.telefono}}</p>
-      <p>Ubicación:{{professional.location}}</p>
-      <p>Link: {{professional.link}}</p>
+<div class="profile-container">
+  <mat-card class="profile-card">
+    <mat-card-header>
+      <div mat-card-avatar class="header-image" style="background-image: url('https://randomuser.me/api/portraits/women/52.jpg');"></div>
+      <mat-card-title><h1>{{professional.name}}</h1></mat-card-title>
+      <mat-card-subtitle><h2>{{professional.email}}</h2></mat-card-subtitle>
+      <mat-card-subtitle><h2>{{professional.telefono}}</h2></mat-card-subtitle>
+      <mat-card-subtitle><h2>{{professional.profession}}</h2></mat-card-subtitle>
+    </mat-card-header>
+  
+  </mat-card>
+  <mat-card class="app-card">
+    <h1>Google meet Link</h1>
+    <p>Link...</p>
+  </mat-card>
 </div>
-<h2>PACIENTES</h2>
-<div *ngFor="let item of patientsProf" (click)="getPatientById(item)" [routerLink]="['/patient/' + item._id]"  class="row">
-  <div class="column">
-    <div class="card">
-      <h3>{{item.name}}</h3>
-      <p>{{item._id}}</p>
-    </div>
-  </div>
+<br>

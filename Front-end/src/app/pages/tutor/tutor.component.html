@@ -1,7 +1,16 @@
-<div *ngFor="let item of pArray" (click)="getTutorById(item)" [routerLink]="[item._id]"  class="row">
-    <div class="column">
-      <div class="card">
-        <h3>{{item.name}}</h3>
-        <p>{{item._id}}</p>
+    <br>
+    <h1>Tutors</h1>
+    <br>
+    
+    <div class="card" *ngFor="let item of pArray" (click)="getTutorById(item)" [routerLink]="['profile/' + item._id]">
+      <div class="cardContainer">
+        <h4><b>Name: {{item.name}}</b></h4>
+        <p>Email: {{item.email}}</p>
+        <p>Telefono: {{item.telefono}}</p>
       </div>
+      <br>
+      <br>
+      <br>
     </div>
+    <br>
+    <br>

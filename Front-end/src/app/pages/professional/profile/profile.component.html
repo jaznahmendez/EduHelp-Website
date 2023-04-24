@@ -1,6 +1,52 @@
-<div class="column">
-    <div class="card">
-      <h3>Nombre: {{professional.name}}</h3>
-      <p>Email: {{professional.email}}</p>
-      <p>Id: {{professional._id}}</p>
+<div class="profile-container">
+  <mat-card class="profile-card">
+    <mat-card-header>
+      <div mat-card-avatar class="header-image" style="background-image: url('https://randomuser.me/api/portraits/women/52.jpg');"></div>
+      <mat-card-title><h1>{{professional.name}}</h1></mat-card-title>
+      <mat-card-subtitle><h2>{{professional.email}}</h2></mat-card-subtitle>
+      <mat-card-subtitle><h2>{{professional.telefono}}</h2></mat-card-subtitle>
+      <mat-card-subtitle><h2>{{professional.profession}}</h2></mat-card-subtitle>
+    </mat-card-header>
+    <mat-card-actions align="end">
+      <button mat-fab extended (click)="openEditDialog()">
+        <mat-icon>edit</mat-icon>
+        <span>Edit</span>
+      </button>
+    </mat-card-actions> 
+  </mat-card>
+  <mat-card class="app-card">
+    <div class="tutor-title">My Next Appointments</div>
+    <mat-card-content>
+    </mat-card-content>
+    <mat-card-actions align="end">
+    </mat-card-actions>
+  </mat-card>
+</div>
+
+<div class="middle-div">
+  <h2><span class="middle-title">My Current Patients</span></h2>
+</div>
+
+<div class="container-patient">
+  <div  class="error-msg" *ngIf="this.patientsProf == ''">Uuh Oh! it seems you do not have any current patients registered</div>
+  <div *ngFor="let item of patientsProf; let i = index;">
+    <mat-card class="patient-card">
+      <mat-card-header>
+        <div mat-card-avatar class="patient-image" [style.background-image] = "imageLinkCp[i]"></div>
+        <mat-card-title><h1>{{item.name}}</h1></mat-card-title>
+        <mat-card-subtitle><h2>{{item.profession}}</h2></mat-card-subtitle>
+        <mat-card-subtitle><h2>{{item.email}}</h2></mat-card-subtitle>
+        <mat-card-subtitle><h2>{{item.telefono}}</h2></mat-card-subtitle>
+      </mat-card-header>
+      <mat-card-content>
+        <mat-card-actions align="end"class="btn">
+          <button mat-fab extended>
+            <mat-icon>persona</mat-icon>
+            <span [routerLink]="['/patient/' + item._id]">See Profile</span>
+          </button>
+        </mat-card-actions>
+      </mat-card-content>
+      
+    </mat-card>
+  </div>
 </div>

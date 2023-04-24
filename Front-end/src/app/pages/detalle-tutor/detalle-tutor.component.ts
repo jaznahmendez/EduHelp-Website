@@ -3,6 +3,7 @@ import { Tutor } from 'src/app/shared/interfaces/tutor'
 import { Patient } from 'src/app/shared/interfaces/patient'
 import { TutorService } from 'src/app/shared/services/tutor.service'
 import { PatientService } from 'src/app/shared/services/patient.service'
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-detalle-tutor',
@@ -13,11 +14,17 @@ export class DetalleTutorComponent implements OnInit{
   tutor: any = {}
   hijos: any[] = []
   p: Patient[] = []
+  id: string = ''
 
-  constructor(private tutorService: TutorService, private patientService: PatientService) {}
+  constructor(private route: ActivatedRoute, private tutorService: TutorService, private patientService: PatientService) {}
   @Output() onSelectedPatient: EventEmitter<any> = new EventEmitter();
 
   ngOnInit(): void {
+    this.route.params.subscribe(params => {
+      this.id = params['id'];
+    });
+    this.tutorService.id = this.id
+
     this.tutorService.getTutor().subscribe((response: any) => {
       this.tutor = response
     });

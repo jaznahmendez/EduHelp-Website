@@ -6,10 +6,11 @@ class controladorPatient{
         let obj = {
             name: req.body.name,
             email: req.body.email,
-            gender: req.body.gender
+            gender: req.body.gender,
+            age: req.body.age
         }
         let id = req.params.id;
-        patient.findByIdAndUpdate(id, obj, {new:true})
+        patient.findByIdAndUpdate(id, req.body, {new:true})
             .then(patient => {
                 console.log('Paciente Actualizado');
                 res.status(200).send(patient);

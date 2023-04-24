@@ -3,7 +3,7 @@ const { response } = require('express');
 
 const professionalController = {
     createProfessional: (req, res) => {
-        let prof = {
+        /*let prof = {
             name: req.body.name,
             profession: req.body.profession,
             email: req.body.email,
@@ -12,9 +12,9 @@ const professionalController = {
             token: req.body.token,
             location: req.body.location,
             link: req.body.link
-        }
+        }*/
         //console.log(prof)
-        modelo(prof).save()
+        modelo(req.body).save()
             .then(prof =>{
                 res.status(200).send(prof)    
             })
@@ -23,23 +23,13 @@ const professionalController = {
             })
     },
     updateProfessional: (req, res) => {
-        let prof = {
-            name: req.body.name,
-            profession: req.body.profession,
-            email: req.body.email,
-            password: req.body.password,
-            telefono: req.body.telefono,
-            token: req.body.token,
-            location: req.body.location,
-            link: req.body.link
-        }
-
-        modelo.findByIdAndUpdate(req.params.id, prof)
+        //console.log('good')
+        modelo.findByIdAndUpdate(req.params.id, req.body)
             .then(profToUpdate =>{
                 res.status(200).send(profToUpdate)    
             })
             .catch(profToUpdate =>{
-                res.status(400).send('algo salió mal en actualizar la cuenta de profesional con id ', req.params.id)    
+                res.status(400).send('algo salió mal en actualizar la cuenta de profesional con id ' + req.params.id)    
             })
     }, // solo los activos
     getProfessional: (req, res) => {
