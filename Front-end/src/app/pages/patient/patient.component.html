@@ -2,7 +2,7 @@
 <h1>Patients</h1>
 <br>
 
-<div class="card" *ngFor="let item of pArray" (click)="getPatientById(item)" [routerLink]="[item._id]">
+<div class="card" *ngFor="let item of pArray" (click)="getPatientById(item)" [routerLink]="['profile/' + item._id]">
   <div class="cardContainer">
     <h4><b>Name: {{item.name}}</b></h4>
     <p>Email: {{item.email}}</p>
