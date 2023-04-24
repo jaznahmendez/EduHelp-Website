@@ -8,7 +8,7 @@
       <mat-card-subtitle><h2>{{professional.profession}}</h2></mat-card-subtitle>
     </mat-card-header>
     <mat-card-actions align="end">
-      <button mat-fab extended>
+      <button mat-fab extended (click)="openEditDialog()">
         <mat-icon>edit</mat-icon>
         <span>Edit</span>
       </button>
@@ -37,13 +37,14 @@
         <mat-card-subtitle><h2>{{item.profession}}</h2></mat-card-subtitle>
         <mat-card-subtitle><h2>{{item.email}}</h2></mat-card-subtitle>
         <mat-card-subtitle><h2>{{item.telefono}}</h2></mat-card-subtitle>
+        <mat-card-subtitle><h2>{{item._id}}</h2></mat-card-subtitle>
       </mat-card-header>
       <mat-card-content>
       </mat-card-content>
       <mat-card-actions align="end">
         <button mat-fab extended>
           <mat-icon>persona</mat-icon>
-          <span [routerLink]="['/professional/' + item._id]">See Profile</span>
+          <span [routerLink]="['/patient/' + item._id]">See Profile</span>
         </button>
       </mat-card-actions>
     </mat-card>

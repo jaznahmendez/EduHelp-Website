@@ -39,7 +39,7 @@ const professionalController = {
                 res.status(200).send(profToUpdate)    
             })
             .catch(profToUpdate =>{
-                res.status(400).send('algo salió mal en actualizar la cuenta de profesional con id ', req.params.id)    
+                res.status(400).send('algo salió mal en actualizar la cuenta de profesional con id ' + req.params.id)    
             })
     }, // solo los activos
     getProfessional: (req, res) => {
