@@ -3,6 +3,7 @@ import { Patient } from 'src/app/shared/interfaces/patient'
 import { PatientService } from 'src/app/shared/services/patient.service'
 import { TutorService } from 'src/app/shared/services/tutor.service'
 import { ProfessionalService } from 'src/app/shared/services/professional.service'
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-detalles-patient',
@@ -25,10 +26,16 @@ export class DetallesPatientComponent implements OnInit {
   tutor: any = {}
   currentProffesionals: any = []
   cp: any = []
+  id: string = '';
 
-  constructor(private patientService: PatientService, private tutorService: TutorService, private professionalService: ProfessionalService) {}
+  constructor(private route: ActivatedRoute, private patientService: PatientService, private tutorService: TutorService, private professionalService: ProfessionalService) {}
 
   ngOnInit(): void {
+    this.route.params.subscribe(params => {
+      this.id = params['id'];
+    });
+    this.patientService.id = this.id
+
     this.patientService.getPatient().subscribe((response: any) => {
       this.patient = response
       this.tutorService.id = this.patient.tutorId

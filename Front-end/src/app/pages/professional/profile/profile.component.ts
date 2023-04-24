@@ -43,7 +43,7 @@ export class ProfileComponent implements OnInit {
         {
           if(this.patients[i].currentProffesionals[j] == this.idProf)
           {
-            console.log(this.patients)
+            //console.log(this.patients)
             this.patientsProf.push(this.patients[i])
             this.imageLinkCp.push("url('https://randomuser.me/api/portraits/women/" + i + ".jpg')");
           }

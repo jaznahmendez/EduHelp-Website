@@ -1,6 +1,7 @@
 import { Component, Output, EventEmitter } from '@angular/core';
 import { Patient } from 'src/app/shared/interfaces/patient'
 import { PatientService } from 'src/app/shared/services/patient.service'
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-patient',
@@ -18,7 +19,7 @@ export class PatientComponent {
   }
   id = '';
 
-  constructor(private patientService: PatientService) {
+  constructor(private route: ActivatedRoute, private patientService: PatientService) {
     this.getPatients();
   }
 
