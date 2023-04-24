@@ -13,7 +13,8 @@ export class AdminComponent {
   admin: Admin = {
     name: '',
     password: '',
-    telefono: ''
+    telefono: '',
+    email: ''
   }
   id = '';
 
