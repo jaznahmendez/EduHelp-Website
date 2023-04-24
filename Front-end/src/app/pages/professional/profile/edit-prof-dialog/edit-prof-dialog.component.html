@@ -11,8 +11,21 @@
   <mat-form-field appearance="fill">
     <mat-label>Phone Number</mat-label>
     <input matInput [(ngModel)]="data.telefono">
-  </mat-form-field>
-
+  </mat-form-field><br>
+  <mat-form-field appearance="fill">
+    <mat-label>Profession</mat-label>
+    <mat-select [(ngModel)]="data.profession">
+      <mat-option value="Psychologist">Psychologist</mat-option>
+      <mat-option value="Pedagogue">Pedagogue</mat-option>
+      <mat-option value="Speech therapist">Speech therapist</mat-option>
+      <mat-option value="Psychiatrist">Psychiatrist</mat-option>
+      <mat-option value=" ">Other</mat-option>
+    </mat-select>
+  </mat-form-field><br>
+  <mat-form-field appearance="fill" *ngIf="data.profession != '' &&  (data.profession == ' ' || (data.profession != 'Psychologist' && data.profession != 'Pedagogue'&& data.profession != 'Speech therapist' && data.profession != 'Psychiatrist'))">
+    <mat-label>Specify your profession</mat-label>
+    <input matInput [(ngModel)]="data.profession" required>
+  </mat-form-field> <br>
   <br>
 </div>
 <div mat-dialog-actions>
