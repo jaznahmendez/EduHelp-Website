@@ -4,6 +4,8 @@ import { Professional } from 'src/app/shared/interfaces/professional'
 import { PatientService } from 'src/app/shared/services/patient.service';
 import { ProfessionalService } from 'src/app/shared/services/professional.service'
 import { ActivatedRoute } from '@angular/router';
+import { MatDialog } from '@angular/material/dialog';
+import { EditProfDialogComponent } from './edit-prof-dialog/edit-prof-dialog.component';
 
 @Component({
   selector: 'app-profile',
@@ -20,7 +22,7 @@ export class ProfileComponent implements OnInit {
   patientsProf: any = []
   imageLinkCp : any =  [];
 
-  constructor(private professionalService: ProfessionalService, private patientService: PatientService,  private route: ActivatedRoute) {}
+  constructor(private professionalService: ProfessionalService, private patientService: PatientService,  private route: ActivatedRoute, public dialog: MatDialog) {}
 
   ngOnInit(): void {
     this.route.params.subscribe(params => {
@@ -41,6 +43,7 @@ export class ProfileComponent implements OnInit {
         {
           if(this.patients[i].currentProffesionals[j] == this.idProf)
           {
+            console.log(this.patients)
             this.patientsProf.push(this.patients[i])
             this.imageLinkCp.push("url('https://randomuser.me/api/portraits/women/" + i + ".jpg')");
           }
@@ -69,4 +72,21 @@ export class ProfileComponent implements OnInit {
     });
   }
   
+  openEditDialog(): void {
+    const dialogRef = this.dialog.open(EditProfDialogComponent, {
+      data: { ...this.professional }
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      console.log('The dialog was closed');
+      console.log(result);
+      if(result){
+        console.log('res: ',result);
+        console.log('id: ',this.professional._id);
+        this.professionalService.updateProfessional(result, this.professional._id);
+        this.professional = result;
+      }
+    });
+  }
+
 }

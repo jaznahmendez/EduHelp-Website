@@ -42,4 +42,41 @@
 
 .middle-div{
   clear: both;
+  padding-top: 20px;
+  h2{
+    background: #eab68d;
+    .middle-title{
+      padding-left: 20px;
+    }
+  }
+}
+
+.patient-card{
+  width: 30%;
+  box-sizing: border-box;
+  border-radius: 25px;
+  border: 2px solid #795c3e;
+  margin-top: 15px;
+  margin-left: 10px;
+  margin-bottom: 15px;
+  float: left;
+  box-sizing: margin-box;
+}
+
+.patient-card h1{
+  font-size: 30px;
+  margin-left: 20px;
+}
+
+.patient-card h2{
+  font-size: 15px;
+  margin-left: 20px;
+  color: grey;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.patient-image {
+  width: 150px;
+  height: 150px;
+  background-size: cover;
 }
