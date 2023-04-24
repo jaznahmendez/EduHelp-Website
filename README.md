@@ -7,3 +7,14 @@ Integrantes
 -	Laura Griselda González Camacho
 -	Jazmin Nahil Méndez Santana
 En esta entrega se realiza una primera fase del diseño de la API
+
+Instrucciones de uso:
+Crear .env en Back-end con la liga proporcionada en la entrega en Canvas
+En la terminal con el proyecto local:
+  - cd Back-end
+  - npm install
+  - npm run dev
+En la terminal con el proyecto local:
+  - cd Front-end
+  - npm install
+  - ng serve --o
