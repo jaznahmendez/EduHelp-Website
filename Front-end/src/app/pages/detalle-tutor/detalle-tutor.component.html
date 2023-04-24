@@ -16,7 +16,7 @@
   <h1>My Family</h1>
 </div>
 <div class="container-patient">
-  <div *ngFor="let item of hijos; let i = index;">
+  <div *ngFor="let item of hijos; let i = index;" [routerLink]="['/patient/' + item._id]">
     <mat-card class="patient-card">
       <mat-card-header>
         <div mat-card-avatar class="patient-image" style="background-image: url('https://randomuser.me/api/portraits/women/52.jpg');"></div>
@@ -29,4 +29,3 @@
     </mat-card>
   </div>
 </div>
-
