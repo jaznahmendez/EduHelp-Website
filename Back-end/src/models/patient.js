@@ -4,7 +4,6 @@ const pacienteSchema = new Schema({
     name: { type: String, required: true },
     tutorId: { type: Schema.ObjectId, required: true },
     email: { type: String, required: true },
-    password: { type: String, required: true },
     age: { type: Number },
     gender: { type: String },
     pastProffesionals: { type: Array, default: null },

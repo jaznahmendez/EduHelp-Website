@@ -3,7 +3,55 @@ const patient = require('../models/patient');
 const professional = require('../models/professional');
 const { response } = require('express');
 
+const { OAuth2Client } = require('google-auth-library');
+
+require('dotenv').config();
+
+const googleClient = new OAuth2Client(process.env.GOOGLE_ID)
+
 class controladorTutor{
+    static googleLogin(req, res) {
+        const idToken = req.body.googleToken
+        googleClient.verifyIdToken({ idToken: idToken }).then(response => {
+            const user = response.getPayload();
+            const a = user
+            tutor.find()
+            .then(response => {
+                
+                if(response.length == 0)
+                {
+                    const temp = {
+                        name: user.name,
+                        email: user.email,
+                        token: idToken
+                    }
+                    a = temp;
+                    tutor(temp).save()
+                        .then(tutor =>{
+                            res.status(200).send(tutor)    
+                        })
+                        .catch(tutor =>{
+                            res.status(400).send()    
+                        })
+                }
+                else {
+                    for(let i = 0; i < response.length; i++)
+                    {
+                        let t = response[i]
+                        if(t.email == user.email) a = t;
+                    }
+                }
+                res.send(a)
+            })
+            .catch(error => {
+                res.status(400).send()
+            })
+
+            res.send(a)
+        }).catch(err => {
+            res.status(401).send({msg: 'token inválido'})
+        })
+    }
     static findTutor (req, res){
         let id = req.params.id;
         tutor.findById(id)
@@ -32,6 +80,25 @@ class controladorTutor{
                 console.error("Failed to insert the document");
                 res.send(err);
             });
+    }
+
+    static getTutorByEmail(req, res)
+    {
+        let email = req.params.email
+        let a = {}
+        tutor.find()
+        .then(response => {
+            for(let i = 0; i < response.length; i++)
+            {
+                let t = response[i]
+                if(t.email == email) a = t; 
+            }
+            
+            res.send(a)
+        })
+        .catch(error => {
+            res.status(400).send()
+        })
     }
 
     static updateTutor(req, res){
