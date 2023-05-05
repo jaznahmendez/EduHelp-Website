@@ -8,6 +8,24 @@ require('dotenv').config();
 const googleClient = new OAuth2Client(process.env.GOOGLE_ID)
 
 class controladorPatient{
+    static getPatientByToken(req, res) {
+        let token = req.params.token
+        let a = {}
+        patient.find()
+        .then(response => {
+            for(let i = 0; i < response.length; i++)
+            {
+                let t = response[i]
+                if(t.token == token) a = t; 
+            }
+            
+            res.send(a)
+        })
+        .catch(error => {
+            res.status(400).send()
+        })
+    }
+
     static googleLogin(req, res) {
         const idToken = req.body.googleToken
         googleClient.verifyIdToken({ idToken: idToken }).then(response => {
