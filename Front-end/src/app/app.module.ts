@@ -47,6 +47,9 @@ import { NewPatientComponent } from './pages/tutor/tprofile/new-patient/new-pati
 import { EditPatientDialogComponent } from './pages/patient/pprofile/edit-patient-dialog/edit-patient-dialog.component';
 import { EditProfDialogComponent } from './pages/professional/profile/edit-prof-dialog/edit-prof-dialog.component';
 import { EditAdminComponent } from './pages/admin/aprofile/edit-admin/edit-admin.component';
+import {  SocialLoginModule, SocialAuthServiceConfig, GoogleLoginProvider, GoogleSigninButtonModule } from '@abacritt/angularx-social-login';
+import { environment } from './environments/environment';
+import { LoginComponent } from './pages/login/login.component';
 
 
 @NgModule({
@@ -71,7 +74,8 @@ import { EditAdminComponent } from './pages/admin/aprofile/edit-admin/edit-admin
     NewPatientComponent,
     EditPatientDialogComponent,
     EditProfDialogComponent,
-    EditAdminComponent
+    EditAdminComponent,
+    LoginComponent
   ],
   imports: [
     BrowserModule,
@@ -95,10 +99,30 @@ import { EditAdminComponent } from './pages/admin/aprofile/edit-admin/edit-admin
     MatButtonToggleModule,
     MatTooltipModule,
     HttpClientModule,
-    MatDialogModule
+    MatDialogModule,
+    SocialLoginModule,
+    GoogleSigninButtonModule
 
   ],
-  providers: [],
+  providers: [
+    {
+      provide: 'SocialAuthServiceConfig',
+      useValue: {
+        autoLogin: false,
+        providers: [
+          {
+            id: GoogleLoginProvider.PROVIDER_ID,
+            provider: new GoogleLoginProvider(
+              environment.googleId//'clientId'
+            )
+          }
+        ],
+        onError: (err) => {
+          console.error(err);
+        }
+      } as SocialAuthServiceConfig,
+    }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

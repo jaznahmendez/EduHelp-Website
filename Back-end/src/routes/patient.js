@@ -29,4 +29,6 @@ const pacientes = require('../controllers/patient')
  */
 router.put('/:id', express.json(), pacientes.updatePaciente)
 
+router.get('/:token', pacientes.getPatientByToken)
+
 module.exports = router

@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { FormGroup, FormBuilder, Validators, FormControl } from '@angular/forms';
 import { RegisterService } from 'src/app/shared/services/register.service'
+import { TokenService } from 'src/app/shared/services/token.service';
 
 
 @Component({
@@ -26,7 +27,7 @@ export class HomeComponent {
   routerL = ''
   
 
-  constructor(FormBuilder: FormBuilder, private registerService: RegisterService){
+  constructor(FormBuilder: FormBuilder, private registerService: RegisterService, private tokenService: TokenService){
     console.log('hi')
     this.firstFormGroup = FormBuilder.group({
       name: ['', Validators.required],
@@ -46,8 +47,6 @@ export class HomeComponent {
 
     this.LoginForm = FormBuilder.group({
       user: ['', Validators.required],
-      email: ['', [Validators.required, Validators.email]],
-      password: ['', [Validators.required, Validators.minLength(3)]]
     });
 
   }
@@ -86,6 +85,7 @@ export class HomeComponent {
   }
 
   login(){
+    /*
     if(this.LoginForm.value.user == "professional"){
       this.routerL = '/professional/profile/641e3aa760a550973418d30e'
     }else if(this.LoginForm.value.user == "tutor"){
@@ -94,5 +94,7 @@ export class HomeComponent {
       this.routerL = '/patient/profile/641e68619a05a988c6bf61f1'
     }
     //redirigir a ruta hardcodeada
+    */
+    this.tokenService.setToken('1234');
   }
 }

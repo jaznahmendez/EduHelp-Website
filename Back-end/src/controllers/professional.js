@@ -1,7 +1,56 @@
 const modelo = require('../models/professional');
 const { response } = require('express');
 
+const { OAuth2Client } = require('google-auth-library');
+
+require('dotenv').config();
+
+const googleClient = new OAuth2Client(process.env.GOOGLE_ID)
+
 const professionalController = {
+    googleLogin: (req, res) => {
+        const idToken = req.body.googleToken
+        googleClient.verifyIdToken({ idToken: idToken }).then(response => {
+            const user = response.getPayload();
+            const a = user
+
+            modelo.find()
+            .then(response => {
+                
+                if(response.length == 0)
+                {
+                    const temp = {
+                        name: user.name,
+                        email: user.email,
+                        token: idToken
+                    }
+                    a = temp;
+                    modelo(temp).save()
+                        .then(p =>{
+                            res.status(200).send(p)    
+                        })
+                        .catch(p =>{
+                            res.status(400).send()    
+                        })
+                }
+                else {
+                    for(let i = 0; i < response.length; i++)
+                    {
+                        let p = response[i]
+                        if(p.email == user.email) a = p;
+                    }
+                }
+                res.send(a)
+            })
+            .catch(error => {
+                res.status(400).send()
+            })
+
+            res.send(a)
+        }).catch(err => {
+            res.status(401).send({msg: 'token inválido'})
+        })
+    },
     createProfessional: (req, res) => {
         /*let prof = {
             name: req.body.name,
