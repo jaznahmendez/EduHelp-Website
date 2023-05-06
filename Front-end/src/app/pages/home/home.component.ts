@@ -95,6 +95,7 @@ export class HomeComponent {
     }
     //redirigir a ruta hardcodeada
     */
+   console.log(this.LoginForm.value.user)
     this.tokenService.setToken('1234');
   }
 }
