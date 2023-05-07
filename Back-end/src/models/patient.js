@@ -9,7 +9,8 @@ const pacienteSchema = new Schema({
     pastProffesionals: { type: Array, default: null },
     currentProffesionals: { type: Array, default: null },
     tutorDescription: { type: String }, // para que el tutor pueda poner una breve explicación de por qué el hijo necesita esa ayuda
-    token: { type: String }
+    token: { type: String },
+    login: { type: Boolean, default: false}
 })
 
 module.exports = model('Pacientes', pacienteSchema)

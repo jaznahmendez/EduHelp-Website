@@ -63,7 +63,7 @@ export class TProfileComponent implements OnInit {
       {
         this.patientService.id = this.hijos[i];
         this.patientService.getPatient().subscribe((response: any) => {
-          console.log(response)
+          //console.log(response)
           if(response != null)this.hijosArray.push(response);
           this.imageLink.push("url('https://randomuser.me/api/portraits/women/" + i + ".jpg')");
         });

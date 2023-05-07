@@ -19,6 +19,7 @@ import { AProfileComponent } from './pages/admin/aprofile/aprofile.component';
 
 import { HomeComponent } from './pages/home/home.component';
 
+
 const routes: Routes = [
   {path: '', component: HomeComponent},
 

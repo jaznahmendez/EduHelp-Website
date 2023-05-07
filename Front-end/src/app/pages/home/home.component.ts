@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
 import { FormGroup, FormBuilder, Validators, FormControl } from '@angular/forms';
+import { Router } from '@angular/router';
+import { LoginService } from 'src/app/shared/services/login.service';
 import { RegisterService } from 'src/app/shared/services/register.service'
 import { TokenService } from 'src/app/shared/services/token.service';
 
@@ -14,6 +16,7 @@ export class HomeComponent {
   panelOpenState = false;
   tutorString = "tutor";
   profString = "professional";
+  patientString = "patient";
 
   firstFormGroup: FormGroup;
   secondFormGroup: FormGroup;
@@ -25,10 +28,11 @@ export class HomeComponent {
   hide = true;
 
   routerL = ''
-  
+  userType: string = ''
+  //this.LoginForm.value.user 
 
-  constructor(FormBuilder: FormBuilder, private registerService: RegisterService, private tokenService: TokenService){
-    console.log('hi')
+  constructor(private loginService: LoginService, FormBuilder: FormBuilder, private registerService: RegisterService, private tokenService: TokenService, private router: Router){
+    //console.log('hi')
     this.firstFormGroup = FormBuilder.group({
       name: ['', Validators.required],
       telefono: ['', [Validators.required, Validators.minLength(3)]]
@@ -58,7 +62,16 @@ export class HomeComponent {
   user = { };
   
 
-  crearUsuario (){
+  credenciales: any = { email: '', password: '' };
+
+  login(){
+    console.log(this.LoginForm.value.user);
+    this.loginService.userType = this.LoginForm.value.user;    
+  }
+}
+
+/*
+ crearUsuario (){
     if(this.fontStyleControl == "tutor"){
       this.user = {
         name: this.firstFormGroup.value.name,
@@ -83,18 +96,4 @@ export class HomeComponent {
     //console.log(this.user)
     //console.log(typeof(this.user))
   }
-
-  login(){
-    /*
-    if(this.LoginForm.value.user == "professional"){
-      this.routerL = '/professional/profile/641e3aa760a550973418d30e'
-    }else if(this.LoginForm.value.user == "tutor"){
-      this.routerL = '/tutor/profile/641e47725ad83e88452cd701'
-    }else{
-      this.routerL = '/patient/profile/641e68619a05a988c6bf61f1'
-    }
-    //redirigir a ruta hardcodeada
-    */
-    this.tokenService.setToken('1234');
-  }
-}
+*/

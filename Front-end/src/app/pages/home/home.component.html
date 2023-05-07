@@ -79,137 +79,12 @@
 
 
     <div class="child">
-        <mat-card class="example-card">
+       <mat-card class="example-card">
             <mat-tab-group mat-stretch-tabs="false" mat-align-tabs="start">
-                <mat-tab label="Sign Up">
-                  <section class="btn-group-t">
-                    <span>Create an account for a  </span>
-                    <mat-form-field appearance="fill">
-                      <mat-select [(value)]="fontStyleControl">
-                        <mat-option value="tutor">Tutor</mat-option>
-                        <mat-option value="professional">Professional</mat-option>
-                      </mat-select>
-                    </mat-form-field>
-                  </section>
-                    <section *ngIf="fontStyleControl == tutorString">
-                      <mat-stepper orientation="vertical" [linear]="isLinear" #stepper>
-                        <mat-step [stepControl]="firstFormGroup">
-                          <form [formGroup]="firstFormGroup">
-                            <ng-template matStepLabel>Personal Information</ng-template>
-                            <mat-form-field appearance="fill">
-                              <mat-label>Full Name</mat-label>
-                              <input matInput placeholder="First name, Last name" formControlName="name" required>
-                            </mat-form-field><br>
-                            <mat-form-field appearance="fill">
-                              <mat-label>Phone-Number</mat-label>
-                              <input matInput placeholder="Ex. 2124567890" formControlName="telefono" required>
-                            </mat-form-field>
-                            <div>
-                              <button class="nxt-btn" [disabled]="this.firstFormGroup.status == 'INVALID'" mat-raised-button matStepperNext color="accent">Next</button>
-                            </div>
-                          </form>
-                        </mat-step>
-                        <mat-step [stepControl]="secondFormGroup">
-                          <form [formGroup]="secondFormGroup">
-                            <ng-template matStepLabel>Account Information</ng-template>
-                            <mat-form-field appearance="fill">
-                              <mat-label>Email</mat-label>
-                              <input matInput formControlName="email" placeholder="Enter a valid email address" required>
-                            </mat-form-field><br>
-                            <mat-form-field appearance="fill">
-                              <mat-label>Password</mat-label>
-                              <input matInput [type]="hide ? 'password' : 'text'" formControlName="password">
-                              <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
-                                <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
-                              </button>
-                            </mat-form-field>
-                            <div>
-                              <div >
-                                <button mat-raised-button matStepperPrevious color="warn">Back</button>
-                                <button class="nxt-btn" [disabled]="this.secondFormGroup.status == 'INVALID'" mat-raised-button matStepperNext color="accent">Next</button>
-                              </div>
-                            </div>
-                          </form>
-                        </mat-step>
-                        <mat-step>
-                          <ng-template matStepLabel>Almost there...</ng-template>
-                          <div>
-                            <button mat-raised-button matStepperPrevious color="warn">Back</button>
-                            <button mat-raised-button color="accent" class="nxt-btn" [disabled]="this.secondFormGroup.status == 'INVALID' || this.firstFormGroup.status == 'INVALID'" (click)="crearUsuario()">Create Account</button>
-                          </div>
-                        </mat-step>
-                      </mat-stepper>
-                    </section>
-                    <section *ngIf="fontStyleControl == profString; else no_data">
-                      <mat-stepper orientation="vertical" [linear]="isLinear" #stepper>
-                        <mat-step [stepControl]="thirdFormGroup">
-                          <form [formGroup]="thirdFormGroup">
-                            <ng-template matStepLabel>Personal Information</ng-template>
-                            <mat-form-field appearance="fill">
-                              <mat-label>Full Name</mat-label>
-                              <input matInput placeholder="First name, Last name" formControlName="name" required>
-                            </mat-form-field><br>
-                            <mat-form-field appearance="fill">
-                              <mat-label>Phone-Number</mat-label>
-                              <input matInput placeholder="Ex. 2124567890" formControlName="telefono" required>
-                            </mat-form-field> <br>
-                            <mat-form-field appearance="fill">
-                              <mat-label>Select your profession</mat-label>
-                              <select matNativeControl required formControlName="profession">
-                                <option value="Psychologist">Psychologist</option>
-                                <option value="Pedagogue">Pedagogue</option>
-                                <option value="Speech therapist">Speech therapist</option>
-                                <option value="Psychiatrist">Psychiatrist</option>
-                                <option value=" ">Other</option>
-                              </select>
-                            </mat-form-field>
-                            <br>
-                            <mat-form-field appearance="fill" *ngIf="this.thirdFormGroup.value.profession != '' &&  (this.thirdFormGroup.value.profession == ' ' || (this.thirdFormGroup.value.profession != 'Psychologist' && this.thirdFormGroup.value.profession != 'Pedagogue'&& this.thirdFormGroup.value.profession != 'Speech therapist' && this.thirdFormGroup.value.profession != 'Psychiatrist'))">
-                              <mat-label>Specify your profession</mat-label>
-                              <input matInput formControlName="profession" required>
-                            </mat-form-field> <br>
-                            <div>
-                              <button class="nxt-btn" [disabled]="this.thirdFormGroup.status == 'INVALID'" mat-raised-button matStepperNext color="accent">Next</button>
-                            </div>
-                          </form>
-                        </mat-step>
-                        <mat-step [stepControl]="secondFormGroup">
-                          <form [formGroup]="secondFormGroup">
-                            <ng-template matStepLabel>Account Information</ng-template>
-                            <mat-form-field appearance="fill">
-                              <mat-label>Email</mat-label>
-                              <input matInput formControlName="email" placeholder="Enter a valid email address" required>
-                            </mat-form-field><br>
-                            <mat-form-field appearance="fill">
-                              <mat-label>Password</mat-label>
-                              <input matInput [type]="hide ? 'password' : 'text'" formControlName="password">
-                              <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
-                                <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
-                              </button>
-                            </mat-form-field>
-                            <div>
-                              <div >
-                                <button mat-raised-button matStepperPrevious color="warn">Back</button>
-                                <button class="nxt-btn" [disabled]="this.secondFormGroup.status == 'INVALID'" mat-raised-button matStepperNext color="accent">Next</button>
-                              </div>
-                            </div>
-                          </form>
-                        </mat-step>
-                        <mat-step>
-                          <ng-template matStepLabel>Almost there...</ng-template>
-                          <div>
-                            <button mat-raised-button matStepperPrevious color="warn">Back</button>
-                            <button mat-raised-button color="accent" class="nxt-btn" [disabled]="this.secondFormGroup.status == 'INVALID' || this.thirdFormGroup.status == 'INVALID'" (click)="crearUsuario()" [routerLink]=[routerL]>Create Account</button>
-                          </div>
-                        </mat-step>
-                      </mat-stepper>
-                    </section>
-                    <ng-template #no_data></ng-template>
-                  
-                </mat-tab>
                 <mat-tab label="Login">
-                  <div class="loginContainer">
-                    <form [formGroup]="LoginForm">
+                  <div id="login" class="loginContainer">
+                    <form (submit)="login()" [formGroup]="LoginForm">
+                      <br>
                       <div>
                         <label>Login as a:</label><br>
                         <mat-radio-group formControlName="user" required>
@@ -218,8 +93,15 @@
                           <mat-radio-button value="patient">Patient</mat-radio-button><br>
                         </mat-radio-group>
                       </div>
-                    </form>
-                    <asl-google-signin-button *ngIf="this.LoginForm.status == 'VALID'" type='standard' size='large' text='signin_with' width='400'></asl-google-signin-button>
+                    <br>
+                      <div>
+                        <button>Select</button>
+                    </div>
+                    <br>
+                    <div>
+                        <asl-google-signin-button type='standard' size='large' width='400'></asl-google-signin-button>
+                    </div>
+                  </form>
                   </div>
                 </mat-tab>
             </mat-tab-group>

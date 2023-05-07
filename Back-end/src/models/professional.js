@@ -10,7 +10,8 @@ const profesionistaSchema = new Schema({
     active: { type: Boolean, default: false},
     location: { type: String, default: 'online' },
     link: { type: String }, // link a su google calendar,
-    patients: { type: [Schema.ObjectId], default: [] }// array de los ids de sus pacientes
+    patients: { type: [Schema.ObjectId], default: [] }, // array de los ids de sus pacientes
+    login: { type: Boolean, default: false}
 })
 
 module.exports = model('Profesionista', profesionistaSchema)
