@@ -16,7 +16,6 @@ const adminController = {
         googleClient.verifyIdToken({ idToken: idToken }).then(response => {
             const user = response.getPayload();
             let a = {}
-
             modelo.find()
             .then(response => {
                 let exists = false;
