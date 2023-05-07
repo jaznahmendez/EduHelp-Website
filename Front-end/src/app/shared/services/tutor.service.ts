@@ -46,7 +46,7 @@ export class TutorService {
   getTutor() {
     //console.log('id: ', this.id)
     let url = this.apiUrl + 'admin/tutor/' + this.id
-    console.log(url)
+    //console.log(url)
     return this.httpClient.get(url)
   }
 
@@ -56,6 +56,7 @@ export class TutorService {
     let options = {
       headers: headers
     }
+    //console.log(id)
     this.httpClient.put<any>(this.apiUrl + 'tutor/' + id, tutor, options).subscribe()
   }
 

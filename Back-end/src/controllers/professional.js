@@ -12,57 +12,53 @@ const professionalController = {
         const idToken = req.body.googleToken
         googleClient.verifyIdToken({ idToken: idToken }).then(response => {
             const user = response.getPayload();
-            const a = user
+            let a = {}
 
             modelo.find()
             .then(response => {
-                
-                if(response.length == 0)
+                let exists = false;
+                for(let i = 0; i < response.length; i++)
                 {
-                    const temp = {
+                    let t = response[i]
+                    if(t.email == user.email)
+                    {
+                        
+                        exists = true
+                        a = t;
+                    }
+                }
+                //console.log(exists == false)
+                if(exists == false)
+                {
+                    let temp = {
                         name: user.name,
                         email: user.email,
                         token: idToken
                     }
+                    //console.log(temp)
                     a = temp;
+                    //console.log('before save')
                     modelo(temp).save()
                         .then(p =>{
+                            console.log(p)
                             res.status(200).send(p)    
                         })
                         .catch(p =>{
-                            res.status(400).send()    
-                        })
+                            res.status(400).send('not saving correctly')    
+                        })   
                 }
-                else {
-                    for(let i = 0; i < response.length; i++)
-                    {
-                        let p = response[i]
-                        if(p.email == user.email) a = p;
-                    }
-                }
+                //console.log(exists)
                 res.send(a)
             })
             .catch(error => {
                 res.status(400).send()
             })
 
-            res.send(a)
         }).catch(err => {
             res.status(401).send({msg: 'token inválido'})
         })
     },
     createProfessional: (req, res) => {
-        /*let prof = {
-            name: req.body.name,
-            profession: req.body.profession,
-            email: req.body.email,
-            password: req.body.password,
-            telefono: req.body.telefono,
-            token: req.body.token,
-            location: req.body.location,
-            link: req.body.link
-        }*/
-        //console.log(prof)
         modelo(req.body).save()
             .then(prof =>{
                 res.status(200).send(prof)    

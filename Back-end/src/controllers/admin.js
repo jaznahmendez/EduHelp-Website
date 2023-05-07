@@ -15,36 +15,48 @@ const adminController = {
         const idToken = req.body.googleToken
         googleClient.verifyIdToken({ idToken: idToken }).then(response => {
             const user = response.getPayload();
-            const a = user
+            let a = {}
 
             modelo.find()
-                .then(response => {
-                    
-                    if(response.length == 0)
+            .then(response => {
+                let exists = false;
+                for(let i = 0; i < response.length; i++)
+                {
+                    let t = response[i]
+                    if(t.email == user.email)
                     {
-                        const temp = {
-                            name: user.name,
-                            email: user.email,
-                            token: idToken
-                        }
-                        a = temp;
-                        modelo(temp).save()
-                            .then(admin =>{
-                                res.status(200).send(admin)    
-                            })
-                            .catch(admin =>{
-                                res.status(400).send()    
-                            })
+                        
+                        exists = true
+                        a = t;
                     }
-                    else {
-                        for(let i = 0; i < response.length; i++)
-                        {
-                            let admin = response[i]
-                            if(admin.email == user.email) a = admin;
-                        }
+                }
+                //console.log(exists == false)
+                if(exists == false)
+                {
+                    let temp = {
+                        name: user.name,
+                        email: user.email,
+                        token: idToken
                     }
-                    res.send(a)
-                })
+                    //console.log(temp)
+                    a = temp;
+                    //console.log('before save')
+                    modelo(temp).save()
+                        .then(admin =>{
+                            console.log(admin)
+                            res.status(200).send(admin)    
+                        })
+                        .catch(admin =>{
+                            res.status(400).send('not saving correctly')    
+                        })   
+                }
+                //console.log(exists)
+                res.send(a)
+            })
+            .catch(error => {
+                res.status(400).send()
+            })
+
                 .catch(error => {
                     res.status(400).send()
                 })

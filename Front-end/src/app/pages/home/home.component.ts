@@ -65,6 +65,7 @@ export class HomeComponent {
   credenciales: any = { email: '', password: '' };
 
   login(){
+    this.loginService.setUserType(this.LoginForm.value.user)
     console.log(this.LoginForm.value.user);
     this.loginService.userType = this.LoginForm.value.user;    
   }
