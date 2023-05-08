@@ -18,6 +18,8 @@ export class HomeComponent {
   profString = "professional";
   patientString = "patient";
 
+  userState = '';
+
   firstFormGroup: FormGroup;
   secondFormGroup: FormGroup;
 
@@ -64,9 +66,14 @@ export class HomeComponent {
 
   credenciales: any = { email: '', password: '' };
 
+  setUser(){
+    console.log(this.LoginForm);
+    this.user = this.LoginForm.value.user;
+  }
+  
   login(){
     this.loginService.setUserType(this.LoginForm.value.user)
-    console.log(this.LoginForm.value.user);
+    console.log(this.LoginForm);
     this.loginService.userType = this.LoginForm.value.user;    
   }
 }

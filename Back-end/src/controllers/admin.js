@@ -11,7 +11,7 @@ require('dotenv').config();
 const googleClient = new OAuth2Client(process.env.GOOGLE_ID)
 
 const adminController = {
-    googleLogin: (req, res) => {
+    googleLogin: (req, res) => { 
         const idToken = req.body.googleToken
         googleClient.verifyIdToken({ idToken: idToken }).then(response => {
             const user = response.getPayload();

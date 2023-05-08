@@ -110,7 +110,6 @@ export class NavComponent{
         }
       }
     });
-
   }
 
   logOut() {

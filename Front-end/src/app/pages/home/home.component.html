@@ -88,16 +88,12 @@
                       <div>
                         <label>Login as a:</label><br>
                         <mat-radio-group formControlName="user" required>
-                          <mat-radio-button value="professional">Professional</mat-radio-button><br>
+                          <mat-radio-button (click)="setUser()" value="professional">Professional</mat-radio-button><br>
                           <mat-radio-button value="tutor">Tutor</mat-radio-button><br>
                           <mat-radio-button value="patient">Patient</mat-radio-button><br>
                         </mat-radio-group>
+                        <p>{{userState}}</p>
                       </div>
-                    <br>
-                      <div>
-                        <button>Select</button>
-                    </div>
-                    <br>
                     <div>
                         <asl-google-signin-button type='standard' size='large' width='400'></asl-google-signin-button>
                     </div>
