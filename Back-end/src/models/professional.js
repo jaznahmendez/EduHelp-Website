@@ -3,7 +3,7 @@ const {Schema, model} = require('mongoose')
 const profesionistaSchema = new Schema({
     name: { type: String, required: true },
     profession: { type: String, default: 'no description' },
-    email: { type: String },
+    email: { type: String, required: true },
     password: { type: String },
     telefono: { type: String },
     token: { type: String },

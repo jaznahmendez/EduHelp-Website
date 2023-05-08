@@ -1,4 +1,5 @@
 const patient = require('../models/patient');
+const { response } = require('express');
 // nombre, correo, género
 
 const { OAuth2Client } = require('google-auth-library');
@@ -31,7 +32,6 @@ class controladorPatient{
         googleClient.verifyIdToken({ idToken: idToken }).then(response => {
             const user = response.getPayload();
             let a = {}
-
             patient.find()
             .then(response => {
                 let exists = false;
@@ -40,7 +40,6 @@ class controladorPatient{
                     let t = response[i]
                     if(t.email == user.email)
                     {
-                        
                         exists = true
                         a = t;
                     }

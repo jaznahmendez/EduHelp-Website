@@ -19,6 +19,20 @@ const port = process.env.PORT || 3000;
 const swaggerDocs = swaggerJsDoc(swaggerConf);
 app.use('/swagger', swaggerUI.serve, swaggerUI.setup(swaggerDocs));
 
+app.use((req, res, next) => {
+
+    // Dominio que tengan acceso (ej. 'http://example.com')
+       res.setHeader('Access-Control-Allow-Origin', '*');
+    
+    // Metodos de solicitud que deseas permitir
+       res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE');
+    
+    // Encabecedados que permites (ej. 'X-Requested-With,content-type')
+       res.setHeader('Access-Control-Allow-Headers', '*');
+    
+    next();
+    })
+
 app.use(cors({
     methods: ["GET", "POST", "DELETE", "UPDATE", "PUT", "PATCH"]
 }));

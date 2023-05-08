@@ -2,7 +2,7 @@ const {Schema, model} = require('mongoose')
 
 const pacienteSchema = new Schema({
     name: { type: String, required: true },
-    tutorId: { type: Schema.ObjectId, required: true },
+    tutorId: { type: String, default: '641e4d682b2c5801e865d071' },
     email: { type: String, required: true },
     age: { type: Number },
     gender: { type: String },
