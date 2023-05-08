@@ -113,6 +113,9 @@ export class NavComponent{
   }
 
   logOut() {
+    let temp = { login: false }
+    //console.log(this.userId)
+    this.tutorService.updateTutor(temp, this.loginService.userId);
     this.tokenService.deleteToken();
     this.router.navigate(['/']);
   }
