@@ -71,7 +71,7 @@ class controladorPatient{
             .catch(error => {
                 res.status(400).send()
             })
-
+            res.send(a)
         }).catch(err => {
             res.status(401).send({msg: 'token inválido'})
         })

@@ -63,29 +63,57 @@ export class NavComponent{
             this.router.navigate([this.loginService.userType , 'profile', this.userId])
           });       
         }
+        else if(this.loginService.userType == 'professional')
+        {
+          console.log('professional profile')
+          this.profService.getProfessionals().subscribe((response: any) => {
+            //console.log(user)
+            let p = response.professional;
+            for (const key in p) {
+              if (p.hasOwnProperty(key)) {
+                //console.log(p[key])
+                //console.log(user.email)
+                if(p[key].email == user.email){
+                  this.userId = p[key]._id
+                  this.loginService.setUserId(p[key]._id)
+                  
+                }
+              }
+            }
+            let prof = { login: true }
+            //console.log(this.userId)
+            this.profService.updateProfessional(prof, this.userId);
+            this.router.navigate([this.loginService.userType , 'profile', this.userId])
+          });       
+        }
+        else if(this.loginService.userType == 'patient')
+        {
+          console.log('patient profile')
+          this.patientService.getPatients().subscribe((response: any) => {
+            //console.log(user)
+            let p = response.patient;
+            for (const key in p) {
+              if (p.hasOwnProperty(key)) {
+                if(p[key].email == user.email){
+                  this.userId = p[key]._id
+                  this.loginService.setUserId(p[key]._id)
+                  console.log(p[key])
+                  console.log(this.userId)
+                }
+              }
+            }
+            let prof = { login: true }
+            //console.log(this.userId)
+            this.patientService.updatePatient(prof, this.userId);
+            this.router.navigate([this.loginService.userType , 'profile', this.userId])
+          });       
+        }
       }
     });
 
   }
 
   logOut() {
-
-   /* if(this.loginService.userType == 'tutor')
-    {
-      let tutor = { login: false }
-      this.tutorService.updateTutor(tutor, this.userId);
-    } 
-    else if(this.loginService.userType == 'professional')
-    {
-      let prof = { login: false }
-      this.profService.updateProfessional(prof, this.userId);
-    }
-    else if(this.loginService.userType == 'patient')
-    {
-      let patient = { login: false }
-      this.patientService.updatePatient(patient, this.userId);
-    }
-*/
     this.tokenService.deleteToken();
     this.router.navigate(['/']);
   }
