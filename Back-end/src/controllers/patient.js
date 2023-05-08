@@ -45,7 +45,7 @@ class controladorPatient{
                     }
                 }
                 //console.log(exists == false)
-                if(exists == false)
+               /* if(exists == false)
                 {
                     let temp = {
                         name: user.name,
@@ -63,7 +63,7 @@ class controladorPatient{
                         .catch(p =>{
                             res.status(400).send('not saving correctly')    
                         })   
-                }
+                }*/
                 //console.log(exists)
                 res.send(a)
             })

@@ -23,16 +23,6 @@ export class LoginService {
   {
     this.userId = id
   }
-
-  /*
-  createPatient(patient: object)
-  {
-    let headers = new HttpHeaders({'Content-Type': 'application/json'})
-    let options = {
-      headers: headers
-    }
-    this.httpClient.post<any>(this.apiUrl + 'admin/patient', patient, options).subscribe();
-  }*/
   
   login(idToken: string, userType: string): Observable<any> {
     let headers = new HttpHeaders({'Content-Type': 'application/json'})
