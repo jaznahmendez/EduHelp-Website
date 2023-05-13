@@ -53,7 +53,7 @@ export class NavComponent{
                   this.userId = p[key]._id
                   console.log(this.userId)
                   this.loginService.setUserId(p[key]._id)
-                  
+                  console.log('from login', this.loginService.userId)
                 }
               }
             }
@@ -114,7 +114,7 @@ export class NavComponent{
 
   logOut() {
     let temp = { login: false }
-    //console.log(this.userId)
+    console.log(this.loginService.userId)
     this.tutorService.updateTutor(temp, this.loginService.userId);
     this.tokenService.deleteToken();
     this.router.navigate(['/']);

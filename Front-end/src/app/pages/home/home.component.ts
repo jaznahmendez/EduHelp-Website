@@ -66,14 +66,17 @@ export class HomeComponent {
 
   credenciales: any = { email: '', password: '' };
 
-  setUser(){
-    console.log(this.LoginForm);
-    this.user = this.LoginForm.value.user;
+  setUser(user: string){
+    this.loginService.setUserType(user)
+    this.loginService.userType = user;
+    this.user = user;
+    console.log(user);
+    //console.log(this.user)
   }
   
   login(){
     this.loginService.setUserType(this.LoginForm.value.user)
-    console.log(this.LoginForm);
+    console.log(this.LoginForm.value.user);
     this.loginService.userType = this.LoginForm.value.user;    
   }
 }
