@@ -5,9 +5,9 @@ const rutasAdministrador = require('./admin.js');
 const rutasPacientes = require('./patient')
 const rutasTutores = require('./tutor')
 const rutasProfesionista = require('./professional')
+const rutasAuth = require('./auth.js')
 
-router.use('/', express.json());
-
+router.use('/login', rutasAuth)
 router.use('/admin', rutasAdministrador)
 router.use('/patient', rutasPacientes)
 router.use('/tutor', rutasTutores)

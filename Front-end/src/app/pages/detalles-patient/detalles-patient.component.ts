@@ -3,6 +3,7 @@ import { Patient } from 'src/app/shared/interfaces/patient'
 import { PatientService } from 'src/app/shared/services/patient.service'
 import { TutorService } from 'src/app/shared/services/tutor.service'
 import { ProfessionalService } from 'src/app/shared/services/professional.service'
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-detalles-patient',
@@ -18,17 +19,23 @@ export class DetallesPatientComponent implements OnInit {
     age: 0,
     gender: '',
     pastProfessionals: '',
-    currentProfessionals: '',
+    currentProffesionals: '',
     tutorDescription: ''
   }
 
   tutor: any = {}
-  currentProfessionals: any = []
+  currentProffesionals: any = []
   cp: any = []
+  id: string = '';
 
-  constructor(private patientService: PatientService, private tutorService: TutorService, private professionalService: ProfessionalService) {}
+  constructor(private route: ActivatedRoute, private patientService: PatientService, private tutorService: TutorService, private professionalService: ProfessionalService) {}
 
   ngOnInit(): void {
+    this.route.params.subscribe(params => {
+      this.id = params['id'];
+    });
+    this.patientService.id = this.id
+
     this.patientService.getPatient().subscribe((response: any) => {
       this.patient = response
       this.tutorService.id = this.patient.tutorId
@@ -37,20 +44,6 @@ export class DetallesPatientComponent implements OnInit {
         console.log(response)
         this.tutor = response
       });
-
-      for(let i = 0; i < this.patient.currentProffesionals.length; i++)
-      {
-        this.currentProfessionals.push(this.patient.currentProffesionals[i])
-      }
-      
-      for(let i = 0; i < this.currentProfessionals.length; i++)
-      {
-        this.professionalService.id = this.currentProfessionals[i];
-        this.professionalService.getProfessional().subscribe((response: any) => {
-          console.log(response)
-          this.cp.push(response);
-        });
-      }
     });
   }
 

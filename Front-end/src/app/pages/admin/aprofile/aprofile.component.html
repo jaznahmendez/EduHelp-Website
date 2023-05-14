@@ -1,6 +1,62 @@
-<div class="column">
-    <div class="card">
-      <h3>Nombre: {{admin.name}}</h3>
-      <p>Email: {{admin.telefono}}</p>
-      <p>Id: {{admin._id}}</p>
+<div class="profile-container">
+  <mat-card class="profile-card">
+    <mat-card-header>
+      <mat-card-title><h1>{{admin.name}}</h1></mat-card-title>
+      <mat-card-subtitle><h2>{{admin.email}}</h2></mat-card-subtitle>
+      <mat-card-subtitle><h2>{{admin.telefono}}</h2></mat-card-subtitle>
+      <mat-card-subtitle><h2>{{admin._id}}</h2></mat-card-subtitle>
+    </mat-card-header>
+    <mat-card-actions align="end">
+      <button mat-fab extended (click)="openEditDialog()">
+        <mat-icon>edit</mat-icon>
+        <span>Edit</span>
+      </button>
+    </mat-card-actions> 
+  </mat-card>
+  <mat-card class="app-card">
+    <div class="tutor-title">Create new Admin</div>
+    <mat-card-content>
+      <form [formGroup]="firstFormGroup">
+        <mat-form-field appearance="fill">
+          <mat-label>Full Name</mat-label>
+          <input matInput placeholder="First name, Last name" formControlName="name" required>
+        </mat-form-field>
+        <mat-form-field appearance="fill">
+          <mat-label>Phone Number</mat-label>
+          <input matInput formControlName="telefono" required>
+        </mat-form-field><br>
+        <mat-form-field appearance="fill">
+          <mat-label>Email</mat-label>
+          <input matInput type="email" formControlName="email" required>
+        </mat-form-field>
+        <mat-form-field appearance="fill">
+          <mat-label>Password</mat-label>
+          <input matInput [type]="hide ? 'password' : 'text'" formControlName="password">
+          <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
+            <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+          </button>
+        </mat-form-field>
+        <div>
+            <button mat-raised-button color="accent" [disabled]="this.firstFormGroup.status == 'INVALID'" (click)="createAdmin()">Create Admin</button>
+        </div>
+      </form>
+    </mat-card-content>
+    <mat-card-actions align="end">
+    </mat-card-actions>
+  </mat-card>
+</div>
+
+<div class="middle-div">
+  <button mat-fab extended [routerLink]="['/tutor']">
+    <mat-icon>view_list</mat-icon>
+    <span>View Tutors</span>
+  </button>
+  <button mat-fab extended [routerLink]="['/patient']">
+    <mat-icon>view_list</mat-icon>
+    <span>View Patients</span>
+  </button>
+  <button mat-fab extended [routerLink]="['/professional']">
+    <mat-icon>view_list</mat-icon>
+    <span>View Professionals</span>
+  </button>
 </div>

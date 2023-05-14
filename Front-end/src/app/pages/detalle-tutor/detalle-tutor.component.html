@@ -1,15 +1,31 @@
-<div class="column">
-    <div class="card">
-      <h3>Nombre: {{tutor.name}}</h3>
-      <p>Email: {{tutor.email}}</p>
-      <p>Id: {{tutor._id}}</p>
+<div>
+  <mat-card class="profile-card">
+    <mat-card-header>
+      <div mat-card-avatar class="header-image" style="background-image: url('https://randomuser.me/api/portraits/men/52.jpg');"></div>
+      <mat-card-title><h1>{{tutor.name}}</h1></mat-card-title>
+      <mat-card-subtitle><h2>{{tutor.email}}</h2></mat-card-subtitle>
+      <mat-card-subtitle><h2>{{tutor.telefono}}</h2></mat-card-subtitle>
+    </mat-card-header>
+    <mat-card-content>
+    </mat-card-content>
+  </mat-card>
 </div>
+<br>
 
-<h2>HIJOS</h2>
-<div *ngFor="let item of hijos" (click)="getPatientById(item)" [routerLink]="['/patient/' + item._id]" class="row">
-  <div class="column">
-    <div class="card">
-      <h3>{{item.name}}</h3>
-      <p>{{item.tutorId}}</p>
-    </div>
+<div class="middle-div">
+  <h1>My Family</h1>
+</div>
+<div class="container-patient">
+  <div *ngFor="let item of hijos; let i = index;" [routerLink]="['/patient/' + item._id]">
+    <mat-card class="patient-card">
+      <mat-card-header>
+        <div mat-card-avatar class="patient-image" style="background-image: url('https://randomuser.me/api/portraits/women/52.jpg');"></div>
+        <mat-card-title><h1>{{item.name}}</h1></mat-card-title>
+        <mat-card-subtitle><h2>{{item.email}}</h2></mat-card-subtitle>
+        <mat-card-subtitle><h2>{{item.telefono}}</h2></mat-card-subtitle>
+      </mat-card-header>
+      <mat-card-content>
+      </mat-card-content>
+    </mat-card>
   </div>
+</div>

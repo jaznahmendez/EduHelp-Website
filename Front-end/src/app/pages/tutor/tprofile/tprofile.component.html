@@ -1,15 +1,51 @@
-<div class="column">
-    <div class="card">
-      <h3>Nombre: {{tutor.name}}</h3>
-      <p>Email: {{tutor.email}}</p>
-      <p>Id: {{tutor._id}}</p>
+<div>
+  <mat-card class="profile-card">
+    <mat-card-header>
+      <div mat-card-avatar class="header-image" style="background-image: url('https://randomuser.me/api/portraits/men/52.jpg');"></div>
+      <mat-card-title><h1>{{tutor.name}}</h1></mat-card-title>
+      <mat-card-subtitle><h2>{{tutor.email}}</h2></mat-card-subtitle>
+      <mat-card-subtitle><h2>{{tutor.telefono}}</h2></mat-card-subtitle>
+    </mat-card-header>
+    <mat-card-content>
+    </mat-card-content>
+    <mat-card-actions align="end">
+      <button mat-fab extended (click)="openEditDialog()">
+        <mat-icon>edit</mat-icon>
+        <span>Edit</span>
+      </button>
+    </mat-card-actions>
+  </mat-card>
 </div>
 
-<h2>HIJOS</h2>
-<div *ngFor="let item of hijosArray" class="column">
-    <div class="card">
-      <h3>Nombre: {{item.name}}</h3>
-      <p>Email: {{item.email}}</p>
-      <p>Id: {{item._id}}</p>
-    </div>
+<div class="middle-div">
+  <h2>My Family</h2>
+  <button mat-fab extended (click)="openNewDialog()">
+    <mat-icon>add_circle</mat-icon>
+    <span>Add New Member</span>
+</button>
 </div>
+<div class="container-patient">
+  <div *ngFor="let item of hijosArray; let i = index;">
+    <mat-card class="patient-card">
+      <mat-card-header>
+        <div mat-card-avatar class="patient-image" [style.background-image] = "imageLink[i]"></div>
+        <mat-card-title><h1>{{item.name}}</h1></mat-card-title>
+        <mat-card-subtitle><h2>{{item.email}}</h2></mat-card-subtitle>
+        <mat-card-subtitle><h2>{{item.telefono}}</h2></mat-card-subtitle>
+      </mat-card-header>
+      <mat-card-content>
+      </mat-card-content>
+      <mat-card-actions align="end">
+        <button mat-fab extended>
+          <mat-icon>app_registration</mat-icon>
+          <span (click)="deletePatient(item._id)">Delete</span>
+        </button>
+        <button mat-fab extended>
+          <mat-icon>app_registration</mat-icon>
+          <span [routerLink]="['/patient/profile/' + item._id]">Details</span>
+        </button>
+      </mat-card-actions>
+    </mat-card>
+  </div>
+</div>
+

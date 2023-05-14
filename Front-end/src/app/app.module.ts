@@ -5,7 +5,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
-import { HttpClientModule } from '@angular/common/http'
+import { HttpClientModule } from '@angular/common/http';
 
 import {MatCommonModule} from '@angular/material/core';
 import { AdminComponent } from './pages/admin/admin.component';
@@ -32,6 +32,7 @@ import {MatRadioModule} from '@angular/material/radio';
 import { MatInputModule } from '@angular/material/input';
 import {MatButtonToggleModule} from '@angular/material/button-toggle';
 import {MatTooltipModule} from '@angular/material/tooltip';
+import {MatDialogModule} from '@angular/material/dialog';
 
 import { DetalleProfessionalComponent } from './pages/detalle-professional/detalle-professional.component';
 import { ProfileComponent } from './pages/professional/profile/profile.component';
@@ -41,6 +42,14 @@ import { DetalleTutorComponent } from './pages/detalle-tutor/detalle-tutor.compo
 import { TProfileComponent } from './pages/tutor/tprofile/tprofile.component';
 import { DetalleAdminComponent } from './pages/detalle-admin/detalle-admin.component';
 import { AProfileComponent } from './pages/admin/aprofile/aprofile.component';
+import { EditDialogComponent } from './pages/tutor/tprofile/edit-dialog/edit-dialog.component';
+import { NewPatientComponent } from './pages/tutor/tprofile/new-patient/new-patient.component';
+import { EditPatientDialogComponent } from './pages/patient/pprofile/edit-patient-dialog/edit-patient-dialog.component';
+import { EditProfDialogComponent } from './pages/professional/profile/edit-prof-dialog/edit-prof-dialog.component';
+import { EditAdminComponent } from './pages/admin/aprofile/edit-admin/edit-admin.component';
+import {  SocialLoginModule, SocialAuthServiceConfig, GoogleLoginProvider, GoogleSigninButtonModule } from '@abacritt/angularx-social-login';
+import { environment } from './environments/environment';
+import { LoginComponent } from './pages/login/login.component';
 
 
 @NgModule({
@@ -60,12 +69,17 @@ import { AProfileComponent } from './pages/admin/aprofile/aprofile.component';
     DetalleTutorComponent,
     TProfileComponent,
     DetalleAdminComponent,
-    AProfileComponent
+    AProfileComponent,
+    EditDialogComponent,
+    NewPatientComponent,
+    EditPatientDialogComponent,
+    EditProfDialogComponent,
+    EditAdminComponent,
+    LoginComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
-    HttpClientModule,
     BrowserAnimationsModule,
     MatCommonModule,
     MatButtonModule,
@@ -84,17 +98,31 @@ import { AProfileComponent } from './pages/admin/aprofile/aprofile.component';
     MatInputModule,
     MatButtonToggleModule,
     MatTooltipModule,
-    DetalleProfessionalComponent,
-    ProfileComponent,
-    PprofileComponent,
-    DetallesPatientComponent,
-    DetalleTutorComponent,
-    TProfileComponent,
-    DetalleAdminComponent,
-    AProfileComponent,
-    HttpClientModule
+    HttpClientModule,
+    MatDialogModule,
+    SocialLoginModule,
+    GoogleSigninButtonModule
+
   ],
-  providers: [],
+  providers: [
+    {
+      provide: 'SocialAuthServiceConfig',
+      useValue: {
+        autoLogin: false,
+        providers: [
+          {
+            id: GoogleLoginProvider.PROVIDER_ID,
+            provider: new GoogleLoginProvider(
+              environment.googleId//'clientId'
+            )
+          }
+        ],
+        onError: (err) => {
+          console.error(err);
+        }
+      } as SocialAuthServiceConfig,
+    }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

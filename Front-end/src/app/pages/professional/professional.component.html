@@ -1,7 +1,35 @@
-<div *ngFor="let item of pArray" (click)="getProfessionalById(item)" [routerLink]="[item._id]"  class="row">
-  <div class="column">
-    <div class="card">
-      <h3>{{item.name}}</h3>
-      <p>{{item.profession}}</p>
-    </div>
+<br><br>
+<h1>Professionals</h1>
+<br>
+<form (submit)="filtrar()">
+  <button class="searchBtn" (click)="filtrar()"><img src="../../../assets/logo.png"></button>
+  <hr>
+  <input class="searchBar" name="buscar" type="text" placeholder="Search..." [(ngModel)]="buscar">
+</form>
+<br><br>
+
+<mat-form-field appearance="fill" class="mat">
+  <mat-select [(value)]="prof">
+    <mat-option (click)="filtrarProfession()"  value="all">All</mat-option>
+    <mat-option (click)="filtrarProfession()"  value="Psychologist">Psychologist</mat-option>
+    <mat-option (click)="filtrarProfession()"  value="Pedagogue">Pedagogue</mat-option>
+    <mat-option (click)="filtrarProfession()"  value="Speech therapist">Speech therapist</mat-option>
+    <mat-option (click)="filtrarProfession()"  value="Psychiatrist">Psychiatrist</mat-option>
+  </mat-select>
+</mat-form-field>
+
+<br>
+
+  <div class="card"   *ngFor="let item of itemsFiltrados2" (click)="getProfessionalById(item)" [routerLink]="[item._id]">
+  <div class="cardContainer">
+    <h4><b>Name: {{item.name}}</b></h4>
+    <p>Profession: {{item.profession}}</p>
+    <p>Email: {{item.email}}</p>
+    <p>Telefono: {{item.telefono}}</p>
   </div>
+  <br>
+  <br>
+  <br>
+</div>
+<br>
+<br>

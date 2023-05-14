@@ -1,22 +1,100 @@
-<div class="column">
-    <div class="card">
-      <h3>Nombre: {{patient.name}}</h3>
-      <p>Email: {{patient.email}}</p>
-      <p>Id: {{patient._id}}</p>
+<div class="profile-container">
+  <mat-card class="profile-card">
+    <mat-card-header>
+      <div mat-card-avatar class="header-image" style="background-image: url('https://randomuser.me/api/portraits/women/52.jpg');"></div>
+      <mat-card-title><h1>{{patient.name}}</h1></mat-card-title>
+      <mat-card-subtitle><h2>{{patient.email}}</h2></mat-card-subtitle>
+      <mat-card-subtitle><h2>{{patient.telefono}}</h2></mat-card-subtitle>
+      <mat-card-subtitle><h2>{{patient.gender}}</h2></mat-card-subtitle>
+      <mat-card-subtitle><h2>{{patient.age}}</h2></mat-card-subtitle>
+      <mat-card-subtitle><h3>About me</h3></mat-card-subtitle>
+      <mat-card-subtitle><p *ngIf="patient.tutorDescription != ''; else errorMsg">{{patient.tutorDescription}}</p></mat-card-subtitle>
+      <ng-template #errorMsg><mat-card-subtitle><p>No description available</p></mat-card-subtitle></ng-template>
+    </mat-card-header>
+    <mat-card-actions align="end">
+      <button mat-fab extended (click)="openEditDialog()">
+        <mat-icon>edit</mat-icon>
+        <span>Edit</span>
+      </button>
+    </mat-card-actions>
+  </mat-card>
+  <mat-card class="tutor-card">
+    <div class="tutor-title">My tutor</div>
+    <mat-card-header>
+      <div mat-card-avatar class="tutor-image" style="background-image: url('https://randomuser.me/api/portraits/men/52.jpg');"></div>
+      <mat-card-title><h1>{{tutor.name}}</h1></mat-card-title>
+      <mat-card-subtitle><h2>{{tutor.email}}</h2></mat-card-subtitle>
+      <mat-card-subtitle><h2>{{tutor.telefono}}</h2></mat-card-subtitle>
+    </mat-card-header>
+    <mat-card-content>
+    </mat-card-content>
+    <mat-card-actions align="end">
+      <button mat-fab extended>
+        <mat-icon>persona</mat-icon>
+        <span [routerLink]="['/tutor/' + tutor._id]">See Profile</span>
+      </button>
+    </mat-card-actions>
+  </mat-card>
+  <mat-card class="app-card">
+    <div class="tutor-title">My Next Appointments</div>
+    <mat-card-content>
+    </mat-card-content>
+    <mat-card-actions align="end">
+    </mat-card-actions>
+  </mat-card>
 </div>
 
-<h2>TUTOR</h2>
-<div class="column">
-    <div class="card">
-      <h3>Nombre: {{tutor.name}}</h3>
-      <p>Email: {{tutor.email}}</p>
-      <p>Id: {{tutor._id}}</p>
+
+<div class="middle-div">
+  <h2><span class="middle-title">My Current Professionals</span></h2>
 </div>
 
-<h2>PROFESIONALES</h2>
-<div *ngFor="let item of cp" class="column">
-    <div class="card">
-      <h3>Nombre: {{item.name}}</h3>
-      <p>Email: {{item.email}}</p>
-      <p>Id: {{item._id}}</p>
+<div class="container-patient">
+  <div  class="error-msg" *ngIf="this.cp == ''">Uuh Oh! it seems you do not have any current professionals registered</div>
+  <div *ngFor="let item of cp; let i = index;">
+    <mat-card class="patient-card">
+      <mat-card-header>
+        <div mat-card-avatar class="patient-image" [style.background-image] = "imageLinkCp[i]"></div>
+        <mat-card-title><h1>{{item.name}}</h1></mat-card-title>
+        <mat-card-subtitle><h2>{{item.profession}}</h2></mat-card-subtitle>
+        <mat-card-subtitle><h2>{{item.email}}</h2></mat-card-subtitle>
+        <mat-card-subtitle><h2>{{item.telefono}}</h2></mat-card-subtitle>
+      </mat-card-header>
+      <mat-card-content>
+      </mat-card-content>
+      <mat-card-actions align="end">
+        <button mat-fab extended>
+          <mat-icon>persona</mat-icon>
+          <span [routerLink]="['/professional/' + item._id]">See Profile</span>
+        </button>
+      </mat-card-actions>
+    </mat-card>
+  </div>
+</div>
+
+<div class="middle-div">
+  <h2><span class="middle-title">My Past Professionals</span></h2>
+</div>
+
+<div class="container-patient">
+  <div  class="error-msg" *ngIf="this.pp == ''">Uuh Oh! it seems you do not have any past professionals registered</div>
+  <div *ngFor="let item of pp; let i = index;">
+    <mat-card class="patient-card">
+      <mat-card-header>
+        <div mat-card-avatar class="patient-image" [style.background-image] = "imageLinkPp[i]"></div>
+        <mat-card-title><h1>{{item.name}}</h1></mat-card-title>
+        <mat-card-subtitle><h2>{{item.profession}}</h2></mat-card-subtitle>
+        <mat-card-subtitle><h2>{{item.email}}</h2></mat-card-subtitle>
+        <mat-card-subtitle><h2>{{item.telefono}}</h2></mat-card-subtitle>
+      </mat-card-header>
+      <mat-card-content>
+      </mat-card-content>
+      <mat-card-actions align="end">
+        <button mat-fab extended>
+          <mat-icon>persona</mat-icon>
+          <span [routerLink]="['/professional/' + item._id]">See Profile</span>
+        </button>
+      </mat-card-actions>
+    </mat-card>
+  </div>
 </div>

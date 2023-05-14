@@ -35,7 +35,7 @@ router.get('/', controller.getProfessional);
  *      200:
  *        description: nuevo profesional creado
  */
-router.post('/', controller.createProfessional);
+router.post('/', express.json(), controller.createProfessional);
 
 /**
  * @swagger
