@@ -35,9 +35,12 @@ export class NavComponent{
       if(user){
         this.loginService.login(user.idToken, this.loginService.userType).subscribe(response => {
           this.tokenService.setToken(response.token)
-          this.router.navigate([this.loginService.userType , 'profile', this.userId])
+          this.loginService.setUserEmail(user.email)
+          //this.router.navigate([this.loginService.userType , 'profile', this.userId])
         })
-    
+      }
+      
+      console.log('hey',this.loginService.userType)
         if(this.loginService.userType == 'tutor')
         {
           console.log('tutor profile')
@@ -46,9 +49,9 @@ export class NavComponent{
             let p = response.tutor;
             for (const key in p) {
               if (p.hasOwnProperty(key)) {
-                console.log(p[key])
-                console.log(user.email)
-                if(p[key].email == user.email){
+                console.log(p[key].email)
+                console.log(this.loginService.userEmail)
+                if(p[key].email == this.loginService.userEmail){
                   //console.log(p[key]._id)
                   this.userId = p[key]._id
                   console.log(this.userId)
@@ -72,18 +75,19 @@ export class NavComponent{
             for (const key in p) {
               if (p.hasOwnProperty(key)) {
                 //console.log(p[key])
-                //console.log(user.email)
-                if(p[key].email == user.email){
+                //console.log(this.loginService.userEmail)
+                if(p[key].email == this.loginService.userEmail){
                   this.userId = p[key]._id
                   this.loginService.setUserId(p[key]._id)
                   
+                  let prof = { login: true }
+                  //console.log(this.userId)
+                  this.profService.updateProfessional(prof, p[key]._id);
+                  this.router.navigate([this.loginService.userType , 'profile', p[key]._id])
                 }
               }
             }
-            let prof = { login: true }
-            //console.log(this.userId)
-            this.profService.updateProfessional(prof, this.userId);
-            this.router.navigate([this.loginService.userType , 'profile', this.userId])
+            
           });       
         }
         else if(this.loginService.userType == 'patient')
@@ -94,7 +98,7 @@ export class NavComponent{
             let p = response.patient;
             for (const key in p) {
               if (p.hasOwnProperty(key)) {
-                if(p[key].email == user.email){
+                if(p[key].email == this.loginService.userEmail){
                   this.userId = p[key]._id
                   this.loginService.setUserId(p[key]._id)
                   console.log(p[key])
@@ -108,8 +112,8 @@ export class NavComponent{
             this.router.navigate([this.loginService.userType , 'profile', this.userId])
           });       
         }
-      }
-    });
+      });
+    
   }
 
   logOut() {

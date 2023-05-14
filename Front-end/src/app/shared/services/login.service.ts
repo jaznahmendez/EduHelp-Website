@@ -23,13 +23,14 @@ export class LoginService {
   {
     this.userId = id
   }
+
+  setUserEmail(email: string)
+  {
+    this.userEmail = email
+  }
   
   login(idToken: string, userType: string): Observable<any> {
-    let headers = new HttpHeaders({'Content-Type': 'application/json'})
-    let options = {
-      headers: headers
-    }
-    return this.httpClient.post('http://localhost:3000/login/' + userType, { googleToken: idToken}, options);
+    return this.httpClient.post('http://localhost:3000/login/' + userType, { googleToken: idToken});
   }
 
 }
