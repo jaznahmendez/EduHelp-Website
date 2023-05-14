@@ -33,6 +33,8 @@ import { MatInputModule } from '@angular/material/input';
 import {MatButtonToggleModule} from '@angular/material/button-toggle';
 import {MatTooltipModule} from '@angular/material/tooltip';
 
+import { FullCalendarModule } from '@fullcalendar/angular';
+
 import { DetalleProfessionalComponent } from './pages/detalle-professional/detalle-professional.component';
 import { ProfileComponent } from './pages/professional/profile/profile.component';
 import { PprofileComponent } from './pages/patient/pprofile/pprofile.component';
@@ -41,6 +43,7 @@ import { DetalleTutorComponent } from './pages/detalle-tutor/detalle-tutor.compo
 import { TProfileComponent } from './pages/tutor/tprofile/tprofile.component';
 import { DetalleAdminComponent } from './pages/detalle-admin/detalle-admin.component';
 import { AProfileComponent } from './pages/admin/aprofile/aprofile.component';
+import { CalendarComponent } from './pages/calendar/calendar.component';
 
 
 @NgModule({
@@ -60,7 +63,8 @@ import { AProfileComponent } from './pages/admin/aprofile/aprofile.component';
     DetalleTutorComponent,
     TProfileComponent,
     DetalleAdminComponent,
-    AProfileComponent
+    AProfileComponent,
+    CalendarComponent
   ],
   imports: [
     BrowserModule,
@@ -84,15 +88,8 @@ import { AProfileComponent } from './pages/admin/aprofile/aprofile.component';
     MatInputModule,
     MatButtonToggleModule,
     MatTooltipModule,
-    DetalleProfessionalComponent,
-    ProfileComponent,
-    PprofileComponent,
-    DetallesPatientComponent,
-    DetalleTutorComponent,
-    TProfileComponent,
-    DetalleAdminComponent,
-    AProfileComponent,
-    HttpClientModule
+    HttpClientModule,
+    FullCalendarModule
   ],
   providers: [],
   bootstrap: [AppComponent]

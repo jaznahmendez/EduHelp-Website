@@ -18,6 +18,7 @@ import { DetalleAdminComponent } from './pages/detalle-admin/detalle-admin.compo
 import { AProfileComponent } from './pages/admin/aprofile/aprofile.component';
 
 import { HomeComponent } from './pages/home/home.component';
+import { CalendarComponent } from './pages/calendar/calendar.component';
 
 const routes: Routes = [
   {path: '', component: HomeComponent},
@@ -37,6 +38,8 @@ const routes: Routes = [
   {path: 'admin', component: AdminComponent},
   {path: 'admin/:id', component: DetalleAdminComponent},
   {path: 'admin/profile/:id', component: AProfileComponent},
+
+  {path: 'calendar', component: CalendarComponent}
 ];
 
 @NgModule({
