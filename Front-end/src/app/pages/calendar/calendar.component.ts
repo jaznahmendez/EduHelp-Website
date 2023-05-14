@@ -15,6 +15,8 @@ import { TokenService } from 'src/app/shared/services/token.service';
 export class CalendarComponent implements OnInit {
 
   private accessToken : string | null;
+  private calendarObj : any;
+  private events: Array<any> = [];
 
   constructor(private authService: SocialAuthService, private httpClient: HttpClient, private tokenService: TokenService) {
     this.accessToken = '';
@@ -37,27 +39,29 @@ export class CalendarComponent implements OnInit {
       .get('https://www.googleapis.com/calendar/v3/calendars/primary/events', {
         headers: { Authorization: `Bearer ${this.accessToken}` },
       })
-      .subscribe((events) => {
-        alert('Look at your console');
-        console.log('events', events);
+      .subscribe((res) => {
+        //console.log('events', res);
+        this.calendarObj = res;
+        for(let i = 0; i < this.calendarObj.items.length; i++){
+            //console.log(this.calendarObj.items[i]);
+            this.events.push({
+              title: this.calendarObj.items[i].summary,
+              start: this.calendarObj.items[i].start.date == undefined ? this.calendarObj.items[i].start.dateTime : this.calendarObj.items[i].start.date,
+              end: this.calendarObj.items[i].end.date  == undefined ? this.calendarObj.items[i].end.dateTime : this.calendarObj.items[i].end.date
+            });
+        }
+        console.log(this.events);
+        this.calendarOptions.events = this.events;
       });
   }
 
   calendarOptions: CalendarOptions = {
     initialView: 'dayGridMonth',
-    plugins: [dayGridPlugin, timegrid, interaction],
-    dateClick: this.handleDateClick.bind(this), //  
-    events: [
-      { title: 'event 1', date: new Date()}, 
-      { title: 'event 2', date: '2023-05-27' }
-    ]
+    plugins: [dayGridPlugin, timegrid, interaction], //  
+    events: [{}]
   };
 
-  handleDateClick(arg: any) {
-    console.log('click');
-  }
-
-  printEvent(){
-    console.log('yeah');
+  printEvent(arg: any){
+    console.log(arg);
   }
 }
