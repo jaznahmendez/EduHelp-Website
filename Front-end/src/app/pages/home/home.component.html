@@ -88,9 +88,9 @@
                       <div>
                         <label>Login as a:</label><br>
                         <mat-radio-group formControlName="user" required>
-                          <mat-radio-button (click)="setUser()" value="professional">Professional</mat-radio-button><br>
-                          <mat-radio-button value="tutor">Tutor</mat-radio-button><br>
-                          <mat-radio-button value="patient">Patient</mat-radio-button><br>
+                          <mat-radio-button (click)="setUser('professional')" value="professional">Professional</mat-radio-button><br>
+                          <mat-radio-button (click)="setUser('tutor')" value="tutor">Tutor</mat-radio-button><br>
+                          <mat-radio-button (click)="setUser('patient')" value="patient">Patient</mat-radio-button><br>
                         </mat-radio-group>
                         <p>{{userState}}</p>
                       </div>

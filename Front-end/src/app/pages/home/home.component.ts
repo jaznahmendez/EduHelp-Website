@@ -55,6 +55,8 @@ export class HomeComponent {
       user: ['', Validators.required],
     });
 
+    this.userState = this.LoginForm.value.user;
+
   }
 
   fontStyleControl = "no";
@@ -66,11 +68,12 @@ export class HomeComponent {
 
   credenciales: any = { email: '', password: '' };
 
-  setUser(){
-    console.log(this.LoginForm);
-    this.user = this.LoginForm.value.user;
+  setUser(value: string){
+    this.userState = value;
+    this.loginService.setUserType(value);
+    this.loginService.userType = value; 
   }
-  
+
   login(){
     this.loginService.setUserType(this.LoginForm.value.user)
     console.log(this.LoginForm);
