@@ -83,6 +83,7 @@ import { LoginComponent } from './pages/login/login.component';
   ],
   imports: [
     BrowserModule,
+    FullCalendarModule,
     AppRoutingModule,
     BrowserAnimationsModule,
     MatCommonModule,
@@ -103,11 +104,9 @@ import { LoginComponent } from './pages/login/login.component';
     MatButtonToggleModule,
     MatTooltipModule,
     HttpClientModule,
-    FullCalendarModule,
     MatDialogModule,
     SocialLoginModule,
     GoogleSigninButtonModule
-
   ],
   providers: [
     {
