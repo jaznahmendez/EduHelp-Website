@@ -1,0 +1,62 @@
+<h1 mat-dialog-title>Create New Patient Profile</h1>
+<mat-stepper>
+    <mat-step [stepControl]="firstFormGroup">
+      <form [formGroup]="firstFormGroup">
+        <ng-template matStepLabel>Personal Info</ng-template>
+        <mat-form-field appearance="fill">
+          <mat-label>Full Name</mat-label>
+          <input matInput placeholder="First name, Last name" formControlName="name" required>
+        </mat-form-field><br>
+        <mat-form-field appearance="fill">
+            <mat-label>Age</mat-label>
+            <input type="number" matInput formControlName="age" required>
+        </mat-form-field><br>
+        <div>
+            <mat-radio-group formControlName="gender" required>
+                <mat-radio-button value="Female">Female</mat-radio-button>
+                <mat-radio-button value="Male">Male</mat-radio-button>
+                <mat-radio-button value="Other">Other</mat-radio-button>
+            </mat-radio-group>
+        </div><br>
+        <div>
+            <button mat-raised-button color="accent" [disabled]="this.firstFormGroup.status == 'INVALID'" matStepperNext>Next</button>
+        </div>
+      </form>
+    </mat-step>
+    <mat-step [stepControl]="secondFormGroup">
+        <form [formGroup]="secondFormGroup">
+            <ng-template matStepLabel>Account Information</ng-template>
+            <mat-form-field appearance="fill">
+              <mat-label>Email</mat-label>
+              <input matInput formControlName="email" placeholder="Enter a valid email address" required>
+            </mat-form-field><br>
+            <mat-form-field appearance="fill">
+              <mat-label>Password</mat-label>
+              <input matInput [type]="hide ? 'password' : 'text'" formControlName="password">
+              <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
+                <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+              </button>
+            </mat-form-field>
+            <div>
+              <div >
+                <button mat-raised-button matStepperPrevious color="warn">Back</button>
+                <button class="nxt-btn" [disabled]="this.secondFormGroup.status == 'INVALID'" mat-raised-button matStepperNext color="accent">Next</button>
+              </div>
+            </div>
+          </form>
+    </mat-step>
+    <mat-step>
+      <ng-template matStepLabel>Almost there...</ng-template>
+      <form [formGroup]="thirdFormGroup"> 
+        <label>Could you please provide more information about who they are, how they develop<br> in their surroundings, and what you believe are their main issues?</label>
+        <mat-form-field class="full-width">
+            <mat-label>*You can skip this section</mat-label>
+            <textarea matInput formControlName="tutorDescription"></textarea>
+        </mat-form-field>
+      </form>
+      <div>
+        <button mat-raised-button matStepperPrevious color="warn">Back</button>
+        <button mat-button (click)="createPatient()" [disabled]="this.secondFormGroup.status == 'INVALID' &&  this.firstFormGroup.status == 'INVALID'">Create Account</button>
+      </div>
+    </mat-step>
+  </mat-stepper>

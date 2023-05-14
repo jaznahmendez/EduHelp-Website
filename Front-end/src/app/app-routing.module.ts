@@ -20,6 +20,7 @@ import { AProfileComponent } from './pages/admin/aprofile/aprofile.component';
 import { HomeComponent } from './pages/home/home.component';
 import { CalendarComponent } from './pages/calendar/calendar.component';
 
+
 const routes: Routes = [
   {path: '', component: HomeComponent},
 
@@ -47,5 +48,5 @@ const routes: Routes = [
   exports: [RouterModule]
 })
 
-export class AppRoutingModule { }
+export class AppRoutingModule{}
 

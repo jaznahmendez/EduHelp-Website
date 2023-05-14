@@ -3,7 +3,64 @@ const patient = require('../models/patient');
 const professional = require('../models/professional');
 const { response } = require('express');
 
+const { OAuth2Client } = require('google-auth-library');
+
+require('dotenv').config();
+
+const googleClient = new OAuth2Client(process.env.GOOGLE_ID)
+
 class controladorTutor{
+    static googleLogin(req, res) {
+        
+        const idToken = req.body.googleToken
+        googleClient.verifyIdToken({ idToken: idToken }).then(response => {
+            const user = response.getPayload();
+            let a = {}
+            tutor.find()
+            .then(response => {
+                let exists = false;
+                for(let i = 0; i < response.length; i++)
+                {
+                    let t = response[i]
+                    if(t.email == user.email)
+                    {
+                        
+                        exists = true
+                        a = t;
+                    }
+                }
+                //console.log(exists == false)
+                if(exists == false)
+                {
+                    let temp = {
+                        name: user.name,
+                        email: user.email,
+                        token: idToken
+                    }
+                    //console.log(temp)
+                    a = temp;
+                    //console.log('before save')
+                    tutor(temp).save()
+                        .then(tutor =>{
+                            console.log(tutor)
+                            res.status(200).send(tutor)    
+                        })
+                        .catch(tutor =>{
+                            res.status(400).send('not saving correctly')    
+                        })   
+                }
+                //console.log(exists)
+                res.send(a)
+            })
+            .catch(error => {
+                res.status(400).send()
+            })
+
+            res.send(a)
+        }).catch(err => {
+            res.status(401).send({msg: 'token inválido'})
+        })
+    }
     static findTutor (req, res){
         let id = req.params.id;
         tutor.findById(id)
@@ -17,13 +74,15 @@ class controladorTutor{
     }
 
     static crearTutor(req, res){
-        let obj = {
+        console.log('entra a tutor')
+        /*let obj = {
             name: req.body.name,
-            email: req.body.password,
+            email: req.body.email,
             password: req.body.password,
             telefono: req.body.telefono
-        }
-        tutor(obj).save().then(tutor => {
+        }*/
+        console.log(req.body)
+        tutor(req.body).save().then(tutor => {
                 console.log("Document inserted successfully");
                 res.status(200).send(tutor);
             }).catch(err => {
@@ -32,14 +91,37 @@ class controladorTutor{
             });
     }
 
+    static getTutorByEmail(req, res)
+    {
+        let email = req.params.email
+        let a = {}
+        tutor.find()
+        .then(response => {
+            for(let i = 0; i < response.length; i++)
+            {
+                let t = response[i]
+                if(t.email == email) a = t; 
+            }
+            
+            res.send(a)
+        })
+        .catch(error => {
+            res.status(400).send()
+        })
+    }
+
     static updateTutor(req, res){
-        let obj = {
+        
+        /*let obj = {
             name: req.body.name,
             email: req.body.password,
             password: req.body.password,
             telefono: req.body.telefono
-        }
-        tutor.findByIdAndUpdate(req.param.id, obj).then(tutor => {
+        }*/
+        //console.log("ñam ña,", req.body);
+        console.log(req.params.id)
+        tutor.findByIdAndUpdate(req.params.id, req.body).then(tutor => {
+                console.log(tutor)
                 res.status(200).send(tutor);
             }).catch(err => {
                 console.error("Failed to update the document");
@@ -125,20 +207,10 @@ class controladorTutor{
 
     static borrarPaciente(req, res){
         let id = req.params.id;
+        console.log(id)
         patient.findByIdAndDelete(id)
             .then(patient => {
-
                 let tutorId = patient.tutorId;
-                tutor.findById(tutorId)
-                    .then(tutor => {
-                        tutor.hijos = tutor.hijos.filter(e => e !== id)
-                        res.send(tutor);
-                    })
-                    .catch(err => {
-                        console.log('error');
-                        res.send('No se encuentran tutores con ese ID ' + err);
-                    });
-
                 res.send(patient);
             })
             .catch(err => {

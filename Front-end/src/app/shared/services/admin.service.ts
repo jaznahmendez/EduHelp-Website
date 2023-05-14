@@ -9,7 +9,8 @@ export class AdminService {
   adminSeleccionado: Admin = {
     name: '',
     password: '',
-    telefono: ''
+    telefono: '',
+    email: ''
   }
   apiUrl: string = 'http://localhost:3000/'
   id: string = ''
@@ -49,7 +50,7 @@ export class AdminService {
     let options = {
       headers: headers
     }
-    return this.httpClient.put(this.apiUrl + 'admin/:id' + id, admin, options)
+    return this.httpClient.put(this.apiUrl + 'admin/' + id, admin, options).subscribe()
   }
 
   deleteAdmin(id: string)

@@ -2,6 +2,8 @@ const express = require('express');
 const router = express.Router();
 const controller = require('../controllers/tutor');
 
+router.get('email/:email', controller.getTutorByEmail);
+
 router.put('/:id', express.json(), controller.updateTutor);
 
 /**

@@ -1,6 +1,11 @@
 import { Component, OnInit } from '@angular/core';
+import { Patient } from 'src/app/shared/interfaces/patient';
 import { Professional } from 'src/app/shared/interfaces/professional'
+import { PatientService } from 'src/app/shared/services/patient.service';
 import { ProfessionalService } from 'src/app/shared/services/professional.service'
+import { ActivatedRoute } from '@angular/router';
+import { MatDialog } from '@angular/material/dialog';
+import { EditProfDialogComponent } from './edit-prof-dialog/edit-prof-dialog.component';
 
 @Component({
   selector: 'app-profile',
@@ -9,46 +14,79 @@ import { ProfessionalService } from 'src/app/shared/services/professional.servic
 })
 export class ProfileComponent implements OnInit {
   professional: any = {
-    name: '',
-    profession: '',
-    email: '',
-    password: '',
-    telefono: '',
-    token: '',
-    location: '',
-    link: '',
-    active: false,
-    patients: ['']
   }
-  idProf: String = ''
+  idProf: string = ''
 
-  constructor(private professionalService: ProfessionalService) {}
+  patients: any = []
+  pArray: any = []
+  patientsProf: any = []
+  imageLinkCp : any =  [];
+
+  constructor(private professionalService: ProfessionalService, private patientService: PatientService,  private route: ActivatedRoute, public dialog: MatDialog) {}
 
   ngOnInit(): void {
-    this.professionalService.setProfessionalProfile('6441c0507fc61ff5ae1e112e')
+    this.route.params.subscribe(params => {
+      this.idProf = params['id'];
+      //console.log(id); // will output "123"
+    });
+    this.professionalService.setProfessionalProfile(this.idProf)
     this.professionalService.getProfessional().subscribe((response: any) => {
       this.professional = response
     });
+
+    this.patientService.getPatients().subscribe((response: any) => {
+      this.patients= response.patient;
+      
+      for(let i = 0; i < this.patients.length; i++)
+      {
+        for(let j = 0; j < this.patients[i].currentProffesionals.length; j++)
+        {
+          if(this.patients[i].currentProffesionals[j] == this.idProf)
+          {
+            //console.log(this.patients)
+            this.patientsProf.push(this.patients[i])
+            this.imageLinkCp.push("url('https://randomuser.me/api/portraits/women/" + i + ".jpg')");
+          }
+        }
+      }
+
+      console.log(this.patientsProf)
+      
+    });
   }
 
-  updateProfessional(id: string) {
-    let obj = {
-      name: '',
-      profession: '',
-      email: '',
-      password: '',
-      telefono: '',
-      token: '',
-      location: '',
-      link: '',
-      active: false,
-      patients: ['']
-    }
+  updateProfessional(id: string, obj: any) {
     this.professionalService.updateProfessional(obj, id);
   }
 
   deleteProfessional(id: string) {
     this.professionalService.deleteProfessional(id);
   }
+
+  changeProfessionalPassword(id: string, password: string){
+    this.professionalService.id = id;
+    this.professionalService.getProfessional().subscribe((response: any) => {
+        response.password = password;
+        this.professionalService.updateProfessional(response, id);
+      
+    });
+  }
   
+  openEditDialog(): void {
+    const dialogRef = this.dialog.open(EditProfDialogComponent, {
+      data: { ...this.professional }
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      console.log('The dialog was closed');
+      console.log(result);
+      if(result){
+        console.log('res: ',result);
+        console.log('id: ',this.professional._id);
+        this.professionalService.updateProfessional(result, this.professional._id);
+        this.professional = result;
+      }
+    });
+  }
+
 }
