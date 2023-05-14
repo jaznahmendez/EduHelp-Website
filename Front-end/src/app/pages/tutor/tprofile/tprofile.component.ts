@@ -48,7 +48,7 @@ export class TProfileComponent implements OnInit {
     this.route.params.subscribe(params => {
       this.routeId = params['id'];
     });
-
+    
     this.tutorService.setTutorProfile(this.routeId); // id sacado con token, de mientras es el de Carlos
 
     this.tutorService.getTutor().subscribe((response: any) => {
