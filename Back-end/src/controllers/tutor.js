@@ -14,6 +14,7 @@ class controladorTutor{
         
         const idToken = req.body.googleToken
         googleClient.verifyIdToken({ idToken: idToken }).then(response => {
+            console.log(idToken);
             const user = response.getPayload();
             let a = {}
             tutor.find()

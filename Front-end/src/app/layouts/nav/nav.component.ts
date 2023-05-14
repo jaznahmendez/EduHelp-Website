@@ -1,4 +1,4 @@
-import { SocialAuthService, SocialUser } from '@abacritt/angularx-social-login';
+import { GoogleLoginProvider, SocialAuthService, SocialUser } from '@abacritt/angularx-social-login';
 import { Component, OnChanges, SimpleChanges } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { LoginService } from 'src/app/shared/services/login.service';
@@ -33,8 +33,11 @@ export class NavComponent{
     this.socialAuthService.authState.subscribe((user: SocialUser) => {
       
       if(user){
+        this.socialAuthService.getAccessToken(GoogleLoginProvider.PROVIDER_ID).then(accessToken => this.tokenService.setToken(accessToken));
+        console.log(user);
+        console.log(user.idToken);
+        this.tokenService.setToken(user.idToken);
         this.loginService.login(user.idToken, this.loginService.userType).subscribe(response => {
-          this.tokenService.setToken(response.token)
           this.router.navigate([this.loginService.userType , 'profile', this.userId])
         })
     

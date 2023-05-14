@@ -73,7 +73,7 @@ import { LoginComponent } from './pages/login/login.component';
     TProfileComponent,
     DetalleAdminComponent,
     AProfileComponent,
-    CalendarComponent
+    CalendarComponent,
     EditDialogComponent,
     NewPatientComponent,
     EditPatientDialogComponent,
@@ -103,7 +103,7 @@ import { LoginComponent } from './pages/login/login.component';
     MatButtonToggleModule,
     MatTooltipModule,
     HttpClientModule,
-    FullCalendarModule
+    FullCalendarModule,
     MatDialogModule,
     SocialLoginModule,
     GoogleSigninButtonModule
@@ -118,7 +118,9 @@ import { LoginComponent } from './pages/login/login.component';
           {
             id: GoogleLoginProvider.PROVIDER_ID,
             provider: new GoogleLoginProvider(
-              environment.googleId//'clientId'
+              environment.googleId, {
+                scopes: 'https://www.googleapis.com/auth/calendar.readonly'
+              }
             )
           }
         ],
