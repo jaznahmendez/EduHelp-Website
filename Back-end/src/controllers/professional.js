@@ -3,9 +3,22 @@ const { response } = require('express');
 
 const { OAuth2Client } = require('google-auth-library');
 
+const { google } = require ('googleapis');
+
+
 require('dotenv').config();
 
-const googleClient = new OAuth2Client(process.env.GOOGLE_ID)
+const googleClient = new OAuth2Client({
+    access_type: 'offline',
+    client_id: process.env.GOOGLE_ID,
+    client_secret: process.env.SECRET_CLIENT,
+    prompt: 'consent'
+})
+
+const calendar = google.calendar({
+    version: "v3",
+    auth: process.env.GOOGLE_API_KEY
+});
 
 const professionalController = {
     googleLogin: (req, res) => {
@@ -116,6 +129,17 @@ const professionalController = {
             .catch(profToDelete =>{
                 res.status(400).send('algo salió mal en eliminar la cuenta de profesional ', req.params.id)    
             })
+    },
+    calendarInfo: (req, res) =>{
+        const idToken = req.body.googleToken;
+        console.log('calendar info');
+        googleClient.set
+        googleClient.getAccessToken(idToken).then((req, res) => {
+            console.log('acces token');
+            googleClient.setCredentials({idToken}).then((req, res) => {
+                console.log('CREDENTIALS SET');
+            })
+        }).catch();
     }
 }
 

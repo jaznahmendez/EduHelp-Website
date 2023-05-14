@@ -34,6 +34,8 @@ import {MatButtonToggleModule} from '@angular/material/button-toggle';
 import {MatTooltipModule} from '@angular/material/tooltip';
 import {MatDialogModule} from '@angular/material/dialog';
 
+import { FullCalendarModule } from '@fullcalendar/angular';
+
 import { DetalleProfessionalComponent } from './pages/detalle-professional/detalle-professional.component';
 import { ProfileComponent } from './pages/professional/profile/profile.component';
 import { PprofileComponent } from './pages/patient/pprofile/pprofile.component';
@@ -42,6 +44,7 @@ import { DetalleTutorComponent } from './pages/detalle-tutor/detalle-tutor.compo
 import { TProfileComponent } from './pages/tutor/tprofile/tprofile.component';
 import { DetalleAdminComponent } from './pages/detalle-admin/detalle-admin.component';
 import { AProfileComponent } from './pages/admin/aprofile/aprofile.component';
+import { CalendarComponent } from './pages/calendar/calendar.component';
 import { EditDialogComponent } from './pages/tutor/tprofile/edit-dialog/edit-dialog.component';
 import { NewPatientComponent } from './pages/tutor/tprofile/new-patient/new-patient.component';
 import { EditPatientDialogComponent } from './pages/patient/pprofile/edit-patient-dialog/edit-patient-dialog.component';
@@ -70,6 +73,7 @@ import { LoginComponent } from './pages/login/login.component';
     TProfileComponent,
     DetalleAdminComponent,
     AProfileComponent,
+    CalendarComponent,
     EditDialogComponent,
     NewPatientComponent,
     EditPatientDialogComponent,
@@ -99,6 +103,7 @@ import { LoginComponent } from './pages/login/login.component';
     MatButtonToggleModule,
     MatTooltipModule,
     HttpClientModule,
+    FullCalendarModule,
     MatDialogModule,
     SocialLoginModule,
     GoogleSigninButtonModule
@@ -113,7 +118,9 @@ import { LoginComponent } from './pages/login/login.component';
           {
             id: GoogleLoginProvider.PROVIDER_ID,
             provider: new GoogleLoginProvider(
-              environment.googleId//'clientId'
+              environment.googleId, {
+                scopes: 'https://www.googleapis.com/auth/calendar.readonly'
+              }
             )
           }
         ],

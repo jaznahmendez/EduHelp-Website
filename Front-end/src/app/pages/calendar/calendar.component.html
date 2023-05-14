@@ -1,0 +1,9 @@
+<div class="cont">
+    <full-calendar [options]="calendarOptions">
+        <ng-template #eventContent let-arg>
+            <div class="event" (click)="getGoogleCalendarData()">
+                <b>{{ arg.event.title }}</b>
+            </div>
+          </ng-template>
+    </full-calendar>
+</div>
