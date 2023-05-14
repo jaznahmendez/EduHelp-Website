@@ -34,10 +34,11 @@ export class NavComponent{
       
       if(user){
         this.socialAuthService.getAccessToken(GoogleLoginProvider.PROVIDER_ID).then(accessToken => this.tokenService.setToken(accessToken));
+        this.loginService.setUserEmail(user.email);
         console.log(this.tokenService.getToken());
         //this.tokenService.setToken(user.idToken);
         this.loginService.login(user.idToken, this.loginService.userType).subscribe(response => {
-          this.router.navigate([this.loginService.userType , 'profile', this.userId])
+          //this.router.navigate([this.loginService.userType , 'profile', this.userId])
         })
       }
       
@@ -53,9 +54,9 @@ export class NavComponent{
                 console.log(p[key].email)
                 console.log(this.loginService.userEmail)
                 if(p[key].email == this.loginService.userEmail){
-                  //console.log(p[key]._id)
+                  //console.log('pkey',p[key]._id)
                   this.userId = p[key]._id
-                  console.log(this.userId)
+                  //console.log('userid',this.userId)
                   this.loginService.setUserId(p[key]._id)
                   console.log('from login', this.loginService.userId)
                 }
@@ -64,6 +65,7 @@ export class NavComponent{
             let tutor = { login: true }
             //console.log(this.userId)
             this.tutorService.updateTutor(tutor, this.userId);
+            this.loginService.setUserId(this.userId)
             this.router.navigate([this.loginService.userType , 'profile', this.userId])
           });       
         }
@@ -114,7 +116,9 @@ export class NavComponent{
           });       
         }
       });
-    
+
+      console.log('afterlogin',this.userId)
+      console.log('afterlogin',this.loginService.userId)
   }
 
   logOut() {
