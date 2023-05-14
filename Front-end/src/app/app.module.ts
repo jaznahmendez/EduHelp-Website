@@ -118,7 +118,7 @@ import { LoginComponent } from './pages/login/login.component';
             id: GoogleLoginProvider.PROVIDER_ID,
             provider: new GoogleLoginProvider(
               environment.googleId, {
-                scopes: 'https://www.googleapis.com/auth/calendar.readonly'
+                scopes: 'https://www.googleapis.com/auth/calendar'
               }
             )
           }

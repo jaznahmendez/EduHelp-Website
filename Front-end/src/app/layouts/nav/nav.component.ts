@@ -34,10 +34,9 @@ export class NavComponent{
       
       if(user){
         this.socialAuthService.getAccessToken(GoogleLoginProvider.PROVIDER_ID).then(accessToken => this.tokenService.setToken(accessToken));
-        console.log(user);
-        console.log(user.idToken);
-        this.tokenService.setToken(user.idToken);
         this.loginService.setUserEmail(user.email);
+        console.log(this.tokenService.getToken());
+        //this.tokenService.setToken(user.idToken);
         this.loginService.login(user.idToken, this.loginService.userType).subscribe(response => {
           //this.router.navigate([this.loginService.userType , 'profile', this.userId])
         })
