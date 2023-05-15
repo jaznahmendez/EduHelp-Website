@@ -53,6 +53,7 @@ export class NavComponent{
         //this.tokenService.setToken(user.idToken);
         this.loginService.setUserEmail(user.email);
         if(t=='professional' || t=='tutor'){
+          this.isTutor = true
           this.loginService.login(user.idToken, this.loginService.getUserType()).subscribe(response => {
             //this.router.navigate([this.loginService.userType , 'profile', this.userId])
             
