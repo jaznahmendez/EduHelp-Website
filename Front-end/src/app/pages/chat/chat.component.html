@@ -1,1 +1,12 @@
-<p>chat works!</p>
+<br><br><br>
+<div class="messages">
+    <div class="items">
+        <div *ngFor="let item of messages" [ngClass]="{'owned': item.owned}">
+        {{item.message}}
+        </div>
+    </div>
+    <div class="sending">
+        <input type="text" [(ngModel)]="texto">
+        <button (click)="enviarMensaje()">Enviar</button>
+    </div>
+</div>

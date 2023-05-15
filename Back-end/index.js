@@ -55,11 +55,11 @@ mongoose.connect(mongoUrl).then(() => {
     })
 
     io.on('connection', socket => {
-        io.emit('alguien ve un perfil');
+        io.emit('alguien se conectó');
         //console.log('se conectó alguien');
     
         socket.on('sendMessage', (data) => {
-            console.log(data)
+            //console.log(data)
             io.emit('newMessage', {message: data})
         })
     })

@@ -84,6 +84,6 @@ export class NavComponent{
   }
 
   displayNotifications(){
-    this.router.navigate(['chat']);
+    this.router.navigate(['notification']);
   }
 }

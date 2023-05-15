@@ -41,16 +41,6 @@ export class DetalleProfessionalComponent implements OnInit {
     private route: ActivatedRoute, private professionalService: ProfessionalService, private patientService: PatientService) {}
 
   ngOnInit(): void {
-    //console.log('holaaaa')
-    this.socket = io(environment.apiUrl)
-
-    this.socket.emit('sendMessage', this.loginService.getUserId())
-
-    this.socket.on('newMessage', (data: any) => {
-      console.log('alguien envió un mensaje', data)
-      //this.messages.push(data)
-    })
-
     this.route.params.subscribe(params => {
       this.id = params['id'];
     });
