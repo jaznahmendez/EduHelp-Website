@@ -2,6 +2,11 @@ const express = require('express');
 const router = express.Router();
 const controller = require('../controllers/professional');
 
+const file = require('./../middlewares/file')
+
+router.post('uploads/:id', controller.attachments);
+router.post('upload/:id', file.single('file'), controller.upload);
+
 /**
  * @swagger
  * /professional:

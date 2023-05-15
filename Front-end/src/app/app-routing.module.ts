@@ -22,31 +22,33 @@ import { CalendarComponent } from './pages/calendar/calendar.component';
 
 import { ChatComponent } from './pages/chat/chat.component';
 import { MyCalendarComponent } from './pages/calendar/my-calendar/my-calendar.component';
+import { AuthGuard } from './shared/guards/auth.guard'
 
 
 const routes: Routes = [
   {path: '', component: HomeComponent},
 
-  {path: 'professional', component: ProfessionalComponent},
-  {path: 'professional/:id', component: DetalleProfessionalComponent},
-  {path: 'professional/profile/:id', component: ProfileComponent},
+  {path: 'professional', component: ProfessionalComponent, canActivate: [AuthGuard] },
+  {path: 'professional/:id', component: DetalleProfessionalComponent, canActivate: [AuthGuard] },
+  {path: 'professional/profile/:id', component: ProfileComponent, canActivate: [AuthGuard] },
 
-  {path: 'patient', component: PatientComponent},
-  {path: 'patient/:id', component: DetallesPatientComponent},
-  {path: 'patient/profile/:id', component: PprofileComponent},
+  {path: 'patient', component: PatientComponent, canActivate: [AuthGuard] },
+  {path: 'patient/:id', component: DetallesPatientComponent, canActivate: [AuthGuard] },
+  {path: 'patient/profile/:id', component: PprofileComponent, canActivate: [AuthGuard] },
 
-  {path: 'tutor', component: TutorComponent},
-  {path: 'tutor/:id', component: DetalleTutorComponent},
-  {path: 'tutor/profile/:id', component: TProfileComponent},
+  {path: 'tutor', component: TutorComponent, canActivate: [AuthGuard] },
+  {path: 'tutor/:id', component: DetalleTutorComponent, canActivate: [AuthGuard] },
+  {path: 'tutor/profile/:id', component: TProfileComponent, canActivate: [AuthGuard] },
 
-  {path: 'admin', component: AdminComponent},
-  {path: 'admin/:id', component: DetalleAdminComponent},
-  {path: 'admin/profile/:id', component: AProfileComponent},
+  {path: 'admin', component: AdminComponent, canActivate: [AuthGuard] },
+  {path: 'admin/:id', component: DetalleAdminComponent, canActivate: [AuthGuard] },
+  {path: 'admin/profile/:id', component: AProfileComponent, canActivate: [AuthGuard] },
 
-  {path: 'calendar', component: CalendarComponent},
-  {path: 'mycalendar', component: MyCalendarComponent},
+  {path: 'calendar', component: CalendarComponent, canActivate: [AuthGuard] },
+  {path: 'mycalendar', component: MyCalendarComponent, canActivate: [AuthGuard] },
+  {path: 'calendar', component: CalendarComponent, canActivate: [AuthGuard] },
 
-  {path: 'notification', component: ChatComponent}
+  {path: 'chat', component: ChatComponent, canActivate: [AuthGuard] }
 ];
 
 @NgModule({

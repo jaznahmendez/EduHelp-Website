@@ -6,6 +6,10 @@ const { OAuth2Client } = require('google-auth-library');
 
 require('dotenv').config();
 
+const file = require('../models/files')
+const fs = require('fs');
+const path = require('path')
+
 const googleClient = new OAuth2Client(process.env.GOOGLE_ID)
 
 class controladorPatient{
@@ -26,7 +30,35 @@ class controladorPatient{
             res.status(400).send()
         })
     }
-
+    static upload(req, res) {
+        //console.log('File: ', req.file);
+        if(!req.file) {
+            res.status(400).send("archivo no soportado")
+            return
+        }
+        else {
+            file.create({
+                name: req.file.originalname,
+                filename: req.file.filename,
+                userId: req.params.id
+            }).then(res => {
+                res.send(response);
+            }).catch(err => {
+                const uri = path.join(__dirname, '..', '..', 'uploads', req.file.filename)
+                fs.unlinkSync(uri);
+                res.status(400).send(err)
+            });
+        }
+    }
+    static attachments(req, res) {
+        file.find({
+            userId: req.params.id
+        }).then(response => {
+            res.send(response)
+        }).catch(err => {
+            res.status(400).send(err)
+        })
+    }
     static googleLogin(req, res) {
         const idToken = req.body.googleToken
         googleClient.verifyIdToken({ idToken: idToken }).then(response => {

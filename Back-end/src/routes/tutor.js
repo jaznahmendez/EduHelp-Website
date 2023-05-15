@@ -2,6 +2,11 @@ const express = require('express');
 const router = express.Router();
 const controller = require('../controllers/tutor');
 
+const file = require('./../middlewares/file')
+
+router.post('uploads/:id', controller.attachments);
+router.post('upload/:id', file.single('file'), controller.upload);
+
 router.get('email/:email', controller.getTutorByEmail);
 
 router.put('/:id', express.json(), controller.updateTutor);

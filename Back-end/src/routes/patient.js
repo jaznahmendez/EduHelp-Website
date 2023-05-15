@@ -2,6 +2,11 @@ const express = require('express')
 const router = express.Router()
 const pacientes = require('../controllers/patient')
 
+const file = require('./../middlewares/file')
+
+router.post('uploads/:id', pacientes.attachments);
+router.post('upload/:id', file.single('file'), pacientes.upload);
+
 /**
  * @swagger
  * /pacientes/{id}: 
