@@ -13,8 +13,13 @@
         <mat-icon>edit</mat-icon>
         <span>Edit</span>
       </button>
+      <button mat-fab extended (click)="attach(fileInput)">
+        <mat-icon>edit</mat-icon>
+        <span>Foto</span>
+      </button>
     </mat-card-actions>
   </mat-card>
+  <input #fileInput type="file" (change)="selectFile($event)">
 </div>
 
 <div class="middle-div">

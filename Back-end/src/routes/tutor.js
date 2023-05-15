@@ -4,8 +4,8 @@ const controller = require('../controllers/tutor');
 
 const file = require('./../middlewares/file')
 
-router.post('uploads/:id', controller.attachments);
-router.post('upload/:id', file.single('file'), controller.upload);
+router.get('/uploads/:id', controller.attachments);
+router.post('/upload', file.single('file'), controller.upload);
 
 router.get('email/:email', controller.getTutorByEmail);
 
