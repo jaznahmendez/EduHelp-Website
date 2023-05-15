@@ -1,4 +1,4 @@
-<br><br><br>
+<br><br>
 <h1>Live Q & A</h1>
 <br>
 <div class="messages">
@@ -9,7 +9,7 @@
         </div>
     </div>
     <div class="sending">
-        <input type="text" [(ngModel)]="texto">
+        <input  (keyup.enter)="enviarMensaje()"  type="text" [(ngModel)]="texto">
         <button (click)="enviarMensaje()">Enviar</button>
     </div>
 </div>
