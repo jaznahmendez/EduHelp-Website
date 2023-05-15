@@ -14,11 +14,12 @@ class controladorTutor{
         
         const idToken = req.body.googleToken
         googleClient.verifyIdToken({ idToken: idToken }).then(response => {
+            //console.log(idToken);
+            let exists = false;
             const user = response.getPayload();
             let a = {}
             tutor.find()
             .then(response => {
-                let exists = false;
                 for(let i = 0; i < response.length; i++)
                 {
                     let t = response[i]
@@ -27,36 +28,26 @@ class controladorTutor{
                         
                         exists = true
                         a = t;
+                        res.send(a)
                     }
                 }
-                //console.log(exists == false)
-                if(exists == false)
-                {
-                    let temp = {
-                        name: user.name,
-                        email: user.email,
-                        token: idToken
-                    }
-                    //console.log(temp)
-                    a = temp;
-                    //console.log('before save')
-                    tutor(temp).save()
-                        .then(tutor =>{
-                            console.log(tutor)
-                            res.status(200).send(tutor)    
-                        })
-                        .catch(tutor =>{
-                            res.status(400).send('not saving correctly')    
-                        })   
-                }
-                //console.log(exists)
-                res.send(a)
-            })
-            .catch(error => {
-                res.status(400).send()
-            })
 
-            res.send(a)
+                if(exists == false)
+            {
+                let temp = {
+                    name: user.name,
+                    email: user.email,
+                    token: idToken,
+                    login: true
+                }
+                a = temp;
+                tutor(temp).save()
+                    .then(tutor =>{
+                        console.log(tutor)
+                       res.status(200).send(tutor)    
+                    })  
+            }
+            })
         }).catch(err => {
             res.status(401).send({msg: 'token inválido'})
         })

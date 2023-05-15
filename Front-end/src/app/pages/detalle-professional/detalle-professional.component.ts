@@ -3,7 +3,11 @@ import { Professional } from 'src/app/shared/interfaces/professional'
 import { ProfessionalService } from 'src/app/shared/services/professional.service'
 import { Patient } from 'src/app/shared/interfaces/patient'
 import { PatientService } from 'src/app/shared/services/patient.service'
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
+
+import { io } from 'socket.io-client';
+import { environment } from 'src/app/environments/environment'
+import { LoginService } from 'src/app/shared/services/login.service';
 
 @Component({
   selector: 'app-detalle-professional',
@@ -28,12 +32,25 @@ export class DetalleProfessionalComponent implements OnInit {
   patientsProf: any = []
   id: string = ''
 
+  socket: any;
+
   @Output() onSelectedPatient: EventEmitter<any> = new EventEmitter();
 
-  constructor(private route: ActivatedRoute, private professionalService: ProfessionalService, private patientService: PatientService) {}
+  constructor(
+    private router: Router, private loginService: LoginService,
+    private route: ActivatedRoute, private professionalService: ProfessionalService, private patientService: PatientService) {}
 
   ngOnInit(): void {
     //console.log('holaaaa')
+    this.socket = io(environment.apiUrl)
+
+    this.socket.emit('sendMessage', this.loginService.getUserId())
+
+    this.socket.on('newMessage', (data: any) => {
+      console.log('alguien envió un mensaje', data)
+      //this.messages.push(data)
+    })
+
     this.route.params.subscribe(params => {
       this.id = params['id'];
     });

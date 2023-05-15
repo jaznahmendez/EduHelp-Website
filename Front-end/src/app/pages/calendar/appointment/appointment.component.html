@@ -1,0 +1,28 @@
+<h1 mat-dialog-title>Make an Appointment</h1>
+<div mat-dialog-content>
+    <form [formGroup]="firstFormGroup">
+        <mat-form-field appearance="fill">
+            <mat-label>End Date</mat-label>
+            <input matInput type="datetime-local" formControlName="endDate" required>
+        </mat-form-field>
+        <mat-form-field appearance="fill">
+            <mat-label>End Date</mat-label>
+            <input matInput type="datetime-local" formControlName="endDate" required>
+          </mat-form-field>
+        <mat-form-field appearance="fill">
+          <mat-label>Patient Email</mat-label>
+          <input matInput type="email" formControlName="emailPatient" required>
+        </mat-form-field>
+        <mat-form-field appearance="fill">
+            <mat-label>Tutor Email</mat-label>
+            <input matInput type="email" formControlName="emailTutor" required>
+        </mat-form-field>
+    </form>
+</div>
+<div mat-dialog-actions>
+  <button mat-button (click)="onNoClick()">Cancel</button>
+  <button mat-button (click)="createAppointment()" [mat-dialog-close]="data" cdkFocusInitial>Ok</button>
+</div>
+
+
+

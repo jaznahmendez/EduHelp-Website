@@ -18,6 +18,9 @@ import { DetalleAdminComponent } from './pages/detalle-admin/detalle-admin.compo
 import { AProfileComponent } from './pages/admin/aprofile/aprofile.component';
 
 import { HomeComponent } from './pages/home/home.component';
+import { CalendarComponent } from './pages/calendar/calendar.component';
+
+import { ChatComponent } from './pages/chat/chat.component';
 
 
 const routes: Routes = [
@@ -38,6 +41,10 @@ const routes: Routes = [
   {path: 'admin', component: AdminComponent},
   {path: 'admin/:id', component: DetalleAdminComponent},
   {path: 'admin/profile/:id', component: AProfileComponent},
+
+  {path: 'calendar', component: CalendarComponent},
+
+  {path: 'notification', component: ChatComponent}
 ];
 
 @NgModule({

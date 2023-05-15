@@ -16,20 +16,34 @@ export class LoginService {
 
   setUserType(user: string)
   {
-    this.userType = user;
+    localStorage.setItem('userType', user);
   }
 
   setUserId(id: string)
   {
-    this.userId = id
+    //this.userId = id
+    console.log('saving to storage', id)
+    localStorage.setItem('userId', id);
+  }
+
+  getUserId(): string {
+    //console.log('from storage',localStorage.getItem('userId'))
+    return localStorage.getItem('userId') || '';
+  }
+
+  getUserType(): string {
+    return localStorage.getItem('userType') || '';
+  }
+
+  setUserEmail(email: string)
+  {
+    this.userEmail = email
   }
   
   login(idToken: string, userType: string): Observable<any> {
-    let headers = new HttpHeaders({'Content-Type': 'application/json'})
-    let options = {
-      headers: headers
-    }
-    return this.httpClient.post('http://localhost:3000/login/' + userType, { googleToken: idToken}, options);
+    return this.httpClient.post('http://localhost:3000/login/' + userType, { googleToken: idToken});
   }
+
+  
 
 }

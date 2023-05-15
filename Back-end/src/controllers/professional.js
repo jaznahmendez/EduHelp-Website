@@ -3,20 +3,33 @@ const { response } = require('express');
 
 const { OAuth2Client } = require('google-auth-library');
 
+const { google } = require ('googleapis');
+
+
 require('dotenv').config();
 
-const googleClient = new OAuth2Client(process.env.GOOGLE_ID)
+const googleClient = new OAuth2Client({
+    access_type: 'offline',
+    client_id: process.env.GOOGLE_ID,
+    client_secret: process.env.SECRET_CLIENT,
+    prompt: 'consent'
+})
+
+const calendar = google.calendar({
+    version: "v3",
+    auth: process.env.GOOGLE_API_KEY
+});
 
 const professionalController = {
     googleLogin: (req, res) => {
         const idToken = req.body.googleToken
         googleClient.verifyIdToken({ idToken: idToken }).then(response => {
+            //console.log(idToken);
+            let exists = false;
             const user = response.getPayload();
             let a = {}
-
             modelo.find()
             .then(response => {
-                let exists = false;
                 for(let i = 0; i < response.length; i++)
                 {
                     let t = response[i]
@@ -25,35 +38,26 @@ const professionalController = {
                         
                         exists = true
                         a = t;
+                        res.send(a)
                     }
                 }
-                //console.log(exists == false)
-                if(exists == false)
-                {
-                    let temp = {
-                        name: user.name,
-                        email: user.email,
-                        token: idToken
-                    }
-                    //console.log(temp)
-                    a = temp;
-                    //console.log('before save')
-                    modelo(temp).save()
-                        .then(p =>{
-                            console.log(p)
-                            res.status(200).send(p)    
-                        })
-                        .catch(p =>{
-                            res.status(400).send('not saving correctly')    
-                        })   
-                }
-                //console.log(exists)
-                res.send(a)
-            })
-            .catch(error => {
-                res.status(400).send()
-            })
 
+                if(exists == false)
+            {
+                let temp = {
+                    name: user.name,
+                    email: user.email,
+                    token: idToken,
+                    login: true
+                }
+                a = temp;
+                modelo(temp).save()
+                    .then(prof =>{
+                        console.log(prof)
+                       res.status(200).send(prof)    
+                    })  
+            }
+            })
         }).catch(err => {
             res.status(401).send({msg: 'token inválido'})
         })
@@ -116,6 +120,17 @@ const professionalController = {
             .catch(profToDelete =>{
                 res.status(400).send('algo salió mal en eliminar la cuenta de profesional ', req.params.id)    
             })
+    },
+    calendarInfo: (req, res) =>{
+        const idToken = req.body.googleToken;
+        console.log('calendar info');
+        googleClient.set
+        googleClient.getAccessToken(idToken).then((req, res) => {
+            console.log('acces token');
+            googleClient.setCredentials({idToken}).then((req, res) => {
+                console.log('CREDENTIALS SET');
+            })
+        }).catch();
     }
 }
 
