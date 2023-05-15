@@ -11,34 +11,61 @@
     overflow-y: auto;
     background-color: #f5f5f5; /* Background color */
     text-align: center;
+}
 
+h1 {
+  text-align: center;
+  font-weight: bolder;
 }
 
 .sending {
     align-self: end;
     text-align: center;
     margin-top: 10px;
+    width: 800px;
   }
 
+  
+
 .items {
-    display: inline-block;
-    max-width: 80%;
+    //display: inline-block;
+    //max-width: 100%;
+    width: 800px;
     margin-bottom: 10px;
     padding: 10px;
     border-radius: 8px;
     color: #333;
     flex-grow: 1;
+
+    .user {
+      font-size: 13px;
+      font-style: italic;
+      color: gray;
+    }
+
     .owned {
-        /* Add styles for the chat content here */
-        //text
-        background-color: #d4e6f1;
+      max-width: 95%;
+      //float: left;
+      text-align: left;
+      background-color: #a4dbfd;
+    }
+    
+    .otherUser {
+      max-width: 95%;
+      //float: right;
+      text-align: right;
+      background-color: lightgreen;
     }
 }
 
 .items > div {
-    margin-bottom: 10px;
+    margin-bottom: 15px;
     padding: 10px;
     border-radius: 8px;
+  }
+
+  .sending input {
+    width: 50%;
   }
 
   .sending button {

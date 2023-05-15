@@ -48,20 +48,6 @@ export class NavComponent{
 
             let id = this.loginService.getUserId()
             let type = this.loginService.getUserType();
-            if(type == 'tutor')
-            {
-              let tutor = { login: true }
-              this.tutorService.updateTutor(tutor, id);
-            }
-            else if(type == 'professional'){
-              let prof = { login: true }
-              this.profService.updateProfessional(prof, id);
-            }
-            else if(type == 'patient'){
-              let patient = { login: true }
-              this.patientService.updatePatient(patient, id);
-            }
-      
             this.router.navigate([type , 'profile', id])
            
         })
@@ -70,9 +56,6 @@ export class NavComponent{
   }
 
   logOut() {
-    let temp = { login: false }
-    console.log(this.loginService.getUserId())
-    this.tutorService.updateTutor(temp, this.loginService.getUserId());
     this.tokenService.deleteToken();
     this.router.navigate(['/']);
   }
