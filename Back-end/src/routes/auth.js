@@ -6,7 +6,7 @@ const professional = require('./../controllers/professional');
 const tutor = require('./../controllers/tutor');
 
 router.post('/admin', express.json(), admin.googleLogin);
-router.post('/patient', express.json(), patient.googleLogin);
+router.post('/patient/:tutorId', express.json(), patient.googleLogin);
 router.post('/professional', express.json(), professional.googleLogin);
 router.post('/tutor', express.json(), tutor.googleLogin);
 

@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { LoginService } from 'src/app/shared/services/login.service';
 import { RegisterService } from 'src/app/shared/services/register.service'
 import { TokenService } from 'src/app/shared/services/token.service';
+import { TutorService } from 'src/app/shared/services/tutor.service';
 
 
 @Component({
@@ -33,7 +34,8 @@ export class HomeComponent {
   userType: string = ''
   //this.LoginForm.value.user 
 
-  constructor(private loginService: LoginService, FormBuilder: FormBuilder, private registerService: RegisterService, private tokenService: TokenService, private router: Router){
+  constructor(private tutorService: TutorService,
+    private loginService: LoginService, FormBuilder: FormBuilder, private registerService: RegisterService, private tokenService: TokenService, private router: Router){
     //console.log('hi')
     this.firstFormGroup = FormBuilder.group({
       name: ['', Validators.required],
@@ -53,10 +55,11 @@ export class HomeComponent {
 
     this.LoginForm = FormBuilder.group({
       user: ['', Validators.required],
+      tutorId: ['', Validators.required]
     });
 
     this.userState = this.LoginForm.value.user;
-
+    //console.log(this.LoginForm.value.tutorId)
   }
 
   fontStyleControl = "no";
@@ -64,9 +67,26 @@ export class HomeComponent {
   fontStyle?: string;
   
   user = { };
-  
+  tutorId = ''
 
   credenciales: any = { email: '', password: '' };
+
+  setTutorId()
+  {
+    this.tutorService.getTutors().subscribe((response: any) => {
+      this.tutorId = this.LoginForm.value.tutorId
+      console.log(this.LoginForm.value.tutorId)
+      let p = response.tutor;
+      for (const key in p) {
+        if(p[key].email == this.tutorId)
+        {
+          console.log('saving tutorId', p[key]._id)
+          this.loginService.setTutorId(p[key]._id)
+        }
+      }
+    });
+    
+  }
 
   setUser(user: string){
     this.loginService.setUserType(user)

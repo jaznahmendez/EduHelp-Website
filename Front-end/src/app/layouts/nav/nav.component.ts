@@ -34,23 +34,37 @@ export class NavComponent{
     this.socialAuthService.authState.subscribe((user: SocialUser) => {})
 
     this.socialAuthService.authState.subscribe((user: SocialUser) => {
-      
+      let t = this.loginService.getUserType();
       if(user){
         this.socialAuthService.getAccessToken(GoogleLoginProvider.PROVIDER_ID).then(accessToken => this.tokenService.setToken(accessToken));
         console.log(user);
         console.log(user.idToken);
         //this.tokenService.setToken(user.idToken);
         this.loginService.setUserEmail(user.email);
-        this.loginService.login(user.idToken, this.loginService.getUserType()).subscribe(response => {
-          //this.router.navigate([this.loginService.userType , 'profile', this.userId])
-          
-            this.loginService.setUserId(response._id)
+        if(t=='professional' || t=='tutor'){
+          this.loginService.login(user.idToken, this.loginService.getUserType()).subscribe(response => {
+            //this.router.navigate([this.loginService.userType , 'profile', this.userId])
+            
+              this.loginService.setUserId(response._id)
+  
+              let id = this.loginService.getUserId()
+              let type = this.loginService.getUserType();
+              this.router.navigate([type , 'profile', id])
+             
+          })
+        } else {
+          this.loginService.loginPatient(user.idToken, this.loginService.getTutorId()).subscribe(response => {
+            //this.router.navigate([this.loginService.userType , 'profile', this.userId])
 
-            let id = this.loginService.getUserId()
-            let type = this.loginService.getUserType();
-            this.router.navigate([type , 'profile', id])
-           
-        })
+              this.loginService.setUserId(response._id)
+  
+              let id = this.loginService.getUserId()
+              let type = this.loginService.getUserType();
+              this.router.navigate([type , 'profile', id])
+             
+          })
+        }
+        
       }
     });
   }
