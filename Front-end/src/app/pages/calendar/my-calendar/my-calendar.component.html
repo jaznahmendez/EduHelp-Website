@@ -1,0 +1,10 @@
+<div class="cont">
+    <full-calendar [options]="calendarOptions">
+        <ng-template #eventContent let-arg>
+            <div class="event" (click)="printEvent(arg)">
+                <b>{{ arg.event.start.getHours()}}:{{ arg.event.start.getMinutes()}}hrs </b>
+                <b>{{ arg.event.title }}</b>
+            </div>
+          </ng-template>
+    </full-calendar>
+</div>
