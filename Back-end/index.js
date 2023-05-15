@@ -2,6 +2,8 @@ const express = require('express')
 const routes = require('./src/routes')
 const mongoose = require('mongoose')
 
+const path = require('path')
+
 const socketIo = require('socket.io')
 
 const swaggerJsDoc = require('swagger-jsdoc')
@@ -38,6 +40,8 @@ app.use((req, res, next) => {
 app.use(cors({
     methods: ["GET", "POST", "DELETE", "UPDATE", "PUT", "PATCH"]
 }));
+
+app.use('/assets', express.static(path.join(__dirname, 'uploads')));
 
 app.use('/', routes);
 
