@@ -24,12 +24,12 @@ const professionalController = {
     googleLogin: (req, res) => {
         const idToken = req.body.googleToken
         googleClient.verifyIdToken({ idToken: idToken }).then(response => {
+            //console.log(idToken);
+            let exists = false;
             const user = response.getPayload();
             let a = {}
-
             modelo.find()
             .then(response => {
-                let exists = false;
                 for(let i = 0; i < response.length; i++)
                 {
                     let t = response[i]
@@ -38,35 +38,26 @@ const professionalController = {
                         
                         exists = true
                         a = t;
+                        res.send(a)
                     }
                 }
-                //console.log(exists == false)
-                if(exists == false)
-                {
-                    let temp = {
-                        name: user.name,
-                        email: user.email,
-                        token: idToken
-                    }
-                    //console.log(temp)
-                    a = temp;
-                    //console.log('before save')
-                    modelo(temp).save()
-                        .then(p =>{
-                            console.log(p)
-                            res.status(200).send(p)    
-                        })
-                        .catch(p =>{
-                            res.status(400).send('not saving correctly')    
-                        })   
-                }
-                //console.log(exists)
-                res.send(a)
-            })
-            .catch(error => {
-                res.status(400).send()
-            })
 
+                if(exists == false)
+            {
+                let temp = {
+                    name: user.name,
+                    email: user.email,
+                    token: idToken,
+                    login: true
+                }
+                a = temp;
+                modelo(temp).save()
+                    .then(prof =>{
+                        console.log(prof)
+                       res.status(200).send(prof)    
+                    })  
+            }
+            })
         }).catch(err => {
             res.status(401).send({msg: 'token inválido'})
         })

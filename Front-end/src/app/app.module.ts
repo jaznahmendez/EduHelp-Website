@@ -53,6 +53,7 @@ import { EditAdminComponent } from './pages/admin/aprofile/edit-admin/edit-admin
 import {  SocialLoginModule, SocialAuthServiceConfig, GoogleLoginProvider, GoogleSigninButtonModule } from '@abacritt/angularx-social-login';
 import { environment } from './environments/environment';
 import { LoginComponent } from './pages/login/login.component';
+import { ChatComponent } from './pages/chat/chat.component';
 
 
 @NgModule({
@@ -79,7 +80,8 @@ import { LoginComponent } from './pages/login/login.component';
     EditPatientDialogComponent,
     EditProfDialogComponent,
     EditAdminComponent,
-    LoginComponent
+    LoginComponent,
+    ChatComponent
   ],
   imports: [
     BrowserModule,

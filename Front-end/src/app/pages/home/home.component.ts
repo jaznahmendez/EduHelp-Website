@@ -70,14 +70,14 @@ export class HomeComponent {
     this.loginService.setUserType(user)
     this.loginService.userType = user;
     this.userType = user;
-    console.log(user);
+    //console.log(user);
     //console.log(this.user)
   }
   
   login(){
-    this.loginService.setUserType(this.userType)
+    /*this.loginService.setUserType(this.userType)
     console.log(this.LoginForm.value.user);
-    this.loginService.userType = this.userType  
+    this.loginService.userType = this.userType  */
   }
 }
 

@@ -44,27 +44,6 @@ class controladorPatient{
                         a = t;
                     }
                 }
-                //console.log(exists == false)
-               /* if(exists == false)
-                {
-                    let temp = {
-                        name: user.name,
-                        email: user.email,
-                        token: idToken
-                    }
-                    //console.log(temp)
-                    a = temp;
-                    //console.log('before save')
-                    patient(temp).save()
-                        .then(p =>{
-                            console.log(p)
-                            res.status(200).send(p)    
-                        })
-                        .catch(p =>{
-                            res.status(400).send('not saving correctly')    
-                        })   
-                }*/
-                //console.log(exists)
                 res.send(a)
             })
             .catch(error => {

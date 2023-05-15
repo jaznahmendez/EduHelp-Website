@@ -16,12 +16,23 @@ export class LoginService {
 
   setUserType(user: string)
   {
-    this.userType = user;
+    localStorage.setItem('userType', user);
   }
 
   setUserId(id: string)
   {
-    this.userId = id
+    //this.userId = id
+    console.log('saving to storage', id)
+    localStorage.setItem('userId', id);
+  }
+
+  getUserId(): string {
+    //console.log('from storage',localStorage.getItem('userId'))
+    return localStorage.getItem('userId') || '';
+  }
+
+  getUserType(): string {
+    return localStorage.getItem('userType') || '';
   }
 
   setUserEmail(email: string)
