@@ -12,7 +12,7 @@ export class ProfessionalService {
     password: '',
     telefono: ''
   }
-  apiUrl: string = 'http://localhost:3000/'
+  apiUrl: string = 'https://eduhelp-api.onrender.com/'
   id: string = ''
 
   constructor(private httpClient: HttpClient) { }

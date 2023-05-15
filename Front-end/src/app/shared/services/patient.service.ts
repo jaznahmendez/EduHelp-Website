@@ -12,7 +12,7 @@ export class PatientService {
     password: '',
     tutorId: ''
   }
-  apiUrl: string = 'http://localhost:3000/'
+  apiUrl: string = 'https://eduhelp-api.onrender.com/'
   id: string = ''
 
   constructor(private httpClient: HttpClient) { }

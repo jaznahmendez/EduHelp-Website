@@ -5,7 +5,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http'
   providedIn: 'root'
 })
 export class RegisterService {
-  apiUrl: string = 'http://localhost:3000/'
+  apiUrl: string = 'https://eduhelp-api.onrender.com/'
   constructor(private httpClient: HttpClient) { }
 
   createAdmin(admin: object)

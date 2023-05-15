@@ -11,7 +11,7 @@ import { LoginService } from './login.service';
 export class FilesService {
 
   constructor(private httpClient: HttpClient, private loginService: LoginService) { }
-  apiUrl: string = 'http://localhost:3000/'
+  apiUrl: string = 'https://eduhelp-api.onrender.com/'
 
   upload(input: HTMLInputElement): Observable<any>{
     const formData = new FormData();

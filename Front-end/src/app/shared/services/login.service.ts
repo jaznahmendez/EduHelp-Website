@@ -50,11 +50,11 @@ export class LoginService {
   }
   
   login(idToken: string, userType: string): Observable<any> {
-    return this.httpClient.post('http://localhost:3000/login/' + userType, { googleToken: idToken});
+    return this.httpClient.post('https://eduhelp-api.onrender.com/login/' + userType, { googleToken: idToken});
   }
 
     loginPatient(idToken: string, tutorId: string): Observable<any> {
-      return this.httpClient.post('http://localhost:3000/login/patient/' + tutorId, { googleToken: idToken});
+      return this.httpClient.post('https://eduhelp-api.onrender.com/login/patient/' + tutorId, { googleToken: idToken});
     }
 
 }
