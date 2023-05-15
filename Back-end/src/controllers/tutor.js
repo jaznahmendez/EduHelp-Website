@@ -28,7 +28,7 @@ class controladorTutor{
                 filename: req.file.filename,
                 userId: req.params.id
             }
-            console.log(t)
+            //console.log(t)
             file.create(t).then(response => {
                 console.log(response)
                 res.status(200).send(response);
