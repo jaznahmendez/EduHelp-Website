@@ -34,6 +34,7 @@ export class AppointmentComponent {
     let myCal = localStorage.getItem('myCalendar') || '';
     let profCal = localStorage.getItem('externalCalendar') || '';
     this.tutorService.getPatients().subscribe((response : any) => {
+      console.log(response);
       for(let i = 0; i < response.patient.length; i++){
         if(response.patient[i].email == this.firstFormGroup.value.emailPatient){
             myP = response.patient[i].calendarId

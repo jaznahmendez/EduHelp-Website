@@ -45,14 +45,17 @@ export class CalendarService  {
           this.response.id = id;
           if(localStorage.getItem('userType') == 'professional'){
             this.createAccessProfessional(id);
+            this.getGoogleCalendarData(this.response.id);
           }else if (localStorage.getItem('userType') == 'patient'){
             this.createAccessPatient(id);
+            this.getGoogleCalendarData(this.response.id);
           }else{
             localStorage.setItem('myCalendar', id);
+            this.getGoogleCalendarData(this.response.id);
           }
         }
         console.log(id)
-        this.getGoogleCalendarData(this.response.id);
+        
       });
   }
 
@@ -70,11 +73,14 @@ export class CalendarService  {
       if(localStorage.getItem('userType') == 'professional'){
         this.createAccessProfessional(this.response.id);
         this.putCalendarProfessional(this.response.id);
+        this.getGoogleCalendarData(this.response.id);
       }else if (localStorage.getItem('userType') == 'patient'){
         this.createAccessPatient(this.response.id);
         this.putCalendarPatient(this.response.id);
+        this.getGoogleCalendarData(this.response.id);
       }else{
         localStorage.setItem('myCalendar', this.response.id);
+        this.getGoogleCalendarData(this.response.id);
       }
     });
   }
@@ -88,6 +94,7 @@ export class CalendarService  {
           this.singleAccess(tutors.tutor[i].email, externalCalendar);
             }, 100 * i);
       }
+      this.putCalendarProfessional(this.response.id);
     })
   }
 
@@ -95,6 +102,7 @@ export class CalendarService  {
     this.patientService.getPatient().subscribe((response : any) => {
       this.tutorService.getTutorById(response.tutorId).subscribe((response: any) => {
         this.singleAccess(response.email, calendar);
+        this.putCalendarPatient(this.response.id);
       })
     })
   }
@@ -117,7 +125,7 @@ export class CalendarService  {
 
   putCalendarProfessional(calendar : string){
     let obj = {
-      "calendarId" : calendar
+      calendarId : calendar
     }
     this.userId = localStorage.getItem('userId') || '123';
     this.professionalService.updateProfessional(obj, this.userId);
@@ -125,7 +133,7 @@ export class CalendarService  {
 
   putCalendarPatient(calendar : string){
     let obj = {
-      "calendarId" : calendar
+      calendarId : calendar
     }
     this.userId = localStorage.getItem('userId') || '123';
     this.patientService.updatePatient(obj, this.userId);
