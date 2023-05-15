@@ -2,6 +2,8 @@ const express = require('express')
 const routes = require('./src/routes')
 const mongoose = require('mongoose')
 
+const socketIo = require('socket.io')
+
 const swaggerJsDoc = require('swagger-jsdoc')
 const swaggerUI = require('swagger-ui-express')
 const swaggerConf = require('./swagger.config')
@@ -41,9 +43,27 @@ app.use('/', routes);
 
 mongoose.connect(mongoUrl).then(() => {
     console.log('Se pudo conectar correctamente a la base de datos')
-    app.listen(port, function() {
+    const server = app.listen(port, function() {
         console.log('app is running in port ' + port)
     }) 
+
+    const io = socketIo(server, {
+        cors:{
+            origin: '*',
+            methods: ['GET', 'POST']
+        }
+    })
+
+    io.on('connection', socket => {
+        io.emit('alguien ve un perfil');
+        //console.log('se conectó alguien');
+    
+        socket.on('sendMessage', (data) => {
+            console.log(data)
+            io.emit('newMessage', {message: data})
+        })
+    })
+
 }).catch(err =>{
     console.log('No se pudo conectar a la base de datos', err)
 })

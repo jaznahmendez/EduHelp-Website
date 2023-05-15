@@ -55,6 +55,7 @@ import { EditAdminComponent } from './pages/admin/aprofile/edit-admin/edit-admin
 import {  SocialLoginModule, SocialAuthServiceConfig, GoogleLoginProvider, GoogleSigninButtonModule } from '@abacritt/angularx-social-login';
 import { environment } from './environments/environment';
 import { LoginComponent } from './pages/login/login.component';
+import { ChatComponent } from './pages/chat/chat.component';
 import { AppointmentComponent } from './pages/calendar/appointment/appointment.component';
 
 
@@ -83,6 +84,7 @@ import { AppointmentComponent } from './pages/calendar/appointment/appointment.c
     EditProfDialogComponent,
     EditAdminComponent,
     LoginComponent,
+    ChatComponent,
     AppointmentComponent
   ],
   imports: [
