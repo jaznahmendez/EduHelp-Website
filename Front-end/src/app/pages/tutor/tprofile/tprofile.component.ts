@@ -57,10 +57,12 @@ export class TProfileComponent implements OnInit {
   hijosArray: any = []
 
   @Output() onSelected: EventEmitter<any> = new EventEmitter();
-  
+  photo =  ''
 
   ngOnInit(): void {
-
+    //this.photo = this.fileService.getPhoto();
+    //this.photo = './assets/' + this.loginService.getUserId() + '.jpg'
+    //console.log(this.photo)
     this.route.params.subscribe(params => {
       this.routeId = params['id'];
     });
@@ -137,7 +139,16 @@ export class TProfileComponent implements OnInit {
   {
     const input = e.target as HTMLInputElement;
     console.log('File: ', input.files![0])
-    this.fileService.upload(input).subscribe()
+    this.fileService.upload(input).subscribe({
+      next: () => {
+        //this.photo = this.fileService.getFiles();
+        console.log('file uploaded')
+      },
+      error: () => {
+        console.log('file not uploaded')
+      }
+    }
+    );
   }
 
   openNewDialog(): void {

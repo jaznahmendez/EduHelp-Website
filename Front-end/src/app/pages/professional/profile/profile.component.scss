@@ -12,6 +12,11 @@
   text-align: center;
 }
 
+input[type="file"]
+{
+  display: none;
+}
+
 .app-card{
   width: 30%;
   margin-top: 20px;

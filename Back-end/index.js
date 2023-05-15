@@ -41,7 +41,7 @@ app.use(cors({
     methods: ["GET", "POST", "DELETE", "UPDATE", "PUT", "PATCH"]
 }));
 
-app.use('/assets', express.static(path.join(__dirname, 'uploads')));
+app.use('assets', express.static(path.join(__dirname, 'uploads')));
 
 app.use('/', routes);
 

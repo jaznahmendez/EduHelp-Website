@@ -15,7 +15,9 @@ const googleClient = new OAuth2Client(process.env.GOOGLE_ID)
 
 class controladorTutor{
     static upload(req, res) {
+        //console.log('Req: ', req);
         //console.log('File: ', req.file);
+        //console.log('Body: ', req.body);
         if(!req.file) {
             res.status(400).send("archivo no soportado")
             return
@@ -23,7 +25,8 @@ class controladorTutor{
         else {
             let t = {
                 name: req.file.originalname,
-                filename: req.file.filename
+                filename: req.file.filename,
+                userId: req.params.id
             }
             console.log(t)
             file.create(t).then(response => {
@@ -40,7 +43,8 @@ class controladorTutor{
         file.find({
             userId: req.params.id
         }).then(response => {
-            res.send(response)
+            console.log(response.filename)
+            res.send(response.filename)
         }).catch(err => {
             res.status(400).send(err)
         })

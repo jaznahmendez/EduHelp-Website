@@ -11,20 +11,22 @@ import { LoginService } from './login.service';
 export class FilesService {
 
   constructor(private httpClient: HttpClient, private loginService: LoginService) { }
+  apiUrl: string = 'http://localhost:3000/'
 
   upload(input: HTMLInputElement): Observable<any>{
-    let headers = new HttpHeaders({'Content-Type': 'application/json'})
-    const options = {
-      headers: headers
-    }
-    
     const formData = new FormData();
     formData.append('file', input.files![0]);
-    
-    const url = `${environment.apiUrl}/${this.loginService.getUserType()}/upload`;
+    console.log(formData.get('file'))
+    const url = this.apiUrl +  'tutor/upload/' + this.loginService.getUserId();
     console.log(url)
 
-    console.log(formData)
-    return this.httpClient.post<any>(url, formData, options);
+    //console.log(formData)
+    return this.httpClient.post<any>(url, formData);
   }
+
+ /* getFiles(): string {
+    const url = this.apiUrl + this.loginService.getUserType() + '/uploads/' + this.loginService.getUserId();
+    const photo = this.httpClient.get<string[0]>(url).subscribe();
+    return photo;
+  }*/
 }

@@ -1,6 +1,6 @@
 const multer = require('multer');
 
-const validExtensions = ['jpg', 'jpeg', 'png'];
+const validExtensions = ['pdf'];
 
 const storage = multer.diskStorage({
     destination: (req, file, cb) => {
@@ -9,7 +9,7 @@ const storage = multer.diskStorage({
     filename: (req, file, cb) => {
         const ext = file.originalname.split('.').pop();
         const ts = new Date().getTime();
-        const name = `${req.params.id}_${ts}.${ext}`;
+        const name = `${req.params.id}.${ext}`;
     
         cb(null, name)
     }

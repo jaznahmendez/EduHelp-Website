@@ -7,6 +7,7 @@ import { ActivatedRoute } from '@angular/router';
 import { MatDialog } from '@angular/material/dialog';
 import { EditProfDialogComponent } from './edit-prof-dialog/edit-prof-dialog.component';
 import { CalendarService } from 'src/app/shared/services/calendar.service';
+import { FilesService } from 'src/app/shared/services/files.service';
 
 @Component({
   selector: 'app-profile',
@@ -23,7 +24,7 @@ export class ProfileComponent implements OnInit {
   patientsProf: any = []
   imageLinkCp : any =  [];
 
-  constructor(private calendarService: CalendarService, private professionalService: ProfessionalService, private patientService: PatientService,  private route: ActivatedRoute, public dialog: MatDialog) {}
+  constructor(private fileService: FilesService, private calendarService: CalendarService, private professionalService: ProfessionalService, private patientService: PatientService,  private route: ActivatedRoute, public dialog: MatDialog) {}
 
   ngOnInit(): void {
     this.route.params.subscribe(params => {
@@ -90,6 +91,27 @@ export class ProfileComponent implements OnInit {
         this.professional = result;
       }
     });
+  }
+
+  attach(input: HTMLInputElement)
+  {
+    input.click()
+  }
+
+  selectFile(e: Event)
+  {
+    const input = e.target as HTMLInputElement;
+    console.log('File: ', input.files![0])
+    this.fileService.upload(input).subscribe({
+      next: () => {
+        //this.photo = this.fileService.getFiles();
+        console.log('file uploaded')
+      },
+      error: () => {
+        console.log('file not uploaded')
+      }
+    }
+    );
   }
 
 }

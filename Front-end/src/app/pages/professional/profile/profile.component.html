@@ -12,8 +12,13 @@
         <mat-icon>edit</mat-icon>
         <span>Edit</span>
       </button>
-    </mat-card-actions> 
+      <button mat-fab extended (click)="attach(fileInput)">
+        <mat-icon>edit</mat-icon>
+        <span>Add resume</span>
+      </button>
+    </mat-card-actions>
   </mat-card>
+  <input #fileInput type="file" (change)="selectFile($event)">
   <mat-card class="app-card">
     <div class="tutor-title">My Next Appointments</div>
     <mat-card-content>
