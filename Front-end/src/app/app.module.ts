@@ -33,6 +33,8 @@ import { MatInputModule } from '@angular/material/input';
 import {MatButtonToggleModule} from '@angular/material/button-toggle';
 import {MatTooltipModule} from '@angular/material/tooltip';
 import {MatDialogModule} from '@angular/material/dialog';
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { NgxMatDatetimePickerModule } from '@angular-material-components/datetime-picker';
 
 import { FullCalendarModule } from '@fullcalendar/angular';
 
@@ -53,6 +55,7 @@ import { EditAdminComponent } from './pages/admin/aprofile/edit-admin/edit-admin
 import {  SocialLoginModule, SocialAuthServiceConfig, GoogleLoginProvider, GoogleSigninButtonModule } from '@abacritt/angularx-social-login';
 import { environment } from './environments/environment';
 import { LoginComponent } from './pages/login/login.component';
+import { AppointmentComponent } from './pages/calendar/appointment/appointment.component';
 
 
 @NgModule({
@@ -79,7 +82,8 @@ import { LoginComponent } from './pages/login/login.component';
     EditPatientDialogComponent,
     EditProfDialogComponent,
     EditAdminComponent,
-    LoginComponent
+    LoginComponent,
+    AppointmentComponent
   ],
   imports: [
     BrowserModule,
@@ -106,7 +110,8 @@ import { LoginComponent } from './pages/login/login.component';
     HttpClientModule,
     MatDialogModule,
     SocialLoginModule,
-    GoogleSigninButtonModule
+    GoogleSigninButtonModule,
+    MatDatepickerModule
   ],
   providers: [
     {
