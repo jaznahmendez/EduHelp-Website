@@ -21,6 +21,7 @@ import { HomeComponent } from './pages/home/home.component';
 import { CalendarComponent } from './pages/calendar/calendar.component';
 
 import { ChatComponent } from './pages/chat/chat.component';
+import { MyCalendarComponent } from './pages/calendar/my-calendar/my-calendar.component';
 
 
 const routes: Routes = [
@@ -43,6 +44,7 @@ const routes: Routes = [
   {path: 'admin/profile/:id', component: AProfileComponent},
 
   {path: 'calendar', component: CalendarComponent},
+  {path: 'mycalendar', component: MyCalendarComponent},
 
   {path: 'notification', component: ChatComponent}
 ];

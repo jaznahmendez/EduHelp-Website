@@ -50,6 +50,12 @@ export class TutorService {
     return this.httpClient.get(url)
   }
 
+  getTutorById(id: string){
+    let url = this.apiUrl + 'admin/tutor/' + id
+    //console.log(url)
+    return this.httpClient.get(url)
+  }
+
   updateTutor(tutor: object, id: string)
   {
     let headers = new HttpHeaders({'Content-Type': 'application/json'})

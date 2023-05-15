@@ -22,11 +22,17 @@ export class PprofileComponent implements OnInit {
   cp: any = []
   imageLinkCp : any =  [];
   imageLinkPp : any =  [];
+  routerLink : string = '';
 
   constructor(private route: ActivatedRoute, private patientService: PatientService, private tutorService: TutorService, private professionalService: ProfessionalService, public dialog: MatDialog) {}
 
   ngOnInit(): 
   void { 
+    if(localStorage.getItem('userType') == 'tutor'){
+      this.routerLink = '/calendar'
+    }else{
+      this.routerLink = '/mycalendar'
+    }
     this.route.params.subscribe(params => {
       this.idPatient = params['id'];
     });
@@ -36,7 +42,7 @@ export class PprofileComponent implements OnInit {
     this.patientService.getPatient().subscribe((response: any) => {
       this.patient = response
       this.tutorService.id = this.patient.tutorId
-
+      localStorage.setItem('externalCalendar', this.patient.calendarId);
       this.tutorService.getTutor().subscribe((response: any) => {
         console.log(response)
         this.tutor = response
