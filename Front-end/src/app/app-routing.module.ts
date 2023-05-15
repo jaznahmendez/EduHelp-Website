@@ -30,19 +30,19 @@ const routes: Routes = [
 
   {path: 'professional', component: ProfessionalComponent, canActivate: [AuthGuard] },
   {path: 'professional/:id', component: DetalleProfessionalComponent, canActivate: [AuthGuard] },
-  {path: 'professional/profile/:id', component: ProfileComponent, canActivate: [AuthGuard] },
+  {path: 'professional/profile/:id', component: ProfileComponent},
 
   {path: 'patient', component: PatientComponent, canActivate: [AuthGuard] },
   {path: 'patient/:id', component: DetallesPatientComponent, canActivate: [AuthGuard] },
-  {path: 'patient/profile/:id', component: PprofileComponent, canActivate: [AuthGuard] },
+  {path: 'patient/profile/:id', component: PprofileComponent},
 
   {path: 'tutor', component: TutorComponent, canActivate: [AuthGuard] },
   {path: 'tutor/:id', component: DetalleTutorComponent, canActivate: [AuthGuard] },
-  {path: 'tutor/profile/:id', component: TProfileComponent, canActivate: [AuthGuard] },
+  {path: 'tutor/profile/:id', component: TProfileComponent},
 
   {path: 'admin', component: AdminComponent, canActivate: [AuthGuard] },
   {path: 'admin/:id', component: DetalleAdminComponent, canActivate: [AuthGuard] },
-  {path: 'admin/profile/:id', component: AProfileComponent, canActivate: [AuthGuard] },
+  {path: 'admin/profile/:id', component: AProfileComponent},
 
   {path: 'calendar', component: CalendarComponent, canActivate: [AuthGuard] },
   {path: 'mycalendar', component: MyCalendarComponent, canActivate: [AuthGuard] },

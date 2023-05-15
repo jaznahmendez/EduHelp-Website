@@ -35,6 +35,15 @@ export class LoginService {
     return localStorage.getItem('userType') || '';
   }
 
+  getTutorId(): string {
+    return localStorage.getItem('tutorId') || '';
+  }
+
+
+  setTutorId(id: string) {
+    localStorage.setItem('tutorId', id);
+  }
+
   setUserEmail(email: string)
   {
     this.userEmail = email
@@ -44,6 +53,8 @@ export class LoginService {
     return this.httpClient.post('http://localhost:3000/login/' + userType, { googleToken: idToken});
   }
 
-  
+    loginPatient(idToken: string, tutorId: string): Observable<any> {
+      return this.httpClient.post('http://localhost:3000/login/patient/' + tutorId, { googleToken: idToken});
+    }
 
 }

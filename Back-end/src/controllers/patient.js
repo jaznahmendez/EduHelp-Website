@@ -1,5 +1,6 @@
 const patient = require('../models/patient');
 const { response } = require('express');
+const tutor = require('../models/tutor');
 // nombre, correo, género
 
 const { OAuth2Client } = require('google-auth-library');
@@ -61,27 +62,54 @@ class controladorPatient{
     }
     static googleLogin(req, res) {
         const idToken = req.body.googleToken
+        const tutorId = req.params.tutorId
         googleClient.verifyIdToken({ idToken: idToken }).then(response => {
+            //console.log(idToken);
+            let exists = false;
             const user = response.getPayload();
             let a = {}
             patient.find()
             .then(response => {
-                let exists = false;
                 for(let i = 0; i < response.length; i++)
                 {
                     let t = response[i]
                     if(t.email == user.email)
                     {
+                        
                         exists = true
                         a = t;
+
+                        tutor.findByIdAndUpdate(tutorId, {$push:{
+                            "hijos": t._id}
+                        }, {new:true}).then(response =>{
+                            console.lot(response)
+                        })  
+
+                        res.send(a)
                     }
                 }
-                res.send(a)
+
+                if(exists == false)
+            {
+                let temp = {
+                    name: user.name,
+                    email: user.email,
+                    token: idToken,
+                    tutorId: tutorId
+                }
+                a = temp;
+                patient(temp).save()
+                    .then(prof =>{
+                        console.log(prof)
+                        tutor.findByIdAndUpdate(tutorId, {$push:{
+                            "hijos": prof._id}
+                        }, {new:true}).then(response =>{
+                            console.log(response)
+                        })  
+                       res.status(200).send(prof)    
+                    })  
+            }
             })
-            .catch(error => {
-                res.status(400).send()
-            })
-            res.send(a)
         }).catch(err => {
             res.status(401).send({msg: 'token inválido'})
         })
