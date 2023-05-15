@@ -1,8 +1,11 @@
 <br><br><br>
+<h1>Live Q & A</h1>
+<br>
 <div class="messages">
     <div class="items">
-        <div *ngFor="let item of messages" [ngClass]="{'owned': item.owned}">
+        <div *ngFor="let item of messages" class="owned" [ngClass]="{'otherUser': item.otherUser}">
         {{item.message}}
+        <div class="user">{{item.name}}</div>
         </div>
     </div>
     <div class="sending">
