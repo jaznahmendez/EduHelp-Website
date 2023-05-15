@@ -48,6 +48,7 @@ export class DetalleProfessionalComponent implements OnInit {
 
     this.professionalService.getProfessional().subscribe((response: any) => {
       this.professional = response
+      console.log(this.professional);
       localStorage.setItem('externalCalendar', this.professional.calendarId);
       this.patientService.getPatients().subscribe((response: any) => {
         this.patients= response.patient;

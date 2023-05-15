@@ -42,7 +42,8 @@ export class PprofileComponent implements OnInit {
     this.patientService.getPatient().subscribe((response: any) => {
       this.patient = response
       this.tutorService.id = this.patient.tutorId
-      localStorage.setItem('externalCalendar', this.patient.calendarId);
+      console.log(this.patient);
+      localStorage.setItem('externalCalendar', this.patient.calendarioId);
       this.tutorService.getTutor().subscribe((response: any) => {
         console.log(response)
         this.tutor = response

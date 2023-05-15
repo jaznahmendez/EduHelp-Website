@@ -161,7 +161,8 @@ export class CalendarService  {
       });
   }
 
-  makeAppointment(calendar : string, start: string, end:string): void{
+  makeAppointment(calendar : string, start: string, end: string): void{
+    console.log(start)
     this.httpClient
     .post('https://www.googleapis.com/calendar/v3/calendars/' + calendar + '/events', {
       "end": {
@@ -169,7 +170,8 @@ export class CalendarService  {
       },
       "start": {
         "dateTime": start
-      }
+      },
+      "summary": "Appointment"
     }, {
       headers: { Authorization: `Bearer ${this.accessToken}`,
                 'Content-Type': 'application/json' },

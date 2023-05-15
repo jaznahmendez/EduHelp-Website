@@ -7,5 +7,5 @@
             </div>
           </ng-template>
     </full-calendar>
-    <button mat-raised-button (click)="openAppointmentDialog()">Make Appointment</button>
+    <button *ngIf="this.tutor" mat-raised-button (click)="openAppointmentDialog()">Make Appointment</button>
 </div>

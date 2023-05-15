@@ -20,7 +20,7 @@ export class AppointmentComponent {
     this.firstFormGroup = FormBuilder.group({
       startDate: ['', Validators.required],
       endDate: ['', [Validators.required]],
-      emailPatient: ['', [Validators.required, Validators.email]]
+      emailPatient: ['', [Validators.email]]
     });
   }
 
@@ -35,15 +35,20 @@ export class AppointmentComponent {
     let profCal = localStorage.getItem('externalCalendar') || '';
     this.tutorService.getPatients().subscribe((response : any) => {
       console.log(response);
-      for(let i = 0; i < response.patient.length; i++){
-        if(response.patient[i].email == this.firstFormGroup.value.emailPatient){
-            myP = response.patient[i].calendarId
+      for(let i = 0; i < response.length; i++){
+        if(response[i].email == this.firstFormGroup.value.emailPatient){
+           console.log(response[i].calendarioId);
+            myP = response[i].calendarioId
         }
       }
-      this.calendarService.makeAppointment(myCal, this.firstFormGroup.value.startDate, this.firstFormGroup.value.endDate);
-      this.calendarService.makeAppointment(myP, this.firstFormGroup.value.startDate, this.firstFormGroup.value.endDate);
-      this.calendarService.makeAppointment(profCal, this.firstFormGroup.value.startDate, this.firstFormGroup.value.endDate);
-      alert('Success!');
+      console.log(this.firstFormGroup)
+      let startString = this.firstFormGroup.value.startDate + ":00.000Z";
+      let endString = this.firstFormGroup.value.endDate + ":00.000Z";
+      this.calendarService.makeAppointment(myCal, startString , endString);
+      this.calendarService.makeAppointment(myP, startString, endString);
+      this.calendarService.makeAppointment(profCal, startString, endString);
+      
+      //alert('Success!');
     })
 
     //insert event en mi propio calendario
