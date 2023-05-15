@@ -6,6 +6,7 @@ import { ProfessionalService } from 'src/app/shared/services/professional.servic
 import { ActivatedRoute } from '@angular/router';
 import { MatDialog } from '@angular/material/dialog';
 import { EditProfDialogComponent } from './edit-prof-dialog/edit-prof-dialog.component';
+import { CalendarService } from 'src/app/shared/services/calendar.service';
 
 @Component({
   selector: 'app-profile',
@@ -22,7 +23,7 @@ export class ProfileComponent implements OnInit {
   patientsProf: any = []
   imageLinkCp : any =  [];
 
-  constructor(private professionalService: ProfessionalService, private patientService: PatientService,  private route: ActivatedRoute, public dialog: MatDialog) {}
+  constructor(private calendarService: CalendarService, private professionalService: ProfessionalService, private patientService: PatientService,  private route: ActivatedRoute, public dialog: MatDialog) {}
 
   ngOnInit(): void {
     this.route.params.subscribe(params => {
@@ -51,8 +52,10 @@ export class ProfileComponent implements OnInit {
       }
 
       console.log(this.patientsProf)
-      
+      this.calendarService.getGoogleCalendarList();
+      console.log('pass service')
     });
+
   }
 
   updateProfessional(id: string, obj: any) {

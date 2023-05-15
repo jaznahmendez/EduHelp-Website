@@ -57,6 +57,7 @@ import { environment } from './environments/environment';
 import { LoginComponent } from './pages/login/login.component';
 import { ChatComponent } from './pages/chat/chat.component';
 import { AppointmentComponent } from './pages/calendar/appointment/appointment.component';
+import { MyCalendarComponent } from './pages/calendar/my-calendar/my-calendar.component';
 
 
 @NgModule({
@@ -85,7 +86,8 @@ import { AppointmentComponent } from './pages/calendar/appointment/appointment.c
     EditAdminComponent,
     LoginComponent,
     ChatComponent,
-    AppointmentComponent
+    AppointmentComponent,
+    MyCalendarComponent
   ],
   imports: [
     BrowserModule,

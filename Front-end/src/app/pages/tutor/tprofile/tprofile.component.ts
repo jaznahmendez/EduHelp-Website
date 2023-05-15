@@ -8,6 +8,9 @@ import {MatDialog, MAT_DIALOG_DATA, MatDialogRef} from '@angular/material/dialog
 import { EditDialogComponent } from './edit-dialog/edit-dialog.component';
 import { NewPatientComponent } from './new-patient/new-patient.component';
 import { ActivatedRoute } from '@angular/router';
+import { TokenService } from 'src/app/shared/services/token.service';
+import { HttpClient } from '@angular/common/http';
+import { CalendarService } from 'src/app/shared/services/calendar.service';
 
 @Component({
   selector: 'app-tprofile',
@@ -36,7 +39,14 @@ export class TProfileComponent implements OnInit {
     tutorDescription: ''
   }
 
-  constructor(private route: ActivatedRoute, private registerService: RegisterService, private tutorService: TutorService, private patientService: PatientService, public dialog: MatDialog) { }
+  private accessToken : string | null;
+  private calendarObj : any;
+  private events: Array<any> = [];
+  private calendarListObj: any;
+
+  constructor( private calendarService: CalendarService,private route: ActivatedRoute, private registerService: RegisterService, private tutorService: TutorService, private patientService: PatientService, public dialog: MatDialog) { 
+    this.accessToken = '';
+  }
 
   hijos: any = []
   hijosArray: any = []
@@ -45,6 +55,7 @@ export class TProfileComponent implements OnInit {
   
 
   ngOnInit(): void {
+
     this.route.params.subscribe(params => {
       this.routeId = params['id'];
     });
@@ -69,19 +80,13 @@ export class TProfileComponent implements OnInit {
         });
       }
 
-    });
+      this.calendarService.getGoogleCalendarList();
+
+    }); 
 
   }
 
-  changeTutorPassword(id: string, password: string){
-    this.tutorService.id = id;
-    this.tutorService.getTutor().subscribe((response: any) => {
-        response.password = password;
-        this.tutorService.updateTutor(response, id);
-      
-    });
-  }
-
+  
   createPatient(patient: any){
     this.registerService.createPatient(patient);
   }
