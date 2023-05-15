@@ -13,7 +13,7 @@ import { ProfessionalService } from './professional.service';
 export class CalendarService  {
   private accessToken : string | null;
   private calendarObj : any;
-  private response : any;
+  private response : any = {};
   public events: Array<any> = [];
   private calendarListObj: any;
   private professionalCalendarId = {};
@@ -42,6 +42,7 @@ export class CalendarService  {
         if(!id){
           this.createCalendar();
         }else{
+          this.response.id = id;
           if(localStorage.getItem('userType') == 'professional'){
             this.createAccessProfessional(id);
           }else if (localStorage.getItem('userType') == 'patient'){
@@ -50,6 +51,7 @@ export class CalendarService  {
             localStorage.setItem('myCalendar', id);
           }
         }
+        console.log(id)
         this.getGoogleCalendarData(this.response.id);
       });
   }
@@ -131,7 +133,7 @@ export class CalendarService  {
 
   getGoogleCalendarData(calendarId: string): void {
     if (!this.accessToken) return;
-
+    console.log(calendarId);
     this.httpClient
       .get('https://www.googleapis.com/calendar/v3/calendars/' + calendarId + '/events', {
         headers: { Authorization: `Bearer ${this.accessToken}` },

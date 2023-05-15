@@ -19,6 +19,8 @@ export class NavComponent{
   logged: boolean = false;
   userId: string = ''
   newUser: boolean = true
+  routerLink: string = '';
+  isTutor: boolean = false;
 
   constructor(
     private registerService: RegisterService,
@@ -26,6 +28,15 @@ export class NavComponent{
     private tokenService: TokenService, private router: Router, private route: ActivatedRoute, 
     private loginService: LoginService, private socialAuthService: SocialAuthService)
   {
+    if(localStorage.getItem('userType') == 'tutor'){
+      this.routerLink = '/tutor/profile/' + localStorage.getItem('userId');
+      this.isTutor = true;
+    }else if(localStorage.getItem('userType') == 'patient'){
+      this.routerLink = '/patient/profile/' + localStorage.getItem('userId');
+    }else{
+      this.routerLink = '/professional/profile/' + localStorage.getItem('userId');
+    }
+
     this.tokenService.authStatus.subscribe((status: boolean) => {
       //console.log(status)
       this.logged = status;
