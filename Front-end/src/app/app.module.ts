@@ -33,6 +33,8 @@ import { MatInputModule } from '@angular/material/input';
 import {MatButtonToggleModule} from '@angular/material/button-toggle';
 import {MatTooltipModule} from '@angular/material/tooltip';
 import {MatDialogModule} from '@angular/material/dialog';
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { NgxMatDatetimePickerModule } from '@angular-material-components/datetime-picker';
 
 import { FullCalendarModule } from '@fullcalendar/angular';
 
@@ -54,6 +56,7 @@ import {  SocialLoginModule, SocialAuthServiceConfig, GoogleLoginProvider, Googl
 import { environment } from './environments/environment';
 import { LoginComponent } from './pages/login/login.component';
 import { ChatComponent } from './pages/chat/chat.component';
+import { AppointmentComponent } from './pages/calendar/appointment/appointment.component';
 
 
 @NgModule({
@@ -81,7 +84,8 @@ import { ChatComponent } from './pages/chat/chat.component';
     EditProfDialogComponent,
     EditAdminComponent,
     LoginComponent,
-    ChatComponent
+    ChatComponent,
+    AppointmentComponent
   ],
   imports: [
     BrowserModule,
@@ -108,7 +112,8 @@ import { ChatComponent } from './pages/chat/chat.component';
     HttpClientModule,
     MatDialogModule,
     SocialLoginModule,
-    GoogleSigninButtonModule
+    GoogleSigninButtonModule,
+    MatDatepickerModule
   ],
   providers: [
     {

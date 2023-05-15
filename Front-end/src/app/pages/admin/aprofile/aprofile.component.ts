@@ -12,6 +12,7 @@ import { RegisterService } from 'src/app/shared/services/register.service';
   templateUrl: './aprofile.component.html',
   styleUrls: ['./aprofile.component.scss']
 })
+
 export class AProfileComponent implements OnInit {
   admin: any = {}
   id: string = ''
