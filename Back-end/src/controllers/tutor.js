@@ -21,12 +21,14 @@ class controladorTutor{
             return
         }
         else {
-            file.create({
+            let t = {
                 name: req.file.originalname,
-                filename: req.file.filename,
-                userId: req.params.id
-            }).then(res => {
-                res.send(response);
+                filename: req.file.filename
+            }
+            console.log(t)
+            file.create(t).then(response => {
+                console.log(response)
+                res.status(200).send(response);
             }).catch(err => {
                 const uri = path.join(__dirname, '..', '..', 'uploads', req.file.filename)
                 fs.unlinkSync(uri);

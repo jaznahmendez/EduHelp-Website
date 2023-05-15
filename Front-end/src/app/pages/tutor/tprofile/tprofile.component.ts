@@ -11,6 +11,8 @@ import { ActivatedRoute } from '@angular/router';
 import { TokenService } from 'src/app/shared/services/token.service';
 import { HttpClient } from '@angular/common/http';
 import { CalendarService } from 'src/app/shared/services/calendar.service';
+import { FilesService } from 'src/app/shared/services/files.service';
+import { LoginService } from 'src/app/shared/services/login.service';
 
 @Component({
   selector: 'app-tprofile',
@@ -44,7 +46,10 @@ export class TProfileComponent implements OnInit {
   private events: Array<any> = [];
   private calendarListObj: any;
 
-  constructor( private calendarService: CalendarService,private route: ActivatedRoute, private registerService: RegisterService, private tutorService: TutorService, private patientService: PatientService, public dialog: MatDialog) { 
+  constructor(
+    private loginService: LoginService,
+    private fileService: FilesService,
+    private calendarService: CalendarService,private route: ActivatedRoute, private registerService: RegisterService, private tutorService: TutorService, private patientService: PatientService, public dialog: MatDialog) { 
     this.accessToken = '';
   }
 
@@ -121,6 +126,18 @@ export class TProfileComponent implements OnInit {
         this.tutorService.updateTutor(result, this.routeId);
       }
     });
+  }
+
+  attach(input: HTMLInputElement)
+  {
+    input.click()
+  }
+
+  selectFile(e: Event)
+  {
+    const input = e.target as HTMLInputElement;
+    console.log('File: ', input.files![0])
+    this.fileService.upload(input).subscribe()
   }
 
   openNewDialog(): void {
