@@ -37,18 +37,11 @@ export class NavComponent{
       
       if(user){
         this.socialAuthService.getAccessToken(GoogleLoginProvider.PROVIDER_ID).then(accessToken => this.tokenService.setToken(accessToken));
-<<<<<<< Updated upstream
-        this.loginService.setUserEmail(user.email);
-        console.log(this.tokenService.getToken());
-        //this.tokenService.setToken(user.idToken);
-        this.loginService.login(user.idToken, this.loginService.userType).subscribe(response => {
-=======
         console.log(user);
         console.log(user.idToken);
         //this.tokenService.setToken(user.idToken);
         this.loginService.setUserEmail(user.email);
         this.loginService.login(user.idToken, this.loginService.getUserType()).subscribe(response => {
->>>>>>> Stashed changes
           //this.router.navigate([this.loginService.userType , 'profile', this.userId])
           
             this.loginService.setUserId(response._id)
