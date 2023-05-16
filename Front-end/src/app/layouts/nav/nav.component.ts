@@ -3,11 +3,9 @@ import { Component, OnChanges, SimpleChanges } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { LoginService } from 'src/app/shared/services/login.service';
 import { TokenService } from 'src/app/shared/services/token.service';
-import { HomeComponent } from 'src/app/pages/home/home.component'
 import { TutorService } from 'src/app/shared/services/tutor.service';
 import { ProfessionalService } from 'src/app/shared/services/professional.service';
 import { PatientService } from 'src/app/shared/services/patient.service';
-import { RegisterService } from 'src/app/shared/services/register.service';
 
 @Component({
   selector: 'app-nav',
@@ -23,7 +21,6 @@ export class NavComponent{
   isTutor: boolean = false;
 
   constructor(
-    private registerService: RegisterService,
     private tutorService: TutorService, private profService: ProfessionalService, private patientService: PatientService,
     private tokenService: TokenService, private router: Router, private route: ActivatedRoute, 
     private loginService: LoginService, private socialAuthService: SocialAuthService)

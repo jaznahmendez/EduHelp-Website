@@ -2,7 +2,6 @@ import {Component, Inject} from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import {MatDialog, MAT_DIALOG_DATA, MatDialogRef} from '@angular/material/dialog';
 import { Patient } from 'src/app/shared/interfaces/patient'
-import { RegisterService } from 'src/app/shared/services/register.service'
 
 @Component({
   selector: 'app-new-patient',
@@ -17,7 +16,7 @@ export class NewPatientComponent {
   secondFormGroup: FormGroup;
   thirdFormGroup: FormGroup;
 
-  constructor(private registerService: RegisterService, FormBuilder: FormBuilder, public dialogRef: MatDialogRef<NewPatientComponent>, @Inject(MAT_DIALOG_DATA) public data: Patient) {
+  constructor(FormBuilder: FormBuilder, public dialogRef: MatDialogRef<NewPatientComponent>, @Inject(MAT_DIALOG_DATA) public data: Patient) {
     this.firstFormGroup = FormBuilder.group({
       name: ['', Validators.required],
       age: ['', Validators.required],
@@ -46,7 +45,6 @@ export class NewPatientComponent {
       tutorDescription: this.thirdFormGroup.value.tutorDescription
     }
     console.log(newPatient);
-    this.registerService.createPatient(newPatient);
     window.location.reload()
   }
 

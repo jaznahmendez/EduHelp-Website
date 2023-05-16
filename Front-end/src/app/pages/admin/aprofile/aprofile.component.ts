@@ -5,7 +5,6 @@ import { ActivatedRoute } from '@angular/router';
 import { EditAdminComponent } from './edit-admin/edit-admin.component';
 import { MatDialog } from '@angular/material/dialog';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { RegisterService } from 'src/app/shared/services/register.service';
 
 @Component({
   selector: 'app-aprofile',
@@ -20,7 +19,7 @@ export class AProfileComponent implements OnInit {
   routeId: string = ''
   firstFormGroup: FormGroup;
 
-  constructor(FormBuilder: FormBuilder,private route: ActivatedRoute, private adminService: AdminService, public dialog: MatDialog, private registerService: RegisterService) {
+  constructor(FormBuilder: FormBuilder,private route: ActivatedRoute, private adminService: AdminService, public dialog: MatDialog) {
     this.firstFormGroup = FormBuilder.group({
       name: ['', Validators.required],
       telefono: ['', [Validators.required, Validators.minLength(3)]],
@@ -70,11 +69,5 @@ export class AProfileComponent implements OnInit {
         this.adminService.updateAdmin(result, this.admin._id);
       }
     });
-  }
-
-  createAdmin(){
-    console.log(this.firstFormGroup.value)
-    this.registerService.createAdmin(this.firstFormGroup.value);
-    this.firstFormGroup.reset();
   }
 }

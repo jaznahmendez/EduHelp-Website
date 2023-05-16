@@ -1,5 +1,4 @@
 import { Component, OnInit, OnChanges, SimpleChanges, EventEmitter, Output } from '@angular/core';
-import { RegisterService } from 'src/app/shared/services/register.service'
 import { Tutor } from 'src/app/shared/interfaces/tutor'
 import { Patient } from 'src/app/shared/interfaces/patient'
 import { TutorService } from 'src/app/shared/services/tutor.service'
@@ -49,7 +48,7 @@ export class TProfileComponent implements OnInit {
   constructor(
     private loginService: LoginService,
     private fileService: FilesService,
-    private calendarService: CalendarService,private route: ActivatedRoute, private registerService: RegisterService, private tutorService: TutorService, private patientService: PatientService, public dialog: MatDialog) { 
+    private calendarService: CalendarService,private route: ActivatedRoute, private tutorService: TutorService, private patientService: PatientService, public dialog: MatDialog) { 
     this.accessToken = '';
   }
 
@@ -93,10 +92,6 @@ export class TProfileComponent implements OnInit {
 
   }
 
-  
-  createPatient(patient: any){
-    this.registerService.createPatient(patient);
-  }
 
   updateTutor(obj: object,id: string) {
     this.tutorService.updateTutor(obj, id);

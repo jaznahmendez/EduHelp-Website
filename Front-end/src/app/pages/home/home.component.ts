@@ -2,7 +2,6 @@ import { Component } from '@angular/core';
 import { FormGroup, FormBuilder, Validators, FormControl } from '@angular/forms';
 import { Router } from '@angular/router';
 import { LoginService } from 'src/app/shared/services/login.service';
-import { RegisterService } from 'src/app/shared/services/register.service'
 import { TokenService } from 'src/app/shared/services/token.service';
 import { TutorService } from 'src/app/shared/services/tutor.service';
 
@@ -35,7 +34,7 @@ export class HomeComponent {
   //this.LoginForm.value.user 
 
   constructor(private tutorService: TutorService,
-    private loginService: LoginService, FormBuilder: FormBuilder, private registerService: RegisterService, private tokenService: TokenService, private router: Router){
+    private loginService: LoginService, FormBuilder: FormBuilder, private tokenService: TokenService, private router: Router){
     //console.log('hi')
     this.firstFormGroup = FormBuilder.group({
       name: ['', Validators.required],
@@ -102,31 +101,3 @@ export class HomeComponent {
     this.loginService.userType = this.userType  */
   }
 }
-
-/*
- crearUsuario (){
-    if(this.fontStyleControl == "tutor"){
-      this.user = {
-        name: this.firstFormGroup.value.name,
-        email: this.secondFormGroup.value.email,
-        password: this.secondFormGroup.value.password,
-        telefono: this.firstFormGroup.value.telefono    
-      }
-      //console.log(this.user)
-      this.registerService.createTutor(this.user)
-      this.routerL = '/tutor/profile/641e47725ad83e88452cd701'
-    }else{
-      this.user = {
-        name: this.thirdFormGroup.value.name,
-        profession: this.thirdFormGroup.value.profession,
-        email: this.secondFormGroup.value.email,
-        password: this.secondFormGroup.value.password,
-        telefono: this.thirdFormGroup.value.telefono    
-      }
-      this.registerService.createProfessional(this.user)
-      this.routerL = '/professional/profile/641e3aa760a550973418d30e'
-    }
-    //console.log(this.user)
-    //console.log(typeof(this.user))
-  }
-*/

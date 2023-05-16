@@ -12,7 +12,6 @@ import { AdminComponent } from './pages/admin/admin.component';
 import { PatientComponent } from './pages/patient/patient.component';
 import { ProfessionalComponent } from './pages/professional/professional.component';
 import { TutorComponent } from './pages/tutor/tutor.component';
-import { FooterComponent } from './layouts/footer/footer.component';
 import { NavComponent } from './layouts/nav/nav.component';
 import { HomeComponent } from './pages/home/home.component';
 
@@ -34,7 +33,6 @@ import {MatButtonToggleModule} from '@angular/material/button-toggle';
 import {MatTooltipModule} from '@angular/material/tooltip';
 import {MatDialogModule} from '@angular/material/dialog';
 import { MatDatepickerModule } from '@angular/material/datepicker';
-import { NgxMatDatetimePickerModule } from '@angular-material-components/datetime-picker';
 
 import { FullCalendarModule } from '@fullcalendar/angular';
 
@@ -54,7 +52,6 @@ import { EditProfDialogComponent } from './pages/professional/profile/edit-prof-
 import { EditAdminComponent } from './pages/admin/aprofile/edit-admin/edit-admin.component';
 import {  SocialLoginModule, SocialAuthServiceConfig, GoogleLoginProvider, GoogleSigninButtonModule } from '@abacritt/angularx-social-login';
 import { environment } from './environments/environment';
-import { LoginComponent } from './pages/login/login.component';
 import { ChatComponent } from './pages/chat/chat.component';
 import { AppointmentComponent } from './pages/calendar/appointment/appointment.component';
 import { MyCalendarComponent } from './pages/calendar/my-calendar/my-calendar.component';
@@ -67,7 +64,6 @@ import { MyCalendarComponent } from './pages/calendar/my-calendar/my-calendar.co
     PatientComponent,
     ProfessionalComponent,
     TutorComponent,
-    FooterComponent,
     NavComponent,
     HomeComponent,
     DetalleProfessionalComponent,
@@ -84,7 +80,6 @@ import { MyCalendarComponent } from './pages/calendar/my-calendar/my-calendar.co
     EditPatientDialogComponent,
     EditProfDialogComponent,
     EditAdminComponent,
-    LoginComponent,
     ChatComponent,
     AppointmentComponent,
     MyCalendarComponent
